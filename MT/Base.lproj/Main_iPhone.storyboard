@@ -7,7 +7,7 @@
         <!--Navigation Controller-->
         <scene sceneID="U9o-RV-5we">
             <objects>
-                <navigationController definesPresentationContext="YES" id="UUO-Cr-RWZ" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="UUO-Cr-RWZ" customClass="ZQNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rz9-IK-70s">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -19,7 +19,7 @@
             </objects>
             <point key="canvasLocation" x="-287" y="-41"/>
         </scene>
-        <!--View Controller-->
+        <!--View Controller - 毕业设计-->
         <scene sceneID="xdD-1p-Cwe">
             <objects>
                 <viewController id="9dD-4G-BWo" customClass="ZQViewController" sceneMemberID="viewController">
@@ -30,9 +30,31 @@
                     <view key="view" contentMode="scaleToFill" id="bzD-A4-X0c">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wt-r8-gu5" customClass="ZQNavigationButton">
+                                <rect key="frame" x="110" y="125" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="tintColor" red="0.16862745100000001" green="0.73333333329999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="汉译英">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oL9-OL-psi" customClass="ZQNavigationButton">
+                                <rect key="frame" x="110" y="336" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="tintColor" red="0.16862745100000001" green="0.73333333329999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="英译汉">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="WNS-1I-wCq"/>
+                    <navigationItem key="navigationItem" title="毕业设计" id="WNS-1I-wCq"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tcx-xN-gsV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
