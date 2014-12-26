@@ -114,12 +114,10 @@
 		6DBBF62E1A4DBADD00B28671 /* MT */ = {
 			isa = PBXGroup;
 			children = (
-				6DBBF6371A4DBADD00B28671 /* ZQAppDelegate.h */,
-				6DBBF6381A4DBADD00B28671 /* ZQAppDelegate.m */,
+				6DBBF6621A4DBDE100B28671 /* Controller */,
+				6DBBF6611A4DBDCA00B28671 /* Other */,
+				6DBBF6601A4DBDC300B28671 /* Main */,
 				6DBBF63A1A4DBADD00B28671 /* Main_iPhone.storyboard */,
-				6DBBF63D1A4DBADD00B28671 /* Main_iPad.storyboard */,
-				6DBBF6401A4DBADD00B28671 /* ZQViewController.h */,
-				6DBBF6411A4DBADD00B28671 /* ZQViewController.m */,
 				6DBBF6431A4DBADD00B28671 /* Images.xcassets */,
 				6DBBF62F1A4DBADD00B28671 /* Supporting Files */,
 			);
@@ -153,6 +151,32 @@
 				6DBBF6531A4DBADD00B28671 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6DBBF6601A4DBDC300B28671 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		6DBBF6611A4DBDCA00B28671 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				6DBBF6371A4DBADD00B28671 /* ZQAppDelegate.h */,
+				6DBBF6381A4DBADD00B28671 /* ZQAppDelegate.m */,
+				6DBBF63D1A4DBADD00B28671 /* Main_iPad.storyboard */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		6DBBF6621A4DBDE100B28671 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6DBBF6401A4DBADD00B28671 /* ZQViewController.h */,
+				6DBBF6411A4DBADD00B28671 /* ZQViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
