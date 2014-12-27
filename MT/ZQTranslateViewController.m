@@ -29,12 +29,14 @@
     self.type = [[NSUserDefaults standardUserDefaults] integerForKey:TranslateTypeKey];
     
     NSString *title = [NSString stringWithFormat:@"当前是%@模式", self.type == TranslateTypeEn2Cn ? @"英译汉" : @"汉译英"];
-    [TSMessage showNotificationInViewController:self title:title subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
+    [TSMessage showNotificationInViewController:self title:title subtitle:nil type:TSMessageNotificationTypeSuccess duration:3.8f canBeDismissedByUser:YES];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = @"翻译";
 
 }
 
