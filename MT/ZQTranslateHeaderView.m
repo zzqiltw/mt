@@ -1,3 +1,4 @@
+
 //
 //  ZQTranslateHeaderView.m
 //  MT
@@ -8,24 +9,30 @@
 
 #import "ZQTranslateHeaderView.h"
 
+@interface ZQTranslateHeaderView ()
+
+@property (weak, nonatomic) IBOutlet UILabel *mode;
+- (IBAction)clickTranslateBtn:(id)sender;
+
+@end
+
 @implementation ZQTranslateHeaderView
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        self = [[[NSBundle mainBundle] loadNibNamed:@"ZQTranslateHeaderView" owner:nil options:nil] lastObject];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)setModeType:(NSString *)modeType
 {
-    // Drawing code
+    _modeType = modeType;
+    self.mode.text = modeType;
 }
-*/
 
+- (IBAction)clickTranslateBtn:(id)sender {
+}
 @end

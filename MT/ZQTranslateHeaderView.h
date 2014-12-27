@@ -10,4 +10,6 @@
 
 @interface ZQTranslateHeaderView : UIView
 
+@property (nonatomic, copy) NSString *modeType;
+
 @end

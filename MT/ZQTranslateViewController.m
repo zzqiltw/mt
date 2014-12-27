@@ -7,6 +7,7 @@
 //
 
 #import "ZQTranslateViewController.h"
+#import "ZQTranslateHeaderView.h"
 #import <TSMessage.h>
 @interface ZQTranslateViewController ()
 @property (nonatomic, assign) TranslateType type;
@@ -28,8 +29,12 @@
     
     self.type = [[NSUserDefaults standardUserDefaults] integerForKey:TranslateTypeKey];
     
-    NSString *title = [NSString stringWithFormat:@"当前是%@模式", self.type == TranslateTypeEn2Cn ? @"英译汉" : @"汉译英"];
-    [TSMessage showNotificationInViewController:self title:title subtitle:nil type:TSMessageNotificationTypeSuccess duration:3.8f canBeDismissedByUser:YES];
+    NSString *title = [NSString stringWithFormat:@"%@", self.type == TranslateTypeEn2Cn ? @"英译汉模式" : @"汉译英模式"];
+    [TSMessage showNotificationInViewController:self title:title subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
+    
+    ZQTranslateHeaderView *headerView = [[ZQTranslateHeaderView alloc] init];
+    headerView.modeType = title;
+    self.tableView.tableHeaderView = headerView;
 }
 
 - (void)viewDidLoad
@@ -37,7 +42,7 @@
     [super viewDidLoad];
     
     self.title = @"翻译";
-
+    
 }
 
 #pragma mark - Table view data source
