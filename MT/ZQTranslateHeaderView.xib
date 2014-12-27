@@ -40,6 +40,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="inputField" destination="wN4-tw-o9Z" id="yC1-fK-yTM"/>
                 <outlet property="mode" destination="kQG-KP-MKl" id="EHg-vK-CtH"/>
             </connections>
         </view>

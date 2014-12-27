@@ -8,11 +8,12 @@
 //
 
 #import "ZQTranslateHeaderView.h"
-
+#import "ZQKeyboardToolView.h"
 @interface ZQTranslateHeaderView ()
 
 @property (weak, nonatomic) IBOutlet UILabel *mode;
 - (IBAction)clickTranslateBtn:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *inputField;
 
 @end
 
@@ -23,6 +24,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self = [[[NSBundle mainBundle] loadNibNamed:@"ZQTranslateHeaderView" owner:nil options:nil] lastObject];
+        self.inputField.inputAccessoryView = [[ZQKeyboardToolView alloc] init];
     }
     return self;
 }
