@@ -20,8 +20,14 @@
 }
 
 - (IBAction)quitKb:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(keyboardToolView:didClickQuitBtn:)]) {
+        [self.delegate keyboardToolView:self didClickQuitBtn:sender];
+    }
 }
 
 - (IBAction)clearAll:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(keyboardToolView:didClickClearBtn:)]) {
+        [self.delegate keyboardToolView:self didClickClearBtn:sender];
+    }
 }
 @end

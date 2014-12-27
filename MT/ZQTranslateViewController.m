@@ -19,6 +19,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return self;
 }
@@ -42,7 +43,11 @@
     [super viewDidLoad];
     
     self.title = @"翻译";
-    
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [[UIImage imageNamed:@"bg2.jpg"] drawInRect:self.view.bounds];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
 }
 
 #pragma mark - Table view data source

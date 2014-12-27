@@ -8,10 +8,10 @@
 //
 
 #import "ZQTranslateHeaderView.h"
-#import "ZQKeyboardToolView.h"
+
 @interface ZQTranslateHeaderView ()
 
-@property (weak, nonatomic) IBOutlet UILabel *mode;
+//@property (weak, nonatomic) IBOutlet UILabel *mode;
 - (IBAction)clickTranslateBtn:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
 
@@ -32,9 +32,12 @@
 - (void)setModeType:(NSString *)modeType
 {
     _modeType = modeType;
-    self.mode.text = modeType;
+//    self.mode.text = modeType;
 }
 
 - (IBAction)clickTranslateBtn:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(translateHeaderView:didClickTranslateBtn:)]) {
+        [self.delegate translateHeaderView:self didClickTranslateBtn:sender];
+    }
 }
 @end

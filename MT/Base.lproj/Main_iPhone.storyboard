@@ -29,7 +29,7 @@
                         <viewControllerLayoutGuide type="bottom" id="IfO-2D-oLo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bzD-A4-X0c">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wt-r8-gu5" customClass="ZQNavigationButton">
@@ -71,15 +71,6 @@
         <scene sceneID="UG7-nf-zeg">
             <objects>
                 <tableViewController storyboardIdentifier="Translate" id="aTr-E3-UFS" customClass="ZQTranslateViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="VZb-Xg-g9k">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="aTr-E3-UFS" id="yCB-KX-q8J"/>
-                            <outlet property="delegate" destination="aTr-E3-UFS" id="9PX-H7-1Cm"/>
-                        </connections>
-                    </tableView>
                     <navigationItem key="navigationItem" id="bv8-C8-pOW"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9QL-nf-C7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -90,6 +81,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

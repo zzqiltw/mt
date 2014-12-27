@@ -8,8 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ZQKeyboardToolViewDelegate;
+
 @interface ZQKeyboardToolView : UIView
+@property (nonatomic, weak) id<ZQKeyboardToolViewDelegate> delegate;
+
 - (IBAction)quitKb:(id)sender;
 - (IBAction)clearAll:(id)sender;
+
+
+
+@end
+
+@protocol ZQKeyboardToolViewDelegate <NSObject>
+
+@optional
+- (void)keyboardToolView:(ZQKeyboardToolView *)toolView didClickQuitBtn:(id)sender;
+- (void)keyboardToolView:(ZQKeyboardToolView *)toolView didClickClearBtn:(id)sender;
 
 @end

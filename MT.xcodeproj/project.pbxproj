@@ -31,6 +31,7 @@
 		6DBBF6571A4DBADD00B28671 /* MTTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBF6561A4DBADD00B28671 /* MTTests.m */; };
 		6DBBF6661A4DC38000B28671 /* ZQNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBF6651A4DC38000B28671 /* ZQNavigationController.m */; };
 		6DE1BBEE1A4EFC6400E895CD /* ActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE1BBED1A4EFC6400E895CD /* ActionButton.m */; };
+		6DE1BBF21A4EFEAB00E895CD /* bg2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE1BBF11A4EFEAB00E895CD /* bg2.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		6DBBF6651A4DC38000B28671 /* ZQNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQNavigationController.m; sourceTree = "<group>"; };
 		6DE1BBEC1A4EFC6400E895CD /* ActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionButton.h; sourceTree = "<group>"; };
 		6DE1BBED1A4EFC6400E895CD /* ActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionButton.m; sourceTree = "<group>"; };
+		6DE1BBF11A4EFEAB00E895CD /* bg2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg2.jpg; sourceTree = "<group>"; };
 		AC5DDF80B56A46E48BDEBD4A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		EA60FFFCF37544E68D23B39F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -188,6 +190,7 @@
 		6DBBF62F1A4DBADD00B28671 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6DE1BBF11A4EFEAB00E895CD /* bg2.jpg */,
 				6DBBF6301A4DBADD00B28671 /* MT-Info.plist */,
 				6DBBF6311A4DBADD00B28671 /* InfoPlist.strings */,
 				6DBBF6341A4DBADD00B28671 /* main.m */,
@@ -335,6 +338,7 @@
 				6DBBF63F1A4DBADD00B28671 /* Main_iPad.storyboard in Resources */,
 				6DBBF6441A4DBADD00B28671 /* Images.xcassets in Resources */,
 				6DBBF63C1A4DBADD00B28671 /* Main_iPhone.storyboard in Resources */,
+				6DE1BBF21A4EFEAB00E895CD /* bg2.jpg in Resources */,
 				6DBBF6331A4DBADD00B28671 /* InfoPlist.strings in Resources */,
 				6DA95BCD1A4EF39900154004 /* ZQKeyboardToolView.xib in Resources */,
 				6D11C6C81A4EEB1600527EF7 /* ZQTranslateHeaderView.xib in Resources */,
