@@ -7,9 +7,9 @@
 //
 
 #import "ZQTranslateViewController.h"
-
+#import <TSMessage.h>
 @interface ZQTranslateViewController ()
-
+@property (nonatomic, assign) TranslateType type;
 @end
 
 @implementation ZQTranslateViewController
@@ -18,26 +18,24 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.type = [[NSUserDefaults standardUserDefaults] integerForKey:TranslateTypeKey];
+    
+    NSString *title = [NSString stringWithFormat:@"当前是%@模式", self.type == TranslateTypeEn2Cn ? @"英译汉" : @"汉译英"];
+    [TSMessage showNotificationInViewController:self title:title subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source

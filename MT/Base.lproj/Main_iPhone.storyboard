@@ -10,6 +10,7 @@
                 <navigationController definesPresentationContext="YES" id="UUO-Cr-RWZ" customClass="ZQNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rz9-IK-70s">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.16862745100000001" green="0.73333333329999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="9dD-4G-BWo" kind="relationship" relationship="rootViewController" id="ZIq-Xl-0bq"/>
@@ -32,29 +33,29 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wt-r8-gu5" customClass="ZQNavigationButton">
-                                <rect key="frame" x="110" y="125" width="100" height="100"/>
+                                <rect key="frame" x="110" y="158" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" red="0.16862745100000001" green="0.73333333329999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
                                 <state key="normal" title="汉译英">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="aTr-E3-UFS" kind="push" identifier="Cn2En" id="wqo-dV-S5O"/>
+                                    <action selector="cn2En:" destination="9dD-4G-BWo" eventType="touchUpInside" id="V6K-2G-ai6"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oL9-OL-psi" customClass="ZQNavigationButton">
-                                <rect key="frame" x="110" y="336" width="100" height="100"/>
+                                <rect key="frame" x="110" y="365" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" red="0.16862745100000001" green="0.73333333329999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
                                 <state key="normal" title="英译汉">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="aTr-E3-UFS" kind="push" identifier="En2Cn" id="Sg6-lh-wkw"/>
+                                    <action selector="en2Cn:" destination="9dD-4G-BWo" eventType="touchUpInside" id="2Ci-to-9Uf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -69,8 +70,8 @@
         <!--Translate View Controller-->
         <scene sceneID="UG7-nf-zeg">
             <objects>
-                <tableViewController id="aTr-E3-UFS" customClass="ZQTranslateViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="VZb-Xg-g9k" customClass="zqt">
+                <tableViewController storyboardIdentifier="Translate" id="aTr-E3-UFS" customClass="ZQTranslateViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="VZb-Xg-g9k">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -91,7 +92,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="wqo-dV-S5O"/>
-    </inferredMetricsTieBreakers>
 </document>

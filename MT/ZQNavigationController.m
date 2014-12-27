@@ -26,11 +26,11 @@
     if (iOS7) {
         navBarBgImgName = @"NavBar64";
         navigationBar.tintColor = [UIColor whiteColor];
+    } else {
+        navBarBgImgName = @"NavBar";
     }
-//    } else {
-//        navBarBgImgName = @"NavBar";
-//    }
     [navigationBar setBackgroundImage:[UIImage imageNamed:navBarBgImgName] forBarMetrics:UIBarMetricsDefault];
+
     [navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont systemFontOfSize:16]}];
     
     UIBarButtonItem *item = [UIBarButtonItem appearance];
