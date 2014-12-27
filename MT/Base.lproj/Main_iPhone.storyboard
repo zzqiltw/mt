@@ -10,7 +10,7 @@
                 <navigationController definesPresentationContext="YES" id="UUO-Cr-RWZ" customClass="ZQNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rz9-IK-70s">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.16862745100000001" green="0.73333333329999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="barTintColor" red="0.16862745100000001" green="0.73333333329999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="9dD-4G-BWo" kind="relationship" relationship="rootViewController" id="ZIq-Xl-0bq"/>

@@ -22,15 +22,17 @@
 + (void)initialize
 {
     UINavigationBar *navigationBar = [UINavigationBar appearance];
-    NSString *navBarBgImgName = nil;
-    if (iOS7) {
-        navBarBgImgName = @"NavBar64";
-        navigationBar.tintColor = [UIColor whiteColor];
-    } else {
-        navBarBgImgName = @"NavBar";
-    }
-    [navigationBar setBackgroundImage:[UIImage imageNamed:navBarBgImgName] forBarMetrics:UIBarMetricsDefault];
-
+//    NSString *navBarBgImgName = nil;
+//    if (iOS7) {
+//        navBarBgImgName = @"NavBar64";
+//        navigationBar.tintColor = [UIColor whiteColor];
+//    } else {
+//        navBarBgImgName = @"NavBar";
+//    }
+//    [navigationBar setBackgroundImage:[UIImage imageNamed:navBarBgImgName] forBarMetrics:UIBarMetricsDefault];
+    [navigationBar setBarTintColor:[UIColor colorWithRed:63/255.0 green:160/255.0 blue:165/255.0 alpha:1.0f]];
+    navigationBar.tintColor = [UIColor whiteColor];
+    
     [navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont systemFontOfSize:16]}];
     
     UIBarButtonItem *item = [UIBarButtonItem appearance];
