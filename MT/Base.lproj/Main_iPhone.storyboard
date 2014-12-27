@@ -17,7 +17,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EnG-8w-baq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-287" y="-41"/>
+            <point key="canvasLocation" x="-459" y="-105"/>
         </scene>
         <!--View Controller - 毕业设计-->
         <scene sceneID="xdD-1p-Cwe">
@@ -40,6 +40,9 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="aTr-E3-UFS" kind="push" identifier="Cn2En" id="wqo-dV-S5O"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oL9-OL-psi" customClass="ZQNavigationButton">
                                 <rect key="frame" x="110" y="336" width="100" height="100"/>
@@ -50,6 +53,9 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="aTr-E3-UFS" kind="push" identifier="En2Cn" id="Sg6-lh-wkw"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -58,7 +64,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tcx-xN-gsV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="176" y="-35"/>
+            <point key="canvasLocation" x="16" y="-113"/>
+        </scene>
+        <!--Translate View Controller-->
+        <scene sceneID="UG7-nf-zeg">
+            <objects>
+                <tableViewController id="aTr-E3-UFS" customClass="ZQTranslateViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="VZb-Xg-g9k" customClass="zqt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="aTr-E3-UFS" id="yCB-KX-q8J"/>
+                            <outlet property="delegate" destination="aTr-E3-UFS" id="9PX-H7-1Cm"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="bv8-C8-pOW"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9QL-nf-C7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="412" y="-123"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -66,4 +91,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="wqo-dV-S5O"/>
+    </inferredMetricsTieBreakers>
 </document>
