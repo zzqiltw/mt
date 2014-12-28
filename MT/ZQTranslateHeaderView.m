@@ -14,6 +14,7 @@
 //@property (weak, nonatomic) IBOutlet UILabel *mode;
 - (IBAction)clickTranslateBtn:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
+@property (weak, nonatomic) IBOutlet UIImageView *bgView;
 
 @end
 
@@ -26,6 +27,12 @@
         self = [[[NSBundle mainBundle] loadNibNamed:@"ZQTranslateHeaderView" owner:nil options:nil] lastObject];
     }
     return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.bgView.frame = self.frame;
 }
 
 - (void)setModeType:(NSString *)modeType
@@ -48,6 +55,9 @@
     if ([self.delegate respondsToSelector:@selector(translateHeaderView:didClickTranslateBtn:)]) {
         [self.delegate translateHeaderView:self didClickTranslateBtn:sender];
     }
-    [self.inputField endEditing:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.inputField endEditing:YES];
+
+    });
 }
 @end

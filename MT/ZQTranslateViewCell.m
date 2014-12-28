@@ -18,19 +18,32 @@
 
 @implementation ZQTranslateViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+/**
+ 这个方法好像没有调用耶- -
+ 
+ :param: idinitWithStyle <#idinitWithStyle description#>
+ */
+//- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+//{
+//    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+//    if (self) {
+//        self = [[[NSBundle mainBundle] loadNibNamed:@"ZQTranslateViewCell" owner:nil options:nil] lastObject];
+//        [self setupBg];
+//    }
+//    return self;
+//}
+
+- (void)awakeFromNib
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        self = [[[NSBundle mainBundle] loadNibNamed:@"ZQTranslateViewCell" owner:nil options:nil] lastObject];
-//        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell"]];
-//        imageView.contentMode = UIViewContentModeScaleAspectFill;
-//        self.bgView = imageView;
-//        [self addSubview:self.bgView];
-        self.backgroundView = nil;
-        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cell"]];
-    }
-    return self;
+    [super awakeFromNib];
+    
+    [self setupBg];
+}
+
+- (void)setupBg
+{
+    self.backgroundView = nil;
+    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
 }
 
 - (void)setModel:(ZQTranslateModel *)model
@@ -39,13 +52,7 @@
     
     self.icon.image = [UIImage imageNamed:model.iconName];
     self.translateText.text = model.text;
-    
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-//    self.bgView.frame = self.frame;
-}
 
 @end

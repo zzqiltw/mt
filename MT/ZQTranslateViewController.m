@@ -54,7 +54,7 @@
     self.title = @"翻译";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg3.jpg"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg"]];
     imageView.userInteractionEnabled = YES;
     self.tableView.backgroundView = imageView;
     

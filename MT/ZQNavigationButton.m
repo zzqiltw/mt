@@ -50,7 +50,7 @@
     if (animated) {
         if (highlighted) {
             POPBasicAnimation *scaleAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPViewScaleXY];
-            scaleAnimation.duration = 0.1;
+            scaleAnimation.duration = 0.8;
             scaleAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(0.9, 0.9)];
             [self pop_addAnimation:scaleAnimation forKey:@"scaleAnimation"];
         } else {
