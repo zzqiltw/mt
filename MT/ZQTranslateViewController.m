@@ -1,3 +1,4 @@
+
 //
 //  ZQTranslateViewController.m
 //  MT
@@ -8,8 +9,9 @@
 
 #import "ZQTranslateViewController.h"
 #import "ZQTranslateHeaderView.h"
+#include "ZQKeyboardToolView.h"
 #import <TSMessage.h>
-@interface ZQTranslateViewController ()
+@interface ZQTranslateViewController () <ZQKeyboardToolViewDelegate, ZQTranslateHeaderViewDelegate>
 @property (nonatomic, assign) TranslateType type;
 @end
 
@@ -35,7 +37,14 @@
     
     ZQTranslateHeaderView *headerView = [[ZQTranslateHeaderView alloc] init];
     headerView.modeType = title;
+    headerView.delegate = self;
     self.tableView.tableHeaderView = headerView;
+    
+    ZQKeyboardToolView *toolView = [[ZQKeyboardToolView alloc] init];
+    toolView.delegate = self;
+    
+    [headerView setInputFieldAccessoryView:toolView];
+    
 }
 
 - (void)viewDidLoad
@@ -43,11 +52,10 @@
     [super viewDidLoad];
     
     self.title = @"翻译";
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    [[UIImage imageNamed:@"bg2.jpg"] drawInRect:self.view.bounds];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg2.jpg"]];
+    imageView.userInteractionEnabled = YES;
+    self.tableView.backgroundView = imageView;
+    
 }
 
 #pragma mark - Table view data source
@@ -66,4 +74,17 @@
     return 0;
 }
 
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    NSLog(@"hehe");
+    ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
+    [headerView quitKb];
+}
+
+- (void)keyboardToolView:(ZQKeyboardToolView *)toolView didClickQuitBtn:(id)sender
+{
+    ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
+    [headerView quitKb];
+}
 @end

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZQKeyboardToolView.h"
 
 @protocol ZQTranslateHeaderViewDelegate;
 
@@ -15,6 +14,9 @@
 
 @property (nonatomic, copy) NSString *modeType;
 @property (nonatomic, weak) id<ZQTranslateHeaderViewDelegate> delegate;
+
+- (void)setInputFieldAccessoryView:(UIView *)inputAccessoryView;
+- (void)quitKb;
 
 @end
 

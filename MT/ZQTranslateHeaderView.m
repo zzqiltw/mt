@@ -24,7 +24,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self = [[[NSBundle mainBundle] loadNibNamed:@"ZQTranslateHeaderView" owner:nil options:nil] lastObject];
-        self.inputField.inputAccessoryView = [[ZQKeyboardToolView alloc] init];
     }
     return self;
 }
@@ -32,12 +31,23 @@
 - (void)setModeType:(NSString *)modeType
 {
     _modeType = modeType;
-//    self.mode.text = modeType;
+    //    self.mode.text = modeType;
+}
+
+- (void)setInputFieldAccessoryView:(UIView *)inputAccessoryView
+{
+    self.inputField.inputAccessoryView = inputAccessoryView;
+}
+
+- (void)quitKb
+{
+    [self.inputField endEditing:YES];
 }
 
 - (IBAction)clickTranslateBtn:(id)sender {
     if ([self.delegate respondsToSelector:@selector(translateHeaderView:didClickTranslateBtn:)]) {
         [self.delegate translateHeaderView:self didClickTranslateBtn:sender];
     }
+    [self.inputField endEditing:YES];
 }
 @end
