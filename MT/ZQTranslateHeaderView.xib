@@ -7,17 +7,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1v3-09-mPE" customClass="ZQTranslateHeaderView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入要翻译的内容" minimumFontSize="17" background="bottom_textfield" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wN4-tw-o9Z">
-                    <rect key="frame" x="20" y="50" width="230" height="30"/>
+                    <rect key="frame" x="8" y="42" width="242" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pcg-ne-WCF" customClass="ZQNavigationButton">
-                    <rect key="frame" x="269" y="45" width="40" height="40"/>
+                    <rect key="frame" x="269" y="37" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="tintColor" red="0.16862745100000001" green="0.73333333329999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
@@ -29,6 +29,10 @@
                         <action selector="clickTranslateBtn:" destination="1v3-09-mPE" eventType="touchUpInside" id="QdG-6h-Req"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5KB-Ux-fwK">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

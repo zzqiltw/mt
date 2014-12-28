@@ -9,21 +9,57 @@
 
 #import "ZQTranslateViewController.h"
 #import "ZQTranslateHeaderView.h"
-#include "ZQKeyboardToolView.h"
+#import "ZQKeyboardToolView.h"
+#import "ZQTranslateModel.h"
+#import "ZQTranslateViewCell.h"
 #import <TSMessage.h>
+
 @interface ZQTranslateViewController () <ZQKeyboardToolViewDelegate, ZQTranslateHeaderViewDelegate>
+
 @property (nonatomic, assign) TranslateType type;
+@property (nonatomic, strong) NSArray *translateModelList;
+
 @end
 
 @implementation ZQTranslateViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (NSArray *)translateModelList
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    if (_translateModelList == nil) {
+        ZQTranslateModel *model1 = [[ZQTranslateModel alloc] init];
+        model1.iconName = @"google.png";
+        model1.text = @"google的译文1";
+        
+        ZQTranslateModel *model2 = [[ZQTranslateModel alloc] init];
+        model2.iconName = @"google.png";
+        model2.text = @"google的译文2";
+        
+        ZQTranslateModel *model3 = [[ZQTranslateModel alloc] init];
+        model3.iconName = @"google.png";
+        model3.text = @"google的译文3";
+        
+        ZQTranslateModel *model4 = [[ZQTranslateModel alloc] init];
+        model4.iconName = @"google.png";
+        model4.text = @"google的译文4";
+        
+        _translateModelList = @[model1, model2, model3, model4];
     }
-    return self;
+    return _translateModelList;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.title = @"翻译";
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg3.jpg"]];
+    imageView.userInteractionEnabled = YES;
+    self.tableView.backgroundView = imageView;
+    
+    UINib *nib = [UINib nibWithNibName:@"ZQTranslateViewCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:TranslateCellID];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -44,45 +80,46 @@
     toolView.delegate = self;
     
     [headerView setInputFieldAccessoryView:toolView];
-    
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    self.title = @"翻译";
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg2.jpg"]];
-    imageView.userInteractionEnabled = YES;
-    self.tableView.backgroundView = imageView;
-    
-}
+
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return self.translateModelList.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+#warning 这里要不要indexpath
+    ZQTranslateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TranslateCellID forIndexPath:indexPath];
+    cell.model = self.translateModelList[indexPath.row];
+    return cell;
+}
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    NSLog(@"hehe");
-    ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
-    [headerView quitKb];
+    [self quitKb];
 }
 
 - (void)keyboardToolView:(ZQKeyboardToolView *)toolView didClickQuitBtn:(id)sender
+{
+    [self quitKb];
+}
+
+- (void)quitKb
 {
     ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
     [headerView quitKb];
