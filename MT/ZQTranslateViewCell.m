@@ -44,6 +44,8 @@
 {
     self.backgroundView = nil;
     self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
+//    self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellbg"]];
+    
 }
 
 - (void)setModel:(ZQTranslateModel *)model

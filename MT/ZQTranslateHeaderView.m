@@ -9,7 +9,7 @@
 
 #import "ZQTranslateHeaderView.h"
 
-@interface ZQTranslateHeaderView ()
+@interface ZQTranslateHeaderView () <UITextFieldDelegate>
 
 //@property (weak, nonatomic) IBOutlet UILabel *mode;
 - (IBAction)clickTranslateBtn:(id)sender;
@@ -25,6 +25,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self = [[[NSBundle mainBundle] loadNibNamed:@"ZQTranslateHeaderView" owner:nil options:nil] lastObject];
+        self.inputField.delegate = self;
     }
     return self;
 }
