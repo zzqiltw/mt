@@ -52,6 +52,11 @@
     [self.inputField endEditing:YES];
 }
 
+- (void)clearInputField
+{
+    self.inputField.text = nil;
+}
+
 - (IBAction)clickTranslateBtn:(id)sender {
     if ([self.delegate respondsToSelector:@selector(translateHeaderView:didClickTranslateBtn:)]) {
         [self.delegate translateHeaderView:self didClickTranslateBtn:sender];

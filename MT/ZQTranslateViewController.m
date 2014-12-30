@@ -13,6 +13,7 @@
 #import "ZQTranslateModel.h"
 #import "ZQTranslateViewCell.h"
 #import <TSMessage.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface ZQTranslateViewController () <ZQKeyboardToolViewDelegate, ZQTranslateHeaderViewDelegate>
 
@@ -124,34 +125,48 @@
     [self.translateModelList removeAllObjects];
     [self.tableView reloadData];
     [self quitKb];
+    [self clearInputField];
 }
 - (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender
 {
-    if (self.translateModelList == nil) {
-        ZQTranslateModel *model1 = [[ZQTranslateModel alloc] init];
-        model1.iconName = @"google.png";
-        model1.text = @"google的译文1";
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+        if (self.translateModelList == nil) {
+            ZQTranslateModel *model1 = [[ZQTranslateModel alloc] init];
+            model1.iconName = @"google.png";
+            model1.text = @"google的译文1";
+            
+            ZQTranslateModel *model2 = [[ZQTranslateModel alloc] init];
+            model2.iconName = @"google.png";
+            model2.text = @"百度的译文2";
+            
+            ZQTranslateModel *model3 = [[ZQTranslateModel alloc] init];
+            model3.iconName = @"google.png";
+            model3.text = @"必应的译文3";
+            
+            ZQTranslateModel *model4 = [[ZQTranslateModel alloc] init];
+            model4.iconName = @"google.png";
+            model4.text = @"最优的译文4";
+            
+            _translateModelList = [NSMutableArray arrayWithObjects:model1, model2, model3, model4, nil];
+        }
         
-        ZQTranslateModel *model2 = [[ZQTranslateModel alloc] init];
-        model2.iconName = @"google.png";
-        model2.text = @"google的译文2";
-        
-        ZQTranslateModel *model3 = [[ZQTranslateModel alloc] init];
-        model3.iconName = @"google.png";
-        model3.text = @"google的译文3";
-        
-        ZQTranslateModel *model4 = [[ZQTranslateModel alloc] init];
-        model4.iconName = @"google.png";
-        model4.text = @"google的译文4";
-        
-        _translateModelList = [NSMutableArray arrayWithObjects:model1, model2, model3, model4, nil];
-    }
-    [self.tableView reloadData];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self.tableView reloadData];
+    });
 }
 
 - (void)quitKb
 {
     ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
     [headerView quitKb];
+}
+
+- (void)clearInputField
+{
+    ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
+    [headerView clearInputField];
 }
 @end
