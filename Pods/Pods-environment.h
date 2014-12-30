@@ -54,6 +54,12 @@
 #define COCOAPODS_VERSION_MINOR_HexColors 2
 #define COCOAPODS_VERSION_PATCH_HexColors 1
 
+// MBAutoGrowingTextView
+#define COCOAPODS_POD_AVAILABLE_MBAutoGrowingTextView
+#define COCOAPODS_VERSION_MAJOR_MBAutoGrowingTextView 0
+#define COCOAPODS_VERSION_MINOR_MBAutoGrowingTextView 1
+#define COCOAPODS_VERSION_PATCH_MBAutoGrowingTextView 0
+
 // MBProgressHUD
 #define COCOAPODS_POD_AVAILABLE_MBProgressHUD
 #define COCOAPODS_VERSION_MAJOR_MBProgressHUD 0

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A48C7450A588434E8855EC49"
-               BuildableName = "libPods.a"
-               BlueprintName = "Pods"
+               BlueprintIdentifier = "678B7F338F674F05A7A6432C"
+               BuildableName = "libPods-MBAutoGrowingTextView.a"
+               BlueprintName = "Pods-MBAutoGrowingTextView"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

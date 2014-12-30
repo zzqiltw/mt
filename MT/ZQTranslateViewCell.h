@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#include "ZQTranslateModel.h"
+#import "ZQTranslateFrame.h"
 #define TranslateCellID @"TranslateCellID"
 
 @interface ZQTranslateViewCell : UITableViewCell
 
-@property (nonatomic, strong) ZQTranslateModel *model;
+@property (nonatomic, strong) ZQTranslateFrame *translateFrame;
 
 @end

@@ -11,27 +11,33 @@
 @interface ZQTranslateViewCell ()
 
 @property (weak, nonatomic) UILabel *translateText;
-@property (weak, nonatomic) IBOutlet UIImageView *icon;
+@property (weak, nonatomic) UIImageView *icon;
 @property (nonatomic, strong) UIImageView *bgView;
 
 @end
 
 @implementation ZQTranslateViewCell
 
-/**
- 这个方法好像没有调用耶- -
- 
- :param: idinitWithStyle <#idinitWithStyle description#>
- */
-//- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-//{
-//    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-//    if (self) {
-//        self = [[[NSBundle mainBundle] loadNibNamed:@"ZQTranslateViewCell" owner:nil options:nil] lastObject];
-//        [self setupBg];
-//    }
-//    return self;
-//}
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        UILabel *translateText = [[UILabel alloc] init];
+        translateText.numberOfLines = 0;
+        translateText.textAlignment = NSTextAlignmentCenter;
+        translateText.lineBreakMode = NSLineBreakByWordWrapping;
+        translateText.font = TextFont;
+        [self.contentView addSubview:translateText];
+        self.translateText = translateText;
+        
+        UIImageView *imageView = [[UIImageView alloc] init];
+        [self.contentView addSubview:imageView];
+        self.icon = imageView;
+        
+        [self setupBg];
+    }
+    return self;
+}
 
 - (UIImageView *)bgView
 {
@@ -46,19 +52,6 @@
     return _bgView;
 }
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    [self setupBg];
-    
-    UILabel *translateText = [[UILabel alloc] init];
-    translateText.numberOfLines = 0;
-    translateText.frame = CGRectMake(59, 10, 0, 0);
-    translateText.backgroundColor = [UIColor redColor];
-    [self.contentView addSubview:translateText];
-    self.translateText = translateText;
-}
 
 - (void)setupBg
 {
@@ -67,23 +60,20 @@
 //    self.backgroundView = self.bgView;
 }
 
-- (void)setModel:(ZQTranslateModel *)model
+- (void)setTranslateFrame:(ZQTranslateFrame *)translateFrame
 {
-    _model = model;
+    _translateFrame = translateFrame;
     
-    self.icon.image = [UIImage imageNamed:model.iconName];
-    self.translateText.text = model.text;
+    self.icon.image = [UIImage imageNamed:translateFrame.model.iconName];
+    self.translateText.text = translateFrame.model.text;
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    CGSize labelsize = [self.translateText.text sizeWithFont:self.translateText.font     constrainedToSize:CGSizeMake(320, 200) lineBreakMode:NSLineBreakByWordWrapping];
-    NSLog(@"before%@", NSStringFromCGRect(self.translateText.frame));
-    self.translateText.frame = CGRectMake(self.translateText.frame.origin.x, self.translateText.frame.origin.y, labelsize.width, labelsize.height);
-    NSLog(@"after%@", NSStringFromCGRect(self.translateText.frame));
-    self.translateText.backgroundColor = [UIColor redColor];
+    self.icon.frame = self.translateFrame.iconFrame;
+    self.translateText.frame = self.translateFrame.textFrame;
 }
 
 
