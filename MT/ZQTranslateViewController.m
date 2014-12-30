@@ -29,7 +29,7 @@
     [super viewDidLoad];
     
     self.title = @"翻译";
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg"]];
     imageView.userInteractionEnabled = YES;
@@ -118,7 +118,7 @@
             
             ZQTranslateModel *model2 = [[ZQTranslateModel alloc] init];
             model2.iconName = @"google.png";
-            model2.text = @"百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2";
+            model2.text = @"百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文";
             ZQTranslateFrame *frame2 = [[ZQTranslateFrame alloc] initWithModel:model2];
             
             ZQTranslateModel *model3 = [[ZQTranslateModel alloc] init];

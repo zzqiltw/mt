@@ -21,7 +21,7 @@
 {
     _iconFrame = CGRectMake(8, 10, 40, 40);
  
-    CGSize labelsize = [model.text sizeWithFont:TextFont constrainedToSize:CGSizeMake(250, 200) lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize labelsize = [model.text sizeWithFont:TextFont constrainedToSize:CGSizeMake(218, 200) lineBreakMode:NSLineBreakByWordWrapping];
     _textFrame = CGRectMake(Margin + CGRectGetMaxX(_iconFrame), _iconFrame.origin.y, labelsize.width, labelsize.height);
 
     _rowHeight = Margin * 1.5 + MAX(labelsize.height, CGRectGetMaxY(_iconFrame));

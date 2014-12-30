@@ -13,6 +13,7 @@
 @property (weak, nonatomic) UILabel *translateText;
 @property (weak, nonatomic) UIImageView *icon;
 @property (nonatomic, strong) UIImageView *bgView;
+@property (nonatomic, weak) UIView *sepaView;
 
 @end
 
@@ -24,15 +25,24 @@
     if (self) {
         UILabel *translateText = [[UILabel alloc] init];
         translateText.numberOfLines = 0;
-        translateText.textAlignment = NSTextAlignmentCenter;
+//        translateText.textAlignment = NSTextAlignmentCenter;
         translateText.lineBreakMode = NSLineBreakByWordWrapping;
         translateText.font = TextFont;
         [self.contentView addSubview:translateText];
         self.translateText = translateText;
         
         UIImageView *imageView = [[UIImageView alloc] init];
+        imageView.clipsToBounds = YES;
+        imageView.layer.borderColor = [[UIColor colorWithRed:30/255.0 green:164/255.0 blue:160/255.0 alpha:1.0f] CGColor];
+        imageView.layer.borderWidth = 1.0f;
         [self.contentView addSubview:imageView];
         self.icon = imageView;
+        
+        UIView *sepaView = [[UIView alloc] init];
+        sepaView.backgroundColor = [UIColor colorWithRed:30/255.0 green:164/255.0 blue:160/255.0 alpha:0.5f];
+        sepaView.alpha = 0.5f;
+        [self.contentView addSubview:sepaView];
+        self.sepaView = sepaView;
         
         [self setupBg];
     }
@@ -43,7 +53,7 @@
 {
     if (_bgView == nil) {
         UIImage *bgImage = [UIImage imageNamed:@"cellBg2"];
-        [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(15, 160, 0, 0)];
+
         UIImageView *imageView = [[UIImageView alloc] initWithImage:bgImage];
         imageView.frame = self.frame;
         _bgView = imageView;
@@ -55,6 +65,7 @@
 
 - (void)setupBg
 {
+    
     self.backgroundColor = [UIColor clearColor];
     
 //    self.backgroundView = self.bgView;
@@ -73,7 +84,9 @@
     [super layoutSubviews];
     
     self.icon.frame = self.translateFrame.iconFrame;
+    self.icon.layer.cornerRadius = self.icon.frame.size.width * 0.5f;
     self.translateText.frame = self.translateFrame.textFrame;
+    self.sepaView.frame = CGRectMake(0, 0, self.frame.size.width, 1);
 }
 
 
