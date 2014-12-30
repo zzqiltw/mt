@@ -24,36 +24,12 @@
 
 @implementation ZQTranslateViewController
 
-//- (NSArray *)translateModelList
-//{
-//    if (_translateModelList == nil) {
-//        ZQTranslateModel *model1 = [[ZQTranslateModel alloc] init];
-//        model1.iconName = @"google.png";
-//        model1.text = @"google的译文1";
-//        
-//        ZQTranslateModel *model2 = [[ZQTranslateModel alloc] init];
-//        model2.iconName = @"google.png";
-//        model2.text = @"google的译文2";
-//        
-//        ZQTranslateModel *model3 = [[ZQTranslateModel alloc] init];
-//        model3.iconName = @"google.png";
-//        model3.text = @"google的译文3";
-//        
-//        ZQTranslateModel *model4 = [[ZQTranslateModel alloc] init];
-//        model4.iconName = @"google.png";
-//        model4.text = @"google的译文4";
-//        
-//        _translateModelList = @[model1, model2, model3, model4];
-//    }
-//    return _translateModelList;
-//}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.title = @"翻译";
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg"]];
     imageView.userInteractionEnabled = YES;
@@ -99,7 +75,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    return 60;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -131,7 +107,7 @@
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
         if (self.translateModelList == nil) {
             ZQTranslateModel *model1 = [[ZQTranslateModel alloc] init];
@@ -140,7 +116,7 @@
             
             ZQTranslateModel *model2 = [[ZQTranslateModel alloc] init];
             model2.iconName = @"google.png";
-            model2.text = @"百度的译文2";
+            model2.text = @"百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2百度的译文2";
             
             ZQTranslateModel *model3 = [[ZQTranslateModel alloc] init];
             model3.iconName = @"google.png";
@@ -148,9 +124,13 @@
             
             ZQTranslateModel *model4 = [[ZQTranslateModel alloc] init];
             model4.iconName = @"google.png";
-            model4.text = @"最优的译文4";
+            model4.text = @"有道的译文4";
             
-            _translateModelList = [NSMutableArray arrayWithObjects:model1, model2, model3, model4, nil];
+            ZQTranslateModel *model5 = [[ZQTranslateModel alloc] init];
+            model5.iconName = @"google.png";
+            model5.text = @"最优的译文5";
+            
+            _translateModelList = [NSMutableArray arrayWithObjects:model1, model2, model3, model4, model5, nil];
         }
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];

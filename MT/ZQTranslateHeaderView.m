@@ -9,12 +9,14 @@
 
 #import "ZQTranslateHeaderView.h"
 
-@interface ZQTranslateHeaderView () <UITextFieldDelegate>
+@interface ZQTranslateHeaderView () <UITextFieldDelegate, UITextViewDelegate>
 
 //@property (weak, nonatomic) IBOutlet UILabel *mode;
 - (IBAction)clickTranslateBtn:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
 @property (weak, nonatomic) IBOutlet UIImageView *bgView;
+
+
 
 @end
 
@@ -66,4 +68,7 @@
 
     });
 }
+
+
+
 @end

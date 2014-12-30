@@ -10,9 +10,9 @@
 
 @interface ZQTranslateViewCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *translateText;
+@property (weak, nonatomic) UILabel *translateText;
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
-@property (nonatomic, weak) UIImageView *bgView;
+@property (nonatomic, strong) UIImageView *bgView;
 
 @end
 
@@ -33,19 +33,38 @@
 //    return self;
 //}
 
+- (UIImageView *)bgView
+{
+    if (_bgView == nil) {
+        UIImage *bgImage = [UIImage imageNamed:@"cellBg2"];
+        [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(15, 160, 0, 0)];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:bgImage];
+        imageView.frame = self.frame;
+        _bgView = imageView;
+    }
+    
+    return _bgView;
+}
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     
     [self setupBg];
+    
+    UILabel *translateText = [[UILabel alloc] init];
+    translateText.numberOfLines = 0;
+    translateText.frame = CGRectMake(59, 10, 0, 0);
+    translateText.backgroundColor = [UIColor redColor];
+    [self.contentView addSubview:translateText];
+    self.translateText = translateText;
 }
 
 - (void)setupBg
 {
-    self.backgroundView = nil;
-    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
-//    self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellbg"]];
+    self.backgroundColor = [UIColor clearColor];
     
+//    self.backgroundView = self.bgView;
 }
 
 - (void)setModel:(ZQTranslateModel *)model
@@ -54,6 +73,17 @@
     
     self.icon.image = [UIImage imageNamed:model.iconName];
     self.translateText.text = model.text;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    CGSize labelsize = [self.translateText.text sizeWithFont:self.translateText.font     constrainedToSize:CGSizeMake(320, 200) lineBreakMode:NSLineBreakByWordWrapping];
+    NSLog(@"before%@", NSStringFromCGRect(self.translateText.frame));
+    self.translateText.frame = CGRectMake(self.translateText.frame.origin.x, self.translateText.frame.origin.y, labelsize.width, labelsize.height);
+    NSLog(@"after%@", NSStringFromCGRect(self.translateText.frame));
+    self.translateText.backgroundColor = [UIColor redColor];
 }
 
 
