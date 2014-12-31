@@ -19,7 +19,7 @@
 
 - (void)countFrameWithModel:(ZQTranslateModel *)model
 {
-    _iconFrame = CGRectMake(8, 10, 40, 40);
+    _iconFrame = CGRectMake(8, 10, 30, 30);
  
     CGSize labelsize = [model.text sizeWithFont:TextFont constrainedToSize:CGSizeMake(218, 200) lineBreakMode:NSLineBreakByWordWrapping];
     _textFrame = CGRectMake(Margin + CGRectGetMaxX(_iconFrame), _iconFrame.origin.y, labelsize.width, labelsize.height);

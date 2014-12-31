@@ -8,6 +8,7 @@
 //
 
 #import "ZQTranslateHeaderView.h"
+#import <MBAutoGrowingTextView.h>
 
 @interface ZQTranslateHeaderView () <UITextFieldDelegate, UITextViewDelegate>
 
@@ -16,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
 @property (weak, nonatomic) IBOutlet UIImageView *bgView;
 
+@property (weak, nonatomic) IBOutlet MBAutoGrowingTextView *textView;
 
 
 @end

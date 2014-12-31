@@ -117,17 +117,17 @@
             ZQTranslateFrame *frame1 = [[ZQTranslateFrame alloc] initWithModel:model1];
             
             ZQTranslateModel *model2 = [[ZQTranslateModel alloc] init];
-            model2.iconName = @"google.png";
+            model2.iconName = @"baidu.png";
             model2.text = @"百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文百度的译文";
             ZQTranslateFrame *frame2 = [[ZQTranslateFrame alloc] initWithModel:model2];
             
             ZQTranslateModel *model3 = [[ZQTranslateModel alloc] init];
-            model3.iconName = @"google.png";
+            model3.iconName = @"biying.png";
             model3.text = @"必应的译文3";
             ZQTranslateFrame *frame3 = [[ZQTranslateFrame alloc] initWithModel:model3];
             
             ZQTranslateModel *model4 = [[ZQTranslateModel alloc] init];
-            model4.iconName = @"google.png";
+            model4.iconName = @"youdao.png";
             model4.text = @"有道的译文4";
             ZQTranslateFrame *frame4 = [[ZQTranslateFrame alloc] initWithModel:model4];
             

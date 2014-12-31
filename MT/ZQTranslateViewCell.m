@@ -52,7 +52,7 @@
 - (UIImageView *)bgView
 {
     if (_bgView == nil) {
-        UIImage *bgImage = [UIImage imageNamed:@"cellBg2"];
+        UIImage *bgImage = [UIImage imageNamed:@"headCellBg"];
 
         UIImageView *imageView = [[UIImageView alloc] initWithImage:bgImage];
         imageView.frame = self.frame;
@@ -83,6 +83,8 @@
 {
     [super layoutSubviews];
     
+//    self.backgroundView.frame = CGRectMake(15, 5, self.frame.size.width, self.frame.size.height);
+//    self.contentView.frame = CGRectMake(15, 5, self.frame.size.width, self.frame.size.height);
     self.icon.frame = self.translateFrame.iconFrame;
     self.icon.layer.cornerRadius = self.icon.frame.size.width * 0.5f;
     self.translateText.frame = self.translateFrame.textFrame;
