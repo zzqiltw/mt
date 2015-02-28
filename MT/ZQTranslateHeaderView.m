@@ -9,12 +9,12 @@
 
 #import "ZQTranslateHeaderView.h"
 #import <MBAutoGrowingTextView.h>
+#define PlaceHolder @"请输入要翻译的内容"
 
 @interface ZQTranslateHeaderView () <UITextFieldDelegate, UITextViewDelegate>
 
 //@property (weak, nonatomic) IBOutlet UILabel *mode;
 - (IBAction)clickTranslateBtn:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextField *inputField;
 @property (weak, nonatomic) IBOutlet UIImageView *bgView;
 
 @property (weak, nonatomic) IBOutlet MBAutoGrowingTextView *textView;
@@ -29,7 +29,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self = [[[NSBundle mainBundle] loadNibNamed:@"ZQTranslateHeaderView" owner:nil options:nil] lastObject];
-        self.inputField.delegate = self;
+        self.textView.text = PlaceHolder;
+        self.textView.delegate = self;
     }
     return self;
 }
@@ -48,17 +49,17 @@
 
 - (void)setInputFieldAccessoryView:(UIView *)inputAccessoryView
 {
-    self.inputField.inputAccessoryView = inputAccessoryView;
+    self.textView.inputAccessoryView = inputAccessoryView;
 }
 
 - (void)quitKb
 {
-    [self.inputField endEditing:YES];
+    [self.textView endEditing:YES];
 }
 
 - (void)clearInputField
 {
-    self.inputField.text = nil;
+    self.textView.text = PlaceHolder;
 }
 
 - (IBAction)clickTranslateBtn:(id)sender {
@@ -66,11 +67,14 @@
         [self.delegate translateHeaderView:self didClickTranslateBtn:sender];
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.inputField endEditing:YES];
+        [self.textView endEditing:YES];
 
     });
 }
 
-
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    textView.text = @"";
+}
 
 @end

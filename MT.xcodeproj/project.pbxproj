@@ -12,6 +12,7 @@
 		6D11C6C81A4EEB1600527EF7 /* ZQTranslateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D11C6C71A4EEB1600527EF7 /* ZQTranslateHeaderView.xib */; };
 		6D8DA98B1A4DC4B400E99AFB /* ZQNavigationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DA98A1A4DC4B400E99AFB /* ZQNavigationButton.m */; };
 		6D8DA98E1A4E42A300E99AFB /* ZQTranslateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DA98D1A4E42A300E99AFB /* ZQTranslateViewController.m */; };
+		6DA14CB11AA2067D00B4C6FC /* UIImage+IW.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA14CB01AA2067D00B4C6FC /* UIImage+IW.m */; };
 		6DA95BCB1A4EF38C00154004 /* ZQKeyboardToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA95BCA1A4EF38C00154004 /* ZQKeyboardToolView.m */; };
 		6DA95BCD1A4EF39900154004 /* ZQKeyboardToolView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA95BCC1A4EF39900154004 /* ZQKeyboardToolView.xib */; };
 		6DBBF6291A4DBADD00B28671 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBBF6281A4DBADD00B28671 /* Foundation.framework */; };
@@ -55,6 +56,8 @@
 		6D8DA98A1A4DC4B400E99AFB /* ZQNavigationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQNavigationButton.m; sourceTree = "<group>"; };
 		6D8DA98C1A4E42A300E99AFB /* ZQTranslateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQTranslateViewController.h; sourceTree = "<group>"; };
 		6D8DA98D1A4E42A300E99AFB /* ZQTranslateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQTranslateViewController.m; sourceTree = "<group>"; };
+		6DA14CAF1AA2067D00B4C6FC /* UIImage+IW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+IW.h"; sourceTree = "<group>"; };
+		6DA14CB01AA2067D00B4C6FC /* UIImage+IW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+IW.m"; sourceTree = "<group>"; };
 		6DA95BC91A4EF38C00154004 /* ZQKeyboardToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQKeyboardToolView.h; sourceTree = "<group>"; };
 		6DA95BCA1A4EF38C00154004 /* ZQKeyboardToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQKeyboardToolView.m; sourceTree = "<group>"; };
 		6DA95BCC1A4EF39900154004 /* ZQKeyboardToolView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZQKeyboardToolView.xib; sourceTree = "<group>"; };
@@ -153,6 +156,15 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		6DA14CB21AA2068200B4C6FC /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				6DA14CAF1AA2067D00B4C6FC /* UIImage+IW.h */,
+				6DA14CB01AA2067D00B4C6FC /* UIImage+IW.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
 		6DBBF61C1A4DBADD00B28671 = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +243,7 @@
 		6DBBF6601A4DBDC300B28671 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				6DA14CB21AA2068200B4C6FC /* Category */,
 				6D8DA9881A4DC48400E99AFB /* View */,
 				6DBBF6631A4DC34F00B28671 /* Controller */,
 			);
@@ -424,6 +437,7 @@
 				6DD5B3091A52885200AE332E /* ZQTranslateFrame.m in Sources */,
 				6DD5B3061A503F0400AE332E /* ZQTranslateModel.m in Sources */,
 				6DE1BBEE1A4EFC6400E895CD /* ActionButton.m in Sources */,
+				6DA14CB11AA2067D00B4C6FC /* UIImage+IW.m in Sources */,
 				6D11C6C61A4EEB0800527EF7 /* ZQTranslateHeaderView.m in Sources */,
 				6D8DA98E1A4E42A300E99AFB /* ZQTranslateViewController.m in Sources */,
 				6DD5B3001A503AF500AE332E /* ZQTranslateViewCell.m in Sources */,

@@ -14,14 +14,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入要翻译的内容" minimumFontSize="17" background="bottom_textfield" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wN4-tw-o9Z">
-                    <rect key="frame" x="12" y="60" width="242" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
-                </textField>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pcg-ne-WCF" customClass="ZQNavigationButton">
-                    <rect key="frame" x="271" y="55" width="40" height="40"/>
+                    <rect key="frame" x="271" y="40" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="tintColor" red="0.16862745100000001" green="0.73333333329999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
@@ -33,33 +27,27 @@
                         <action selector="clickTranslateBtn:" destination="1v3-09-mPE" eventType="touchUpInside" id="QdG-6h-Req"/>
                     </connections>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mLL-fw-5v7" customClass="MBAutoGrowingTextView">
-                    <rect key="frame" x="83" y="12" width="100" height="30"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4I8-3J-iEK" customClass="MBAutoGrowingTextView">
+                    <rect key="frame" x="13" y="45" width="250" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="21L-dm-c0c"/>
-                        <constraint firstAttribute="height" constant="30" id="4Y2-nz-WS3"/>
+                        <constraint firstAttribute="height" constant="30" id="8Gs-HS-KRt"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="uDd-8B-A1n"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="mLL-fw-5v7" firstAttribute="leading" secondItem="1v3-09-mPE" secondAttribute="leading" constant="10" id="EIV-Iv-6z0"/>
-                <constraint firstAttribute="trailing" secondItem="mLL-fw-5v7" secondAttribute="trailing" constant="20" id="zSR-xz-PXH"/>
-            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bgView" destination="5KB-Ux-fwK" id="RgE-Mo-iUd"/>
-                <outlet property="inputField" destination="wN4-tw-o9Z" id="yC1-fK-yTM"/>
-                <outlet property="textView" destination="mLL-fw-5v7" id="SwO-hi-yMa"/>
+                <outlet property="textView" destination="4I8-3J-iEK" id="rUL-fK-E5r"/>
             </connections>
         </view>
     </objects>
     <resources>
-        <image name="bottom_textfield" width="166" height="31"/>
         <image name="headBg" width="642" height="194"/>
     </resources>
 </document>

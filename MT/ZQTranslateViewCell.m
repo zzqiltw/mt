@@ -7,6 +7,7 @@
 //
 
 #import "ZQTranslateViewCell.h"
+#import "UIImage+IW.h"
 
 @interface ZQTranslateViewCell ()
 
@@ -38,11 +39,11 @@
         [self.contentView addSubview:imageView];
         self.icon = imageView;
         
-        UIView *sepaView = [[UIView alloc] init];
-        sepaView.backgroundColor = [UIColor colorWithRed:30/255.0 green:164/255.0 blue:160/255.0 alpha:0.5f];
-        sepaView.alpha = 0.5f;
-        [self.contentView addSubview:sepaView];
-        self.sepaView = sepaView;
+//        UIView *sepaView = [[UIView alloc] init];
+//        sepaView.backgroundColor = [UIColor colorWithRed:30/255.0 green:164/255.0 blue:160/255.0 alpha:0.5f];
+//        sepaView.alpha = 0.5f;
+//        [self.contentView addSubview:sepaView];
+//        self.sepaView = sepaView;
         
         [self setupBg];
     }
@@ -52,7 +53,7 @@
 - (UIImageView *)bgView
 {
     if (_bgView == nil) {
-        UIImage *bgImage = [UIImage imageNamed:@"headCellBg"];
+        UIImage *bgImage = [UIImage resizedImage:@"common_card_middle_background"];
 
         UIImageView *imageView = [[UIImageView alloc] initWithImage:bgImage];
         imageView.frame = self.frame;
@@ -62,13 +63,19 @@
     return _bgView;
 }
 
-
+- (void)setFrame:(CGRect)frame
+{
+    frame.origin.x = 3;
+    frame.origin.y += 3;
+    frame.size.width -= 6;
+    frame.size.height -= 6;
+    [super setFrame:frame];
+}
 - (void)setupBg
 {
-    
     self.backgroundColor = [UIColor clearColor];
-    
-//    self.backgroundView = self.bgView;
+    self.bgView = nil;
+    [self insertSubview:self.bgView atIndex:0];
 }
 
 - (void)setTranslateFrame:(ZQTranslateFrame *)translateFrame
@@ -83,12 +90,11 @@
 {
     [super layoutSubviews];
     
-//    self.backgroundView.frame = CGRectMake(15, 5, self.frame.size.width, self.frame.size.height);
-//    self.contentView.frame = CGRectMake(15, 5, self.frame.size.width, self.frame.size.height);
     self.icon.frame = self.translateFrame.iconFrame;
     self.icon.layer.cornerRadius = self.icon.frame.size.width * 0.5f;
     self.translateText.frame = self.translateFrame.textFrame;
-    self.sepaView.frame = CGRectMake(0, 0, self.frame.size.width, 1);
+//    self.sepaView.frame = CGRectMake(0, 0, self.frame.size.width, 1);
+    self.bgView.frame = self.translateFrame.bgFrame;
 }
 
 
