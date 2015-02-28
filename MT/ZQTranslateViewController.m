@@ -12,6 +12,7 @@
 #import "ZQKeyboardToolView.h"
 #import "ZQTranslateModel.h"
 #import "ZQTranslateViewCell.h"
+#import "ZQTranslateTools.h"
 #import <TSMessage.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 
@@ -104,11 +105,13 @@
     [self clearInputField];
 }
 
-- (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender
+- (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender withInput:(NSString *)srcText
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [ZQTranslateTools baiduTranslate:srcText];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.9f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
         if (self.translateModelFrameList == nil) {
             ZQTranslateModel *model1 = [[ZQTranslateModel alloc] init];

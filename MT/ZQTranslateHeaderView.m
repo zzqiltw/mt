@@ -63,8 +63,8 @@
 }
 
 - (IBAction)clickTranslateBtn:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(translateHeaderView:didClickTranslateBtn:)]) {
-        [self.delegate translateHeaderView:self didClickTranslateBtn:sender];
+    if ([self.delegate respondsToSelector:@selector(translateHeaderView:didClickTranslateBtn: withInput:)]) {
+        [self.delegate translateHeaderView:self didClickTranslateBtn:sender withInput:self.textView.text];
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.textView endEditing:YES];

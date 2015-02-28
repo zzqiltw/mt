@@ -24,6 +24,6 @@
 @protocol ZQTranslateHeaderViewDelegate <NSObject>
 
 @optional
-- (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender;
+- (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender withInput:(NSString *)srcText;
 
 @end

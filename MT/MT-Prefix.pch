@@ -13,6 +13,12 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
 #define iOS7 ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 7.0)
+
 #define TranslateTypeKey @"TranslateType"
+
+#define BaiduAPIKey @"XtX8U9p1lMowpKm7gKZxCiIY"
+#define BaiduURL @"http://openapi.baidu.com/public/2.0/bmt/translate"
+
 #endif
