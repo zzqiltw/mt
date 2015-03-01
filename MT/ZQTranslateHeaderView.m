@@ -11,7 +11,7 @@
 #import <MBAutoGrowingTextView.h>
 #define PlaceHolder @"请输入要翻译的内容"
 
-@interface ZQTranslateHeaderView () <UITextFieldDelegate, UITextViewDelegate>
+@interface ZQTranslateHeaderView () <UITextViewDelegate>
 
 //@property (weak, nonatomic) IBOutlet UILabel *mode;
 - (IBAction)clickTranslateBtn:(id)sender;
@@ -60,6 +60,7 @@
 - (void)clearInputField
 {
     self.textView.text = PlaceHolder;
+//    self.textView.text = @"";
 }
 
 - (IBAction)clickTranslateBtn:(id)sender {
@@ -68,7 +69,6 @@
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.textView endEditing:YES];
-
     });
 }
 

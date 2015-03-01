@@ -113,11 +113,12 @@
     [self clearInputField];
 }
 
-- (void)refreshDataWithIcon:(NSString *)icon text:(NSString *)text
+- (void)refreshDataWithIcon:(NSString *)icon text:(NSString *)text srcText:(NSString *)srcText
 {
     ZQTranslateModel *model = [[ZQTranslateModel alloc] init];
     model.iconName = icon;
-    model.text = text;
+    model.srcText = [NSString stringWithFormat:@"原文:%@", text];
+    model.text = [NSString stringWithFormat:@"译文:%@", text];
     ZQTranslateFrame *modelFrame = [[ZQTranslateFrame alloc] initWithModel:model];
     [self.translateModelFrameList addObject:modelFrame];
     [self.tableView reloadData];
@@ -132,17 +133,18 @@
     
     [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
         ZQBaiduTranslateResultItem *item = result.trans_result[0];
-        [self refreshDataWithIcon:@"baidu.png" text:item.dst];
+        [self refreshDataWithIcon:@"baidu.png" text:item.dst srcText:srcText];
     } failure:^(NSError *error) {
         
     }];
     
     [ZQTranslateTools youdaoTranslate:srcText ofType:self.type success:^(NSString *youdaoResult) {
-        [self refreshDataWithIcon:@"youdao.png" text:youdaoResult];
+        [self refreshDataWithIcon:@"youdao.png" text:youdaoResult srcText:srcText];
     } failure:^(NSError *error) {
         
     }];
     
+    [ZQTranslateTools icibaTranslate:srcText ofType:self.type];
     self.view.userInteractionEnabled = YES;
     return;
     

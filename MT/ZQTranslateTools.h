@@ -14,4 +14,6 @@
 + (void)baiduTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void(^)(ZQBaiduTranslateResult *result))success failure:(void(^)(NSError *error))failure;
 
 + (void)youdaoTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void(^)(NSString *youdaoResult))success failure:(void(^)(NSError *error))failure;
+
++ (void)icibaTranslate:(NSString *)srcText ofType:(TranslateType)type;
 @end

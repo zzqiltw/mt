@@ -11,6 +11,7 @@
 @interface ZQTranslateModel : NSObject
 
 @property (nonatomic, copy) NSString *iconName;
+@property (nonatomic, copy) NSString *srcText;
 @property (nonatomic, copy) NSString *text;
 
 @end
