@@ -25,6 +25,14 @@
 
 @implementation ZQTranslateViewController
 
+- (NSMutableArray *)translateModelFrameList
+{
+    if (_translateModelFrameList == nil) {
+        _translateModelFrameList = [NSMutableArray array];
+    }
+    return _translateModelFrameList;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -109,7 +117,20 @@
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [ZQTranslateTools baiduTranslate:srcText];
+    [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
+        ZQTranslateModel *baiduModel = [[ZQTranslateModel alloc] init];
+        baiduModel.iconName = @"baidu.png";
+        ZQBaiduTranslateResultItem *item = result.trans_result[0];
+        baiduModel.text = item.dst;
+        ZQTranslateFrame *baiduFrame = [[ZQTranslateFrame alloc] initWithModel:baiduModel];
+        [self.translateModelFrameList addObject:baiduFrame];
+        [self.tableView reloadData];
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    } failure:^(NSError *error) {
+        
+    }];
+    return;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.9f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 

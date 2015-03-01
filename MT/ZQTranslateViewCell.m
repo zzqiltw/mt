@@ -29,6 +29,7 @@
 //        translateText.textAlignment = NSTextAlignmentCenter;
         translateText.lineBreakMode = NSLineBreakByWordWrapping;
         translateText.font = TextFont;
+        translateText.textColor = [UIColor lightGrayColor];
         [self.contentView addSubview:translateText];
         self.translateText = translateText;
         
@@ -83,7 +84,7 @@
     _translateFrame = translateFrame;
     
     self.icon.image = [UIImage imageNamed:translateFrame.model.iconName];
-    self.translateText.text = translateFrame.model.text;
+    self.translateText.text = [NSString stringWithFormat:@"译文:%@", translateFrame.model.text];
 }
 
 - (void)layoutSubviews

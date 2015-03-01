@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ZQBaiduTranslateResult.h"
 
 @interface ZQTranslateTools : NSObject
 
-+ (void)baiduTranslate:(NSString *)srcText;
++ (void)baiduTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void(^)(ZQBaiduTranslateResult *result))success failure:(void(^)(NSError *error))failure;
 
 @end

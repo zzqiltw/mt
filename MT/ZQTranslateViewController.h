@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef NS_ENUM(NSInteger, TranslateType) {
-    TranslateTypeEn2Cn,
-    TranslateTypeCn2En
-};
+
 
 @interface ZQTranslateViewController : UITableViewController
 
