@@ -113,23 +113,37 @@
     [self clearInputField];
 }
 
+- (void)refreshDataWithIcon:(NSString *)icon text:(NSString *)text
+{
+    ZQTranslateModel *model = [[ZQTranslateModel alloc] init];
+    model.iconName = icon;
+    model.text = text;
+    ZQTranslateFrame *modelFrame = [[ZQTranslateFrame alloc] initWithModel:model];
+    [self.translateModelFrameList addObject:modelFrame];
+    [self.tableView reloadData];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
 - (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender withInput:(NSString *)srcText
 {
+    [self.translateModelFrameList removeAllObjects];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.view.userInteractionEnabled = NO;
     
     [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
-        ZQTranslateModel *baiduModel = [[ZQTranslateModel alloc] init];
-        baiduModel.iconName = @"baidu.png";
         ZQBaiduTranslateResultItem *item = result.trans_result[0];
-        baiduModel.text = item.dst;
-        ZQTranslateFrame *baiduFrame = [[ZQTranslateFrame alloc] initWithModel:baiduModel];
-        [self.translateModelFrameList addObject:baiduFrame];
-        [self.tableView reloadData];
-        
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self refreshDataWithIcon:@"baidu.png" text:item.dst];
     } failure:^(NSError *error) {
         
     }];
+    
+    [ZQTranslateTools youdaoTranslate:srcText ofType:self.type success:^(NSString *youdaoResult) {
+        [self refreshDataWithIcon:@"youdao.png" text:youdaoResult];
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    self.view.userInteractionEnabled = YES;
     return;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.9f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

@@ -84,7 +84,7 @@
     _translateFrame = translateFrame;
     
     self.icon.image = [UIImage imageNamed:translateFrame.model.iconName];
-    self.translateText.text = [NSString stringWithFormat:@"译文:%@", translateFrame.model.text];
+    self.translateText.text = translateFrame.model.text;
 }
 
 - (void)layoutSubviews
