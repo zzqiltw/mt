@@ -25,9 +25,9 @@
     _srcTextFrame = CGRectMake(Margin + CGRectGetMaxX(_iconFrame), _iconFrame.origin.y - Margin, srcLabelsize.width, srcLabelsize.height);
     
     CGSize labelsize = [model.text sizeWithFont:TextFont constrainedToSize:CGSizeMake(218, 200)];
-    _textFrame = CGRectMake(_srcTextFrame.origin.x, CGRectGetMaxY(_srcTextFrame) + Margin, labelsize.width, labelsize.height);
+    _textFrame = CGRectMake(_srcTextFrame.origin.x, CGRectGetMaxY(_srcTextFrame) + Margin * 0.5, labelsize.width, labelsize.height);
 
-    _rowHeight = Margin + MAX(CGRectGetMaxY(_textFrame), CGRectGetMaxY(_iconFrame));
+    _rowHeight = Margin * 1.2 + MAX(CGRectGetMaxY(_textFrame), CGRectGetMaxY(_iconFrame));
     
     _bgFrame = CGRectMake(0, 0, [UIScreen mainScreen].applicationFrame.size.width - 6, _rowHeight - 3);
 }

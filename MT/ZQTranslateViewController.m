@@ -117,7 +117,7 @@
 {
     ZQTranslateModel *model = [[ZQTranslateModel alloc] init];
     model.iconName = icon;
-    model.srcText = [NSString stringWithFormat:@"原文:%@", text];
+    model.srcText = [NSString stringWithFormat:@"原文:%@", srcText];
     model.text = [NSString stringWithFormat:@"译文:%@", text];
     ZQTranslateFrame *modelFrame = [[ZQTranslateFrame alloc] initWithModel:model];
     [self.translateModelFrameList addObject:modelFrame];
