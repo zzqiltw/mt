@@ -15,10 +15,12 @@
 
 //@property (weak, nonatomic) IBOutlet UILabel *mode;
 - (IBAction)clickTranslateBtn:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIImageView *bgView;
 
 @property (weak, nonatomic) IBOutlet MBAutoGrowingTextView *textView;
 
+@property (nonatomic, copy) NSString *inputText;
 
 @end
 
@@ -65,6 +67,7 @@
 
 - (IBAction)clickTranslateBtn:(id)sender {
     if ([self.delegate respondsToSelector:@selector(translateHeaderView:didClickTranslateBtn: withInput:)]) {
+        self.inputText = self.textView.text;
         [self.delegate translateHeaderView:self didClickTranslateBtn:sender withInput:self.textView.text];
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -74,7 +77,11 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    textView.text = @"";
+    if (self.inputText == nil) {
+        textView.text = @"";
+    } else {
+        self.inputText = nil;
+    }
 }
 
 @end

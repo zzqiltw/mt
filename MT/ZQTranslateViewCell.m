@@ -31,7 +31,7 @@
         srcTextLabel.numberOfLines = 0;
         srcTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
         srcTextLabel.font = TextFont;
-        srcTextLabel.textColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:0.8];
+        srcTextLabel.textColor = [UIColor lightGrayColor];
         [self.contentView addSubview:srcTextLabel];
         self.srcText = srcTextLabel;
         
@@ -40,7 +40,7 @@
 //        translateText.textAlignment = NSTextAlignmentCenter;
         translateText.lineBreakMode = NSLineBreakByWordWrapping;
         translateText.font = TextFont;
-        translateText.textColor = [UIColor lightGrayColor];
+        translateText.textColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:0.8];
         [self.contentView addSubview:translateText];
         self.translateText = translateText;
         

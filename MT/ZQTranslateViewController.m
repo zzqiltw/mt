@@ -122,7 +122,6 @@
     ZQTranslateFrame *modelFrame = [[ZQTranslateFrame alloc] initWithModel:model];
     [self.translateModelFrameList addObject:modelFrame];
     [self.tableView reloadData];
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 - (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender withInput:(NSString *)srcText
@@ -134,12 +133,27 @@
     [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
         ZQBaiduTranslateResultItem *item = result.trans_result[0];
         [self refreshDataWithIcon:@"baidu.png" text:item.dst srcText:srcText];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSError *error) {
         
     }];
     
-    [ZQTranslateTools youdaoTranslate:srcText ofType:self.type success:^(NSString *youdaoResult) {
-        [self refreshDataWithIcon:@"youdao.png" text:youdaoResult srcText:srcText];
+    [ZQTranslateTools youdaoTranslate:srcText ofType:self.type success:^(ZQYoudaoTranslateResult *youdaoResult) {
+        NSMutableArray *youdaoResultTexts = [NSMutableArray array];
+        for (NSString *locResult in youdaoResult.translation) {
+            [youdaoResultTexts addObject:locResult];
+        }
+        for (ZQYoudaoTranslateResultWebItem *webResultKeyValues in youdaoResult.web) {
+//            for (NSString *webResultValue in webResultKeyValues.value) {
+//                [youdaoResultTexts addObject:webResultValue];
+//            }
+            [youdaoResultTexts addObject:webResultKeyValues.value[0]];
+        }
+//        [self refreshDataWithIcon:@"youdao.png" text:youdaoResult srcText:srcText];
+        for (NSString *resultText in youdaoResultTexts) {
+            [self refreshDataWithIcon:@"youdao.png" text:resultText srcText:srcText];
+        }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSError *error) {
         
     }];

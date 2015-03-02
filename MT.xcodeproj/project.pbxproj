@@ -27,6 +27,8 @@
 		6DB033781AA2B84200CACAFC /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0336D1AA2B84200CACAFC /* NSObject+MJCoding.m */; };
 		6DB033791AA2B84200CACAFC /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0336F1AA2B84200CACAFC /* NSObject+MJKeyValue.m */; };
 		6DB0337A1AA2B84200CACAFC /* NSObject+MJMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB033711AA2B84200CACAFC /* NSObject+MJMember.m */; };
+		6DB033C71AA413B400CACAFC /* ZQYoudaoTranslateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB033C61AA413B300CACAFC /* ZQYoudaoTranslateResult.m */; };
+		6DB033CA1AA4142500CACAFC /* ZQYoudaoTranslateResultWebItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB033C91AA4142500CACAFC /* ZQYoudaoTranslateResultWebItem.m */; };
 		6DBBF6291A4DBADD00B28671 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBBF6281A4DBADD00B28671 /* Foundation.framework */; };
 		6DBBF62B1A4DBADD00B28671 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBBF62A1A4DBADD00B28671 /* CoreGraphics.framework */; };
 		6DBBF62D1A4DBADD00B28671 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBBF62C1A4DBADD00B28671 /* UIKit.framework */; };
@@ -98,6 +100,10 @@
 		6DB0336F1AA2B84200CACAFC /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
 		6DB033701AA2B84200CACAFC /* NSObject+MJMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJMember.h"; sourceTree = "<group>"; };
 		6DB033711AA2B84200CACAFC /* NSObject+MJMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJMember.m"; sourceTree = "<group>"; };
+		6DB033C51AA413B300CACAFC /* ZQYoudaoTranslateResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQYoudaoTranslateResult.h; sourceTree = "<group>"; };
+		6DB033C61AA413B300CACAFC /* ZQYoudaoTranslateResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQYoudaoTranslateResult.m; sourceTree = "<group>"; };
+		6DB033C81AA4142500CACAFC /* ZQYoudaoTranslateResultWebItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQYoudaoTranslateResultWebItem.h; sourceTree = "<group>"; };
+		6DB033C91AA4142500CACAFC /* ZQYoudaoTranslateResultWebItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQYoudaoTranslateResultWebItem.m; sourceTree = "<group>"; };
 		6DBBF6251A4DBADD00B28671 /* MT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DBBF6281A4DBADD00B28671 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6DBBF62A1A4DBADD00B28671 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -256,6 +262,17 @@
 			name = BaiduTranslateResultModel;
 			sourceTree = "<group>";
 		};
+		6DB033C41AA412D500CACAFC /* YoudaoTranslatteResultModel */ = {
+			isa = PBXGroup;
+			children = (
+				6DB033C51AA413B300CACAFC /* ZQYoudaoTranslateResult.h */,
+				6DB033C61AA413B300CACAFC /* ZQYoudaoTranslateResult.m */,
+				6DB033C81AA4142500CACAFC /* ZQYoudaoTranslateResultWebItem.h */,
+				6DB033C91AA4142500CACAFC /* ZQYoudaoTranslateResultWebItem.m */,
+			);
+			name = YoudaoTranslatteResultModel;
+			sourceTree = "<group>";
+		};
 		6DBBF61C1A4DBADD00B28671 = {
 			isa = PBXGroup;
 			children = (
@@ -381,6 +398,7 @@
 				6DD5B3051A503F0400AE332E /* ZQTranslateModel.m */,
 				6DD5B3071A52885200AE332E /* ZQTranslateFrame.h */,
 				6DD5B3081A52885200AE332E /* ZQTranslateFrame.m */,
+				6DB033C41AA412D500CACAFC /* YoudaoTranslatteResultModel */,
 				6DB0337C1AA2BA1800CACAFC /* BaiduTranslateResultModel */,
 			);
 			name = Model;
@@ -540,10 +558,12 @@
 				6DD5B3091A52885200AE332E /* ZQTranslateFrame.m in Sources */,
 				6DD5B3061A503F0400AE332E /* ZQTranslateModel.m in Sources */,
 				6DB033751AA2B84200CACAFC /* MJMethod.m in Sources */,
+				6DB033CA1AA4142500CACAFC /* ZQYoudaoTranslateResultWebItem.m in Sources */,
 				6DB033791AA2B84200CACAFC /* NSObject+MJKeyValue.m in Sources */,
 				6DE1BBEE1A4EFC6400E895CD /* ActionButton.m in Sources */,
 				6DA14CB11AA2067D00B4C6FC /* UIImage+IW.m in Sources */,
 				6DB033781AA2B84200CACAFC /* NSObject+MJCoding.m in Sources */,
+				6DB033C71AA413B400CACAFC /* ZQYoudaoTranslateResult.m in Sources */,
 				6D11C6C61A4EEB0800527EF7 /* ZQTranslateHeaderView.m in Sources */,
 				6D8DA98E1A4E42A300E99AFB /* ZQTranslateViewController.m in Sources */,
 				6DD5B3001A503AF500AE332E /* ZQTranslateViewCell.m in Sources */,

@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "ZQBaiduTranslateResult.h"
+#import "ZQYoudaoTranslateResult.h"
 
 @interface ZQTranslateTools : NSObject
 
 + (void)baiduTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void(^)(ZQBaiduTranslateResult *result))success failure:(void(^)(NSError *error))failure;
 
-+ (void)youdaoTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void(^)(NSString *youdaoResult))success failure:(void(^)(NSError *error))failure;
++ (void)youdaoTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void(^)(ZQYoudaoTranslateResult *youdaoResult))success failure:(void(^)(NSError *error))failure;
 
 + (void)icibaTranslate:(NSString *)srcText ofType:(TranslateType)type;
 @end
