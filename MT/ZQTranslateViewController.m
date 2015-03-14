@@ -45,7 +45,7 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 320, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
 
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg"]];
     imageView.userInteractionEnabled = YES;
