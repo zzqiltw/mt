@@ -16,10 +16,14 @@
 #import <TSMessage.h>
 #import "MBProgressHUD+ZQ.h"
 
+#define ZQFooterViewHeight 30
+
 @interface ZQTranslateViewController () <ZQKeyboardToolViewDelegate, ZQTranslateHeaderViewDelegate>
 
 @property (nonatomic, assign) TranslateType type;
 @property (nonatomic, strong) NSMutableArray *translateModelFrameList;
+
+@property (nonatomic, weak) UIButton *evaluationButton;
 
 @end
 
@@ -38,13 +42,30 @@
     [super viewDidLoad];
     
     self.title = @"翻译";
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 320, 0);
+
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg"]];
     imageView.userInteractionEnabled = YES;
     self.tableView.backgroundView = imageView;
     
     [self.tableView registerClass:[ZQTranslateViewCell class] forCellReuseIdentifier:TranslateCellID];
+    
+    UIView *footerView = [[UIView alloc] init];
+    footerView.backgroundColor = [UIColor clearColor];
+    self.tableView.tableFooterView = footerView;
+    UIButton *evaluationButton = [[UIButton alloc] init];
+    evaluationButton.frame = CGRectMake(5, 5, 310, ZQFooterViewHeight);
+    [evaluationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [evaluationButton setTitle:@"查看译文BLEU评价结果" forState:UIControlStateNormal];
+    evaluationButton.titleLabel.font = [UIFont systemFontOfSize:13];
+    evaluationButton.layer.cornerRadius = 4;
+    evaluationButton.backgroundColor = ZQColor(40, 175, 179, 0.7);
+    evaluationButton.hidden = YES;
+    [footerView addSubview:evaluationButton];
+    self.evaluationButton = evaluationButton;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -66,7 +87,6 @@
     
     [headerView setInputFieldAccessoryView:toolView];
 }
-
 
 
 #pragma mark - Table view data source
@@ -94,14 +114,11 @@
     return cell;
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    [self quitKb];
-}
 
 - (void)keyboardToolView:(ZQKeyboardToolView *)toolView didClickQuitBtn:(id)sender
 {
     [self quitKb];
+    self.evaluationButton.hidden = YES;
 }
 
 - (void)keyboardToolView:(ZQKeyboardToolView *)toolView didClickClearBtn:(id)sender
@@ -125,14 +142,19 @@
 
 - (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender withInput:(NSString *)srcText
 {
+
+    self.evaluationButton.hidden = YES;
     [self.translateModelFrameList removeAllObjects];
+    
     MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加载"];
-    self.view.userInteractionEnabled = NO;
     
     [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
+
         ZQBaiduTranslateResultItem *item = result.trans_result[0];
         [self refreshDataWithIcon:@"baidu.png" text:item.dst srcText:srcText];
         [hud hide:YES];
+        self.evaluationButton.hidden = NO;
+        
     } failure:^(NSError *error) {
         [hud hide:YES];
         [MBProgressHUD showError:@"加载失败"];
@@ -140,6 +162,7 @@
     }];
     
     [ZQTranslateTools youdaoTranslate:srcText ofType:self.type success:^(ZQYoudaoTranslateResult *youdaoResult) {
+        
         NSMutableArray *youdaoResultTexts = [NSMutableArray array];
         for (NSString *locResult in youdaoResult.translation) {
             [youdaoResultTexts addObject:locResult];
@@ -155,6 +178,7 @@
             [self refreshDataWithIcon:@"youdao.png" text:resultText srcText:srcText];
         }
         [hud hide:YES];
+        self.evaluationButton.hidden = NO;
     } failure:^(NSError *error) {
         [hud hide:YES];
         [MBProgressHUD showError:@"加载失败"];
@@ -162,7 +186,6 @@
     }];
     
 //    [ZQTranslateTools icibaTranslate:srcText ofType:self.type];
-    self.view.userInteractionEnabled = YES;
     return;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.9f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -211,5 +234,6 @@
 {
     ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
     [headerView clearInputField];
+    self.evaluationButton.hidden = YES;
 }
 @end

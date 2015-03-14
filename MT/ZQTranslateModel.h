@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#define TextFont [UIFont systemFontOfSize:14]
+#define TextFont [UIFont systemFontOfSize:16]
 @interface ZQTranslateModel : NSObject
 
 @property (nonatomic, copy) NSString *iconName;
