@@ -57,6 +57,7 @@
 - (void)quitKb
 {
     [self.textView endEditing:YES];
+    self.textView.text = PlaceHolder;
 }
 
 - (void)clearInputField

@@ -8,6 +8,8 @@
 
 #import "ZQTranslateTools.h"
 #import <AFNetworking/AFNetworking.h>
+
+#define TimeOutInterval 10.0f
 @implementation ZQTranslateTools
 
 + (void)baiduTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(ZQBaiduTranslateResult *))success failure:(void (^)(NSError *))failure
@@ -26,6 +28,7 @@
     params[@"q"] = srcText;
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer.timeoutInterval = TimeOutInterval;
     [manager GET:BaiduURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         ZQBaiduTranslateResult *result = [ZQBaiduTranslateResult objectWithKeyValues:responseObject];
         if (success) {
@@ -44,6 +47,7 @@
     NSString *encodedText = [srcText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *urlString = [NSString stringWithFormat:
                            @"http://fanyi.youdao.com/openapi.do?keyfrom=testtestest&key=815265506&type=data&doctype=json&version=1.1&q=%@", encodedText];
+    manager.requestSerializer.timeoutInterval = TimeOutInterval;
     [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@", responseObject);
         ZQYoudaoTranslateResult *result = [ZQYoudaoTranslateResult objectWithKeyValues:responseObject];

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="UUO-Cr-RWZ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -29,12 +30,16 @@
                         <viewControllerLayoutGuide type="bottom" id="IfO-2D-oLo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bzD-A4-X0c">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wt-r8-gu5" customClass="ZQNavigationButton">
-                                <rect key="frame" x="110" y="158" width="100" height="100"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wt-r8-gu5" customClass="ZQNavigationButton">
+                                <rect key="frame" x="110" y="154" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="14v-WD-67B"/>
+                                    <constraint firstAttribute="width" constant="100" id="cGr-B9-YB0"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" red="0.16862745100000001" green="0.73333333329999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
                                 <state key="normal" title="汉译英">
@@ -45,8 +50,8 @@
                                     <action selector="cn2En:" destination="9dD-4G-BWo" eventType="touchUpInside" id="V6K-2G-ai6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oL9-OL-psi" customClass="ZQNavigationButton">
-                                <rect key="frame" x="110" y="365" width="100" height="100"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oL9-OL-psi" customClass="ZQNavigationButton">
+                                <rect key="frame" x="110" y="358" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" red="0.2078431547" green="0.73333334920000004" blue="0.74901962280000001" alpha="1" colorSpace="deviceRGB"/>
@@ -60,6 +65,14 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="oL9-OL-psi" secondAttribute="centerY" multiplier="1.5" constant="-44" id="Abp-Fp-SkE"/>
+                            <constraint firstAttribute="bottom" secondItem="0wt-r8-gu5" secondAttribute="centerY" multiplier="3" constant="-44" id="QnN-gG-5Ak"/>
+                            <constraint firstItem="0wt-r8-gu5" firstAttribute="centerX" secondItem="oL9-OL-psi" secondAttribute="centerX" id="TUd-ZM-p0l"/>
+                            <constraint firstItem="0wt-r8-gu5" firstAttribute="width" secondItem="oL9-OL-psi" secondAttribute="width" id="or0-ff-aAF"/>
+                            <constraint firstAttribute="centerX" secondItem="0wt-r8-gu5" secondAttribute="centerX" id="tx2-Ih-Xcg"/>
+                            <constraint firstItem="0wt-r8-gu5" firstAttribute="height" secondItem="oL9-OL-psi" secondAttribute="height" id="xXO-Ct-Pdp"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="毕业设计" id="WNS-1I-wCq"/>
                 </viewController>
@@ -81,6 +94,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
 </document>

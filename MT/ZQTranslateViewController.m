@@ -14,7 +14,7 @@
 #import "ZQTranslateViewCell.h"
 #import "ZQTranslateTools.h"
 #import <TSMessage.h>
-#import <MBProgressHUD/MBProgressHUD.h>
+#import "MBProgressHUD+ZQ.h"
 
 @interface ZQTranslateViewController () <ZQKeyboardToolViewDelegate, ZQTranslateHeaderViewDelegate>
 
@@ -89,7 +89,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-#warning 这里要不要indexpath
     ZQTranslateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TranslateCellID forIndexPath:indexPath];
     cell.translateFrame = self.translateModelFrameList[indexPath.row];
     return cell;
@@ -127,15 +126,17 @@
 - (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender withInput:(NSString *)srcText
 {
     [self.translateModelFrameList removeAllObjects];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加载"];
     self.view.userInteractionEnabled = NO;
     
     [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
         ZQBaiduTranslateResultItem *item = result.trans_result[0];
         [self refreshDataWithIcon:@"baidu.png" text:item.dst srcText:srcText];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [hud hide:YES];
     } failure:^(NSError *error) {
-        
+        [hud hide:YES];
+        [MBProgressHUD showError:@"加载失败"];
+        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
     }];
     
     [ZQTranslateTools youdaoTranslate:srcText ofType:self.type success:^(ZQYoudaoTranslateResult *youdaoResult) {
@@ -153,12 +154,14 @@
         for (NSString *resultText in youdaoResultTexts) {
             [self refreshDataWithIcon:@"youdao.png" text:resultText srcText:srcText];
         }
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [hud hide:YES];
     } failure:^(NSError *error) {
-        
+        [hud hide:YES];
+        [MBProgressHUD showError:@"加载失败"];
+        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
     }];
     
-    [ZQTranslateTools icibaTranslate:srcText ofType:self.type];
+//    [ZQTranslateTools icibaTranslate:srcText ofType:self.type];
     self.view.userInteractionEnabled = YES;
     return;
     
