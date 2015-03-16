@@ -62,8 +62,9 @@
 
 - (void)clearInputField
 {
-    self.textView.text = PlaceHolder;
-//    self.textView.text = @"";
+//    self.textView.text = PlaceHolder;
+    self.textView.text = @"";
+    [self.textView becomeFirstResponder];
 }
 
 - (IBAction)clickTranslateBtn:(id)sender {
