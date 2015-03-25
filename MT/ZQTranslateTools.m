@@ -49,7 +49,6 @@
                            @"http://fanyi.youdao.com/openapi.do?keyfrom=testtestest&key=815265506&type=data&doctype=json&version=1.1&q=%@", encodedText];
     manager.requestSerializer.timeoutInterval = TimeOutInterval;
     [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
         ZQYoudaoTranslateResult *result = [ZQYoudaoTranslateResult objectWithKeyValues:responseObject];
         if (success) {
             success(result);
@@ -58,6 +57,38 @@
         if (failure) {
             failure(error);
         }
+    }];
+}
+
++ (void)googleTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [[AFHTTPResponseSerializer alloc] init];
+    NSString *urlString = @"http://translate.google.cn/translate_a/t";
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"client"] = @"t";
+    params[@"hl"] = @"zh-CN";
+    params[@"text"] = srcText;
+    if (type == TranslateTypeCn2En) {
+        params[@"sl"] = @"zh-CN";
+        params[@"tl"] = @"en";
+    } else if (type == TranslateTypeEn2Cn) {
+        params[@"sl"] = @"en";
+        params[@"tl"] = @"zh-CN";
+    }
+    params[@"ie"] = @"UTF-8";
+    params[@"oe"] = @"UTF-8";
+    
+    [manager GET:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *resultSet = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSRange range = [resultSet rangeOfString:@"\","];
+        NSString *result = [resultSet substringWithRange:NSMakeRange(4, range.location - 4)];
+        
+        if (success) {
+            success(result);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error.localizedDescription);
     }];
 }
 

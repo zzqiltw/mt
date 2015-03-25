@@ -140,6 +140,12 @@
     [self.tableView reloadData];
 }
 
+- (void)hidHudAndEvaluaBtn:(MBProgressHUD *)hud
+{
+    [hud hide:YES];
+    self.evaluationButton.hidden = NO;
+}
+
 - (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender withInput:(NSString *)srcText
 {
 
@@ -148,13 +154,19 @@
     
     MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加载"];
     
+    [ZQTranslateTools googleTranslate:srcText ofType:self.type success:^(NSString *googleResult) {
+        [self refreshDataWithIcon:@"google.png" text:googleResult srcText:srcText];
+        [self hidHudAndEvaluaBtn:hud];
+    } failure:^(NSError *error) {
+        
+    }];
+    
     [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
 
         ZQBaiduTranslateResultItem *item = result.trans_result[0];
         [self refreshDataWithIcon:@"baidu.png" text:item.dst srcText:srcText];
-        [hud hide:YES];
-        self.evaluationButton.hidden = NO;
         
+        [self hidHudAndEvaluaBtn:hud];
     } failure:^(NSError *error) {
         [hud hide:YES];
         [MBProgressHUD showError:@"加载失败"];
@@ -167,23 +179,21 @@
         for (NSString *locResult in youdaoResult.translation) {
             [youdaoResultTexts addObject:locResult];
         }
-        for (ZQYoudaoTranslateResultWebItem *webResultKeyValues in youdaoResult.web) {
-//            for (NSString *webResultValue in webResultKeyValues.value) {
-//                [youdaoResultTexts addObject:webResultValue];
-//            }
-            [youdaoResultTexts addObject:webResultKeyValues.value[0]];
-        }
-//        [self refreshDataWithIcon:@"youdao.png" text:youdaoResult srcText:srcText];
+//        for (ZQYoudaoTranslateResultWebItem *webResultKeyValues in youdaoResult.web) {
+//            [youdaoResultTexts addObject:webResultKeyValues.value[0]];
+//        }
         for (NSString *resultText in youdaoResultTexts) {
             [self refreshDataWithIcon:@"youdao.png" text:resultText srcText:srcText];
         }
-        [hud hide:YES];
-        self.evaluationButton.hidden = NO;
+        
+        [self hidHudAndEvaluaBtn:hud];
     } failure:^(NSError *error) {
         [hud hide:YES];
         [MBProgressHUD showError:@"加载失败"];
         [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
     }];
+    
+    
     
 //    [ZQTranslateTools icibaTranslate:srcText ofType:self.type];
     return;

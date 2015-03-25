@@ -16,5 +16,7 @@
 
 + (void)youdaoTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void(^)(ZQYoudaoTranslateResult *youdaoResult))success failure:(void(^)(NSError *error))failure;
 
++ (void)googleTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void(^)(NSString *googleResult))success failure:(void(^)(NSError *error))failure;
+
 + (void)icibaTranslate:(NSString *)srcText ofType:(TranslateType)type;
 @end
