@@ -60,6 +60,11 @@
     }];
 }
 
+/**
+ *  Google翻译方法1，直接访问
+ *
+ *  @return <#return value description#>
+ */
 + (void)googleTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -88,7 +93,74 @@
             success(result);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", error.localizedDescription);
+        NSLog(@"google error%@", error.localizedDescription);
+    }];
+}
+
+/**
+ *  Google翻译方法2，中转服务
+ *
+ *  @param srcText <#srcText description#>
+ *  @param type    <#type description#>
+ *  @param success <#success description#>
+ *  @param failure <#failure description#>
+ */
+//+ (void)googleTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
+//{
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    NSString *urlString = @"http://brisk.eu.org/api/translate.php";
+//    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+//    if (type == TranslateTypeCn2En) {
+//        params[@"from"] = @"zh-CN";
+//        params[@"to"] = @"en";
+//    } else if (type == TranslateTypeEn2Cn) {
+//        params[@"from"] = @"en";
+//        params[@"to"] = @"zh-CN";
+//    }
+//    params[@"text"] = srcText;
+//    [manager GET:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSString *resultSetOri = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        NSString *resultSet = [NSString replaceUnicode:resultSetOri];
+//        NSUInteger location = [resultSet rangeOfString:@"res"].location + 6;
+//        NSUInteger length = [resultSet rangeOfString:@"}"].location - location - 1;
+//        NSRange range = NSMakeRange(location, length);
+//        NSString *resultString = [resultSet substringWithRange:range];
+//        if (success) {
+//            success(resultString);
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"google error%@", error.localizedDescription);
+//    }];
+//}
+
++ (void)bingTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSString *urlString = @"http://api.microsofttranslator.com/v2/Http.svc/Translate";
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"appId"] = @"TOZ5h9QsS_TW5cHMpjTo4F4YNOprcv8_gk4nTj_Mz8ergin9dj4_J6M43KBb_aZ7D";
+    params[@"text"] = srcText;
+    if (type == TranslateTypeCn2En) {
+        params[@"from"] = @"zh-CN";
+        params[@"to"] = @"en";
+    } else if (type == TranslateTypeEn2Cn) {
+        params[@"from"] = @"en";
+        params[@"to"] = @"zh-CN";
+    }
+    [manager GET:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *resultSet = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSRange range = [resultSet rangeOfString:@"/\">"];
+        NSUInteger location = range.location + 3;
+        NSUInteger length = [resultSet rangeOfString:@"</string>"].location - location;
+        NSString *result = [resultSet substringWithRange:NSMakeRange(location, length)];
+        if (success) {
+            success(result);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"bing error%@", error.localizedDescription);
     }];
 }
 

@@ -161,6 +161,13 @@
         
     }];
     
+    [ZQTranslateTools bingTranslate:srcText ofType:self.type success:^(NSString *bingResult) {
+        [self refreshDataWithIcon:@"biying.png" text:bingResult srcText:srcText];
+        [self hidHudAndEvaluaBtn:hud];
+    } failure:^(NSError *error) {
+        
+    }];
+    
     [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
 
         ZQBaiduTranslateResultItem *item = result.trans_result[0];

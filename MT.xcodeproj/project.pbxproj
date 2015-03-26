@@ -10,6 +10,7 @@
 		5789A28F7D004880A326ED68 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA60FFFCF37544E68D23B39F /* libPods.a */; };
 		6D11C6C61A4EEB0800527EF7 /* ZQTranslateHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D11C6C51A4EEB0800527EF7 /* ZQTranslateHeaderView.m */; };
 		6D11C6C81A4EEB1600527EF7 /* ZQTranslateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D11C6C71A4EEB1600527EF7 /* ZQTranslateHeaderView.xib */; };
+		6D57FAAE1AC43A5500AB2BE3 /* NSString+ZQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D57FAAD1AC43A5500AB2BE3 /* NSString+ZQ.m */; };
 		6D8DA98B1A4DC4B400E99AFB /* ZQNavigationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DA98A1A4DC4B400E99AFB /* ZQNavigationButton.m */; };
 		6D8DA98E1A4E42A300E99AFB /* ZQTranslateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DA98D1A4E42A300E99AFB /* ZQTranslateViewController.m */; };
 		6DA14CB11AA2067D00B4C6FC /* UIImage+IW.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA14CB01AA2067D00B4C6FC /* UIImage+IW.m */; };
@@ -68,6 +69,8 @@
 		6D11C6C41A4EEB0800527EF7 /* ZQTranslateHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQTranslateHeaderView.h; sourceTree = "<group>"; };
 		6D11C6C51A4EEB0800527EF7 /* ZQTranslateHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQTranslateHeaderView.m; sourceTree = "<group>"; };
 		6D11C6C71A4EEB1600527EF7 /* ZQTranslateHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZQTranslateHeaderView.xib; sourceTree = "<group>"; };
+		6D57FAAC1AC43A5500AB2BE3 /* NSString+ZQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ZQ.h"; sourceTree = "<group>"; };
+		6D57FAAD1AC43A5500AB2BE3 /* NSString+ZQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ZQ.m"; sourceTree = "<group>"; };
 		6D8DA9891A4DC4B400E99AFB /* ZQNavigationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQNavigationButton.h; sourceTree = "<group>"; };
 		6D8DA98A1A4DC4B400E99AFB /* ZQNavigationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQNavigationButton.m; sourceTree = "<group>"; };
 		6D8DA98C1A4E42A300E99AFB /* ZQTranslateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQTranslateViewController.h; sourceTree = "<group>"; };
@@ -212,6 +215,8 @@
 				6DB0352B1AB2B90F00CACAFC /* MBProgressHUD+ZQ.m */,
 				6DA14CAF1AA2067D00B4C6FC /* UIImage+IW.h */,
 				6DA14CB01AA2067D00B4C6FC /* UIImage+IW.m */,
+				6D57FAAC1AC43A5500AB2BE3 /* NSString+ZQ.h */,
+				6D57FAAD1AC43A5500AB2BE3 /* NSString+ZQ.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -557,6 +562,7 @@
 				6DB033761AA2B84200CACAFC /* MJType.m in Sources */,
 				6DBBF6391A4DBADD00B28671 /* ZQAppDelegate.m in Sources */,
 				6D8DA98B1A4DC4B400E99AFB /* ZQNavigationButton.m in Sources */,
+				6D57FAAE1AC43A5500AB2BE3 /* NSString+ZQ.m in Sources */,
 				6DB0335C1AA2B80600CACAFC /* ZQBaiduTranslateResultItem.m in Sources */,
 				6DA14CB61AA20EEB00B4C6FC /* ZQTranslateTools.m in Sources */,
 				6DB033771AA2B84200CACAFC /* MJTypeEncoding.m in Sources */,

@@ -18,5 +18,7 @@
 
 + (void)googleTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void(^)(NSString *googleResult))success failure:(void(^)(NSError *error))failure;
 
++ (void)bingTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void(^)(NSString *bingResult))success failure:(void(^)(NSError *error))failure;
+
 + (void)icibaTranslate:(NSString *)srcText ofType:(TranslateType)type;
 @end
