@@ -41,8 +41,6 @@
 {
     [super viewDidLoad];
     
-    self.title = @"翻译";
-    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
@@ -75,6 +73,7 @@
     self.type = [[NSUserDefaults standardUserDefaults] integerForKey:TranslateTypeKey];
     
     NSString *title = [NSString stringWithFormat:@"%@", self.type == TranslateTypeEn2Cn ? @"英译汉模式" : @"汉译英模式"];
+    self.title = title;
     [TSMessage showNotificationInViewController:self title:title subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
     
     ZQTranslateHeaderView *headerView = [[ZQTranslateHeaderView alloc] init];

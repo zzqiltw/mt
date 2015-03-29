@@ -147,8 +147,9 @@
     
     NSString *urlString = @"http://api.microsofttranslator.com/v2/Http.svc/Translate";
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    params[@"appId"] = @"DF9E54CA96F73F2E289AEC059F407DE8295A6515";
-
+    //以下两个appId均可用
+//    params[@"appId"] = @"DF9E54CA96F73F2E289AEC059F407DE8295A6515";
+    params[@"appId"] = @"A4D660A48A6A97CCA791C34935E4C02BBB1BEC1C";
     params[@"text"] = srcText;
     if (type == TranslateTypeCn2En) {
         params[@"from"] = @"zh-CN";
