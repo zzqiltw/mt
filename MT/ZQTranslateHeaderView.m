@@ -9,6 +9,7 @@
 
 #import "ZQTranslateHeaderView.h"
 #import <MBAutoGrowingTextView.h>
+
 #define PlaceHolder @"请输入要翻译的内容"
 
 @interface ZQTranslateHeaderView () <UITextViewDelegate>
@@ -21,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet MBAutoGrowingTextView *textView;
 
 @property (nonatomic, copy) NSString *inputText;
+
+@property (nonatomic, copy) NSString *showingPlaceHold;
 
 @end
 
@@ -46,7 +49,6 @@
 - (void)setModeType:(NSString *)modeType
 {
     _modeType = modeType;
-    //    self.mode.text = modeType;
 }
 
 - (void)setInputFieldAccessoryView:(UIView *)inputAccessoryView

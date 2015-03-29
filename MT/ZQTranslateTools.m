@@ -134,6 +134,12 @@
 //    }];
 //}
 
+/**
+ *  Bing Apitoken会失效
+ *
+ *  @return <#return value description#>
+ */
+
 + (void)bingTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -141,7 +147,8 @@
     
     NSString *urlString = @"http://api.microsofttranslator.com/v2/Http.svc/Translate";
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    params[@"appId"] = @"TOZ5h9QsS_TW5cHMpjTo4F4YNOprcv8_gk4nTj_Mz8ergin9dj4_J6M43KBb_aZ7D";
+    params[@"appId"] = @"DF9E54CA96F73F2E289AEC059F407DE8295A6515";
+
     params[@"text"] = srcText;
     if (type == TranslateTypeCn2En) {
         params[@"from"] = @"zh-CN";
