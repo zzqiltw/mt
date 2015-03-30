@@ -59,7 +59,7 @@
     [evaluationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [evaluationButton setTitle:@"查看译文BLEU评价结果" forState:UIControlStateNormal];
     evaluationButton.titleLabel.font = [UIFont systemFontOfSize:13];
-    evaluationButton.layer.cornerRadius = 4;
+//    evaluationButton.layer.cornerRadius = 4;
     evaluationButton.backgroundColor = ZQColor(40, 175, 179, 0.7);
     evaluationButton.hidden = YES;
     [footerView addSubview:evaluationButton];
