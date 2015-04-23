@@ -65,37 +65,37 @@
  *
  *  @return <#return value description#>
  */
-+ (void)googleTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
-{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [[AFHTTPResponseSerializer alloc] init];
-    NSString *urlString = @"http://translate.google.cn/translate_a/t";
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    params[@"client"] = @"t";
-    params[@"hl"] = @"zh-CN";
-    params[@"text"] = srcText;
-    if (type == TranslateTypeCn2En) {
-        params[@"sl"] = @"zh-CN";
-        params[@"tl"] = @"en";
-    } else if (type == TranslateTypeEn2Cn) {
-        params[@"sl"] = @"en";
-        params[@"tl"] = @"zh-CN";
-    }
-    params[@"ie"] = @"UTF-8";
-    params[@"oe"] = @"UTF-8";
-    
-    [manager GET:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *resultSet = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSRange range = [resultSet rangeOfString:@"\","];
-        NSString *result = [resultSet substringWithRange:NSMakeRange(4, range.location - 4)];
-        
-        if (success) {
-            success(result);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"google error%@", error.localizedDescription);
-    }];
-}
+//+ (void)googleTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
+//{
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    manager.responseSerializer = [[AFHTTPResponseSerializer alloc] init];
+//    NSString *urlString = @"http://translate.google.cn/translate_a/t";
+//    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+//    params[@"client"] = @"t";
+//    params[@"hl"] = @"zh-CN";
+//    params[@"text"] = srcText;
+//    if (type == TranslateTypeCn2En) {
+//        params[@"sl"] = @"zh-CN";
+//        params[@"tl"] = @"en";
+//    } else if (type == TranslateTypeEn2Cn) {
+//        params[@"sl"] = @"en";
+//        params[@"tl"] = @"zh-CN";
+//    }
+//    params[@"ie"] = @"UTF-8";
+//    params[@"oe"] = @"UTF-8";
+//    
+//    [manager GET:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSString *resultSet = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        NSRange range = [resultSet rangeOfString:@"\","];
+//        NSString *result = [resultSet substringWithRange:NSMakeRange(4, range.location - 4)];
+//        
+//        if (success) {
+//            success(result);
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"google error%@", error.localizedDescription);
+//    }];
+//}
 
 /**
  *  Google翻译方法2，中转服务
@@ -105,34 +105,34 @@
  *  @param success <#success description#>
  *  @param failure <#failure description#>
  */
-//+ (void)googleTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
-//{
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-//    NSString *urlString = @"http://brisk.eu.org/api/translate.php";
-//    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-//    if (type == TranslateTypeCn2En) {
-//        params[@"from"] = @"zh-CN";
-//        params[@"to"] = @"en";
-//    } else if (type == TranslateTypeEn2Cn) {
-//        params[@"from"] = @"en";
-//        params[@"to"] = @"zh-CN";
-//    }
-//    params[@"text"] = srcText;
-//    [manager GET:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSString *resultSetOri = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-//        NSString *resultSet = [NSString replaceUnicode:resultSetOri];
-//        NSUInteger location = [resultSet rangeOfString:@"res"].location + 6;
-//        NSUInteger length = [resultSet rangeOfString:@"}"].location - location - 1;
-//        NSRange range = NSMakeRange(location, length);
-//        NSString *resultString = [resultSet substringWithRange:range];
-//        if (success) {
-//            success(resultString);
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"google error%@", error.localizedDescription);
-//    }];
-//}
++ (void)googleTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *urlString = @"http://brisk.eu.org/api/translate.php";
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    if (type == TranslateTypeCn2En) {
+        params[@"from"] = @"zh-CN";
+        params[@"to"] = @"en";
+    } else if (type == TranslateTypeEn2Cn) {
+        params[@"from"] = @"en";
+        params[@"to"] = @"zh-CN";
+    }
+    params[@"text"] = srcText;
+    [manager GET:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *resultSetOri = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSString *resultSet = [NSString replaceUnicode:resultSetOri];
+        NSUInteger location = [resultSet rangeOfString:@"res"].location + 6;
+        NSUInteger length = [resultSet rangeOfString:@"}"].location - location - 1;
+        NSRange range = NSMakeRange(location, length);
+        NSString *resultString = [resultSet substringWithRange:range];
+        if (success) {
+            success(resultString);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"google error%@", error.localizedDescription);
+    }];
+}
 
 /**
  *  Bing Apitoken会失效

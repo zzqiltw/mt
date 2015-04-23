@@ -9,14 +9,21 @@
 #import "ZQViewController.h"
 #import "ZQTranslateViewController.h"
 #import "ZQNavigationButton.h"
+
 @interface ZQViewController ()
 - (IBAction)cn2En:(ZQNavigationButton *)sender;
 
 - (IBAction)en2Cn:(ZQNavigationButton *)sender;
 
+
+
 @end
 
 @implementation ZQViewController
+
+
+
+
 
 - (void)viewDidLoad
 {

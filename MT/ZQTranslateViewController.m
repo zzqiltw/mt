@@ -16,7 +16,7 @@
 #import "ZQTranslateTools.h"
 #import <TSMessage.h>
 #import "MBProgressHUD+ZQ.h"
-
+#import "ZQBLEUModel.h"
 
 typedef enum {
     ZQActionSheetIndexTypeCancel,
@@ -28,12 +28,29 @@ typedef enum {
 
 @property (nonatomic, assign) TranslateType type;
 @property (nonatomic, strong) NSMutableArray *translateModelFrameList;
-
 @property (nonatomic, weak) ZQTranslateFooterView *footerView;
+@property (nonatomic, strong) NSMutableArray *bleuModels;
 
 @end
 
 @implementation ZQTranslateViewController
+
+- (NSMutableArray *)bleuModels
+{
+    if (_bleuModels == nil) {
+        _bleuModels = [NSMutableArray arrayWithCapacity:998];
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"testSrc.plist" ofType:nil];
+        NSArray *array = [NSArray arrayWithContentsOfFile:path];
+        NSInteger count = 3;
+        for (NSInteger i = 0; i < count; ++i) {
+            ZQBLEUModel *bleuModel = [[ZQBLEUModel alloc] init];
+            bleuModel.src = array[i];
+            [_bleuModels addObject:bleuModel];
+        }
+    }
+    return _bleuModels;
+}
 
 - (NSMutableArray *)translateModelFrameList
 {
@@ -42,6 +59,7 @@ typedef enum {
     }
     return _translateModelFrameList;
 }
+
 
 - (void)viewDidLoad
 {
@@ -205,9 +223,6 @@ typedef enum {
         for (NSString *locResult in youdaoResult.translation) {
             [youdaoResultTexts addObject:locResult];
         }
-//        for (ZQYoudaoTranslateResultWebItem *webResultKeyValues in youdaoResult.web) {
-//            [youdaoResultTexts addObject:webResultKeyValues.value[0]];
-//        }
         for (NSString *resultText in youdaoResultTexts) {
             [self refreshDataWithIcon:@"youdao.png" text:resultText srcText:srcText];
         }
