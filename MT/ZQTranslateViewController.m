@@ -58,7 +58,7 @@ typedef enum {
     [self.tableView registerClass:[ZQTranslateViewCell class] forCellReuseIdentifier:TranslateCellID];
     
     ZQTranslateFooterView *footerView = [[ZQTranslateFooterView alloc] init];
-    // 这个要设置，否则不能点
+    // 这个frame要设置，否则不能点
     footerView.frame = CGRectMake(0, 0, 0, ZQFooterViewHeight);
     footerView.hidden = YES;
     footerView.delegate = self;
@@ -153,8 +153,8 @@ typedef enum {
 {
     ZQTranslateModel *model = [[ZQTranslateModel alloc] init];
     model.iconName = icon;
-    model.srcText = [NSString stringWithFormat:@"原文:%@", srcText];
-    model.text = [NSString stringWithFormat:@"译文:%@", text];
+//    model.srcText = [NSString stringWithFormat:@"原文:%@", srcText];
+    model.text = [NSString stringWithFormat:@"%@", text];
     ZQTranslateFrame *modelFrame = [[ZQTranslateFrame alloc] initWithModel:model];
     [self.translateModelFrameList addObject:modelFrame];
     [self.tableView reloadData];
@@ -195,7 +195,7 @@ typedef enum {
         [self hidHudAndEvaluaBtn:hud];
     } failure:^(NSError *error) {
         [hud hide:YES];
-        [MBProgressHUD showError:@"加载失败"];
+        [MBProgressHUD showError:@"百度翻译结果加载失败"];
         [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
     }];
     
@@ -214,9 +214,9 @@ typedef enum {
         
         [self hidHudAndEvaluaBtn:hud];
     } failure:^(NSError *error) {
-        [hud hide:YES];
-        [MBProgressHUD showError:@"加载失败"];
-        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
+//        [hud hide:YES];
+//        [MBProgressHUD showError:@"加载失败"];
+//        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
     }];
 }
 
