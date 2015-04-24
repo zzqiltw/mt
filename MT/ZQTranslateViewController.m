@@ -18,6 +18,9 @@
 #import "MBProgressHUD+ZQ.h"
 #import "ZQBLEUModel.h"
 
+#define ZQTestSentenceTranslateResultFilePath  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"testSrcAnd4TraOutputFile"]
+#define ZQCount 10
+
 typedef enum {
     ZQActionSheetIndexTypeCancel,
     ZQActionSheetIndexTypeBLEU,
@@ -29,6 +32,7 @@ typedef enum {
 @property (nonatomic, assign) TranslateType type;
 @property (nonatomic, strong) NSMutableArray *translateModelFrameList;
 @property (nonatomic, weak) ZQTranslateFooterView *footerView;
+@property (nonatomic, strong) NSMutableArray *bleuSrc;
 @property (nonatomic, strong) NSMutableArray *bleuModels;
 
 @end
@@ -39,17 +43,22 @@ typedef enum {
 {
     if (_bleuModels == nil) {
         _bleuModels = [NSMutableArray arrayWithCapacity:998];
+    }
+    return _bleuModels;
+}
+
+- (NSMutableArray *)bleuSrc
+{
+    if (_bleuSrc == nil) {
+        _bleuSrc = [NSMutableArray arrayWithCapacity:998];
         
         NSString *path = [[NSBundle mainBundle] pathForResource:@"testSrc.plist" ofType:nil];
         NSArray *array = [NSArray arrayWithContentsOfFile:path];
-        NSInteger count = 3;
-        for (NSInteger i = 0; i < count; ++i) {
-            ZQBLEUModel *bleuModel = [[ZQBLEUModel alloc] init];
-            bleuModel.src = array[i];
-            [_bleuModels addObject:bleuModel];
+        for (NSInteger i = 0; i < ZQCount; ++i) {
+            [_bleuSrc addObject:array[i]];
         }
     }
-    return _bleuModels;
+    return _bleuSrc;
 }
 
 - (NSMutableArray *)translateModelFrameList
@@ -184,56 +193,125 @@ typedef enum {
     self.footerView.hidden = NO;
 }
 
+- (void)saveBleuModel:(ZQBLEUModel *)model ofIndex:(NSInteger)i
+{
+    if (model.baiduGet && model.youdaoGet && model.googleGet && model.bingGet) {
+        if (i == ZQCount - 1) {
+            NSArray *array = [ZQBLEUModel keyValuesArrayWithObjectArray:self.bleuModels];
+            [array writeToFile:ZQTestSentenceTranslateResultFilePath atomically:YES];
+        }
+    }
+}
+
+
 - (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender withInput:(NSString *)srcText
 {
-    self.footerView.hidden = YES;
-    [self.translateModelFrameList removeAllObjects];
-    
-    MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加载"];
-    
-    [ZQTranslateTools googleTranslate:srcText ofType:self.type success:^(NSString *googleResult) {
-        [self refreshDataWithIcon:@"google.png" text:googleResult srcText:srcText];
-        [self hidHudAndEvaluaBtn:hud];
-    } failure:^(NSError *error) {
-        
-    }];
-    
-    [ZQTranslateTools bingTranslate:srcText ofType:self.type success:^(NSString *bingResult) {
-        [self refreshDataWithIcon:@"biying.png" text:bingResult srcText:srcText];
-        [self hidHudAndEvaluaBtn:hud];
-    } failure:^(NSError *error) {
-        
-    }];
-    
-    [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
-
-        ZQBaiduTranslateResultItem *item = result.trans_result[0];
-        [self refreshDataWithIcon:@"baidu.png" text:item.dst srcText:srcText];
-        
-        [self hidHudAndEvaluaBtn:hud];
-    } failure:^(NSError *error) {
-        [hud hide:YES];
-        [MBProgressHUD showError:@"百度翻译结果加载失败"];
-        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
-    }];
-    
-    [ZQTranslateTools youdaoTranslate:srcText ofType:self.type success:^(ZQYoudaoTranslateResult *youdaoResult) {
-        
-        NSMutableArray *youdaoResultTexts = [NSMutableArray array];
-        for (NSString *locResult in youdaoResult.translation) {
-            [youdaoResultTexts addObject:locResult];
-        }
-        for (NSString *resultText in youdaoResultTexts) {
-            [self refreshDataWithIcon:@"youdao.png" text:resultText srcText:srcText];
-        }
-        
-        [self hidHudAndEvaluaBtn:hud];
-    } failure:^(NSError *error) {
+//    self.footerView.hidden = YES;
+//    [self.translateModelFrameList removeAllObjects];
+//    
+//    MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加载"];
+//    
+//    [ZQTranslateTools googleTranslate:srcText ofType:self.type success:^(NSString *googleResult) {
+//        [self refreshDataWithIcon:@"google.png" text:googleResult srcText:srcText];
+//        [self hidHudAndEvaluaBtn:hud];
+//    } failure:^(NSError *error) {
+//        
+//    }];
+//    
+//    [ZQTranslateTools bingTranslate:srcText ofType:self.type success:^(NSString *bingResult) {
+//        [self refreshDataWithIcon:@"biying.png" text:bingResult srcText:srcText];
+//        [self hidHudAndEvaluaBtn:hud];
+//    } failure:^(NSError *error) {
+//        
+//    }];
+//    
+//    [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
+//        
+//        ZQBaiduTranslateResultItem *item = result.trans_result[0];
+//        [self refreshDataWithIcon:@"baidu.png" text:item.dst srcText:srcText];
+//        
+//        [self hidHudAndEvaluaBtn:hud];
+//    } failure:^(NSError *error) {
 //        [hud hide:YES];
-//        [MBProgressHUD showError:@"加载失败"];
+//        [MBProgressHUD showError:@"百度翻译结果加载失败"];
 //        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
-    }];
+//    }];
+//    
+//    [ZQTranslateTools youdaoTranslate:srcText ofType:self.type success:^(ZQYoudaoTranslateResult *youdaoResult) {
+//        
+//        NSMutableArray *youdaoResultTexts = [NSMutableArray array];
+//        for (NSString *locResult in youdaoResult.translation) {
+//            [youdaoResultTexts addObject:locResult];
+//        }
+//        for (NSString *resultText in youdaoResultTexts) {
+//            [self refreshDataWithIcon:@"youdao.png" text:resultText srcText:srcText];
+//        }
+//        
+//        [self hidHudAndEvaluaBtn:hud];
+//    } failure:^(NSError *error) {
+//        //        [hud hide:YES];
+//        //        [MBProgressHUD showError:@"加载失败"];
+//        //        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
+//    }];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        for (NSInteger i = 0; i < ZQCount; ++i) {
+            ZQBLEUModel *bleuModel = [[ZQBLEUModel alloc] init];
+            bleuModel.src = self.bleuSrc[i];
+            bleuModel.baiduGet = NO;
+            bleuModel.googleGet = NO;
+            bleuModel.bingGet = NO;
+            bleuModel.youdaoGet = NO;
+            
+            [self.bleuModels addObject:bleuModel];
+            
+            [ZQTranslateTools bingTranslate:bleuModel.src ofType:self.type success:^(NSString *bingResult) {
+                NSInteger currentIndex = [self.bleuModels indexOfObject:bleuModel];
+
+                bleuModel.bingTra = bingResult;
+                bleuModel.bingGet = YES;
+                [self saveBleuModel:bleuModel ofIndex:currentIndex];
+            } failure:^(NSError *error) {
+                
+            }];
+            
+            [ZQTranslateTools baiduTranslate:bleuModel.src ofType:self.type success:^(ZQBaiduTranslateResult *result) {
+                NSInteger currentIndex = [self.bleuModels indexOfObject:bleuModel];
+
+                ZQBaiduTranslateResultItem *item = result.trans_result[0];
+                bleuModel.baiduTra = item.dst;
+                
+                bleuModel.baiduGet = YES;
+                [self saveBleuModel:bleuModel ofIndex:currentIndex];
+            } failure:^(NSError *error) {
+            }];
+            
+            [ZQTranslateTools googleTranslate:bleuModel.src ofType:self.type success:^(NSString *googleResult) {
+
+                NSInteger currentIndex = [self.bleuModels indexOfObject:bleuModel];
+                bleuModel.googleTra = googleResult;
+                NSLog(@"google你是大爷:%@, %ld", bleuModel, [self.bleuModels indexOfObject:bleuModel]);
+                
+                bleuModel.googleGet = YES;
+                [self saveBleuModel:bleuModel ofIndex:currentIndex];
+            } failure:^(NSError *error) {
+                
+            }];
+            
+            [ZQTranslateTools youdaoTranslate:bleuModel.src ofType:self.type success:^(ZQYoudaoTranslateResult *youdaoResult) {
+                NSInteger currentIndex = [self.bleuModels indexOfObject:bleuModel];
+                bleuModel.youdaoTra = youdaoResult.translation.firstObject;
+                
+                bleuModel.youdaoGet = YES;
+                [self saveBleuModel:bleuModel ofIndex:currentIndex];
+            } failure:^(NSError *error) {
+            }];
+        }
+        
+    });
 }
+
 
 - (void)quitKb
 {

@@ -17,5 +17,9 @@
 @property (nonatomic, copy) NSString *googleTra;
 
 
+@property (nonatomic, assign) BOOL baiduGet;
+@property (nonatomic, assign) BOOL googleGet;
+@property (nonatomic, assign) BOOL bingGet;
+@property (nonatomic, assign) BOOL youdaoGet;
 
 @end

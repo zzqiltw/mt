@@ -119,6 +119,8 @@
         params[@"to"] = @"zh-CN";
     }
     params[@"text"] = srcText;
+    manager.requestSerializer.timeoutInterval = TimeOutInterval * 2;
+
     [manager GET:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *resultSetOri = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSString *resultSet = [NSString replaceUnicode:resultSetOri];
@@ -158,6 +160,8 @@
         params[@"from"] = @"en";
         params[@"to"] = @"zh-CN";
     }
+    manager.requestSerializer.timeoutInterval = TimeOutInterval * 2;
+
     [manager GET:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *resultSet = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSRange range = [resultSet rangeOfString:@"/\">"];
