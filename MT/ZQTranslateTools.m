@@ -35,6 +35,7 @@
             success(result);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"baidu error%@", error.localizedDescription);
         if (failure) {
             failure(error);
         }
@@ -54,6 +55,7 @@
             success(result);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"youdao error", error.localizedDescription);
         if (failure) {
             failure(error);
         }

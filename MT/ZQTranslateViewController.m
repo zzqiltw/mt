@@ -19,7 +19,7 @@
 #import "ZQBLEUModel.h"
 
 #define ZQTestSentenceTranslateResultFilePath  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"testSrcAnd4TraOutputFile"]
-#define ZQCount 10
+const NSInteger ZQCount = 100;
 
 typedef enum {
     ZQActionSheetIndexTypeCancel,
@@ -54,7 +54,7 @@ typedef enum {
         
         NSString *path = [[NSBundle mainBundle] pathForResource:@"testSrc.plist" ofType:nil];
         NSArray *array = [NSArray arrayWithContentsOfFile:path];
-        for (NSInteger i = 0; i < ZQCount; ++i) {
+        for (NSInteger i = 0; i < array.count; ++i) {
             [_bleuSrc addObject:array[i]];
         }
     }
@@ -196,10 +196,15 @@ typedef enum {
 - (void)saveBleuModel:(ZQBLEUModel *)model ofIndex:(NSInteger)i
 {
     if (model.baiduGet && model.youdaoGet && model.googleGet && model.bingGet) {
-        if (i == ZQCount - 1) {
+        NSLog(@"i=%d", i);
+//        if (i == self.bleuSrc.count - 1) {
             NSArray *array = [ZQBLEUModel keyValuesArrayWithObjectArray:self.bleuModels];
-            [array writeToFile:ZQTestSentenceTranslateResultFilePath atomically:YES];
-        }
+            NSData *data = [NSJSONSerialization dataWithJSONObject:array options:0 error:nil];
+            if (data.length > 0) {
+                NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                [content writeToFile:ZQTestSentenceTranslateResultFilePath atomically:YES];
+            }
+//        }
     }
 }
 
@@ -258,6 +263,7 @@ typedef enum {
         
         for (NSInteger i = 0; i < ZQCount; ++i) {
             ZQBLEUModel *bleuModel = [[ZQBLEUModel alloc] init];
+            bleuModel.ID = i;
             bleuModel.src = self.bleuSrc[i];
             bleuModel.baiduGet = NO;
             bleuModel.googleGet = NO;
@@ -291,7 +297,6 @@ typedef enum {
 
                 NSInteger currentIndex = [self.bleuModels indexOfObject:bleuModel];
                 bleuModel.googleTra = googleResult;
-                NSLog(@"google你是大爷:%@, %ld", bleuModel, [self.bleuModels indexOfObject:bleuModel]);
                 
                 bleuModel.googleGet = YES;
                 [self saveBleuModel:bleuModel ofIndex:currentIndex];

@@ -10,6 +10,7 @@
 
 @interface ZQBLEUModel : NSObject
 
+@property (nonatomic, assign) NSInteger ID;
 @property (nonatomic, copy) NSString *src;
 @property (nonatomic, copy) NSString *baiduTra;
 @property (nonatomic, copy) NSString *youdaoTra;
