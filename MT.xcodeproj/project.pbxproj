@@ -18,6 +18,7 @@
 		6D8DA98E1A4E42A300E99AFB /* ZQTranslateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DA98D1A4E42A300E99AFB /* ZQTranslateViewController.m */; };
 		6DA14CB11AA2067D00B4C6FC /* UIImage+IW.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA14CB01AA2067D00B4C6FC /* UIImage+IW.m */; };
 		6DA14CB61AA20EEB00B4C6FC /* ZQTranslateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA14CB51AA20EEB00B4C6FC /* ZQTranslateTools.m */; };
+		6DA342AD1AEC80C1005AA351 /* devSrc.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DA342AC1AEC80C1005AA351 /* devSrc.plist */; };
 		6DA95BCB1A4EF38C00154004 /* ZQKeyboardToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA95BCA1A4EF38C00154004 /* ZQKeyboardToolView.m */; };
 		6DA95BCD1A4EF39900154004 /* ZQKeyboardToolView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA95BCC1A4EF39900154004 /* ZQKeyboardToolView.xib */; };
 		6DB033591AA2B79300CACAFC /* ZQBaiduTranslateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB033581AA2B79300CACAFC /* ZQBaiduTranslateResult.m */; };
@@ -87,6 +88,7 @@
 		6DA14CB01AA2067D00B4C6FC /* UIImage+IW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+IW.m"; sourceTree = "<group>"; };
 		6DA14CB41AA20EEB00B4C6FC /* ZQTranslateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQTranslateTools.h; sourceTree = "<group>"; };
 		6DA14CB51AA20EEB00B4C6FC /* ZQTranslateTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQTranslateTools.m; sourceTree = "<group>"; };
+		6DA342AC1AEC80C1005AA351 /* devSrc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = devSrc.plist; sourceTree = "<group>"; };
 		6DA95BC91A4EF38C00154004 /* ZQKeyboardToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQKeyboardToolView.h; sourceTree = "<group>"; };
 		6DA95BCA1A4EF38C00154004 /* ZQKeyboardToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQKeyboardToolView.m; sourceTree = "<group>"; };
 		6DA95BCC1A4EF39900154004 /* ZQKeyboardToolView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZQKeyboardToolView.xib; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 		6DBBF62F1A4DBADD00B28671 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6DA342AC1AEC80C1005AA351 /* devSrc.plist */,
 				6D4DD48B1AE922D500FAB681 /* testSrc.plist */,
 				6DE1BBF11A4EFEAB00E895CD /* bg2.jpg */,
 				6DBBF6301A4DBADD00B28671 /* MT-Info.plist */,
@@ -522,6 +525,7 @@
 				6DBBF6441A4DBADD00B28671 /* Images.xcassets in Resources */,
 				6DB0352C1AB2B90F00CACAFC /* MBProgressHUD+ZQ.bundle in Resources */,
 				6DBBF63C1A4DBADD00B28671 /* Main_iPhone.storyboard in Resources */,
+				6DA342AD1AEC80C1005AA351 /* devSrc.plist in Resources */,
 				6DE1BBF21A4EFEAB00E895CD /* bg2.jpg in Resources */,
 				6DBBF6331A4DBADD00B28671 /* InfoPlist.strings in Resources */,
 				6DA95BCD1A4EF39900154004 /* ZQKeyboardToolView.xib in Resources */,

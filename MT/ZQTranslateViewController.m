@@ -34,6 +34,7 @@ typedef enum {
 @property (nonatomic, weak) ZQTranslateFooterView *footerView;
 @property (nonatomic, strong) NSMutableArray *bleuSrc;
 @property (nonatomic, strong) NSMutableArray *bleuModels;
+@property (nonatomic, assign) NSInteger stepCount;
 
 @end
 
@@ -52,7 +53,7 @@ typedef enum {
     if (_bleuSrc == nil) {
         _bleuSrc = [NSMutableArray arrayWithCapacity:998];
         
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"testSrc.plist" ofType:nil];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"devSrc.plist" ofType:nil];
         NSArray *array = [NSArray arrayWithContentsOfFile:path];
         for (NSInteger i = 0; i < array.count; ++i) {
             [_bleuSrc addObject:array[i]];
@@ -69,10 +70,11 @@ typedef enum {
     return _translateModelFrameList;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.stepCount = 0;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
@@ -196,15 +198,16 @@ typedef enum {
 - (void)saveBleuModel:(ZQBLEUModel *)model ofIndex:(NSInteger)i
 {
     if (model.baiduGet && model.youdaoGet && model.googleGet && model.bingGet) {
-        NSLog(@"i=%d", i);
-//        if (i == self.bleuSrc.count - 1) {
+        self.stepCount ++;
+        NSLog(@"i=%ld step = %ld", i, (long)self.stepCount);
+        if (self.stepCount == ZQCount) {
             NSArray *array = [ZQBLEUModel keyValuesArrayWithObjectArray:self.bleuModels];
             NSData *data = [NSJSONSerialization dataWithJSONObject:array options:0 error:nil];
             if (data.length > 0) {
-                NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                [content writeToFile:ZQTestSentenceTranslateResultFilePath atomically:YES];
+                [data writeToFile:ZQTestSentenceTranslateResultFilePath atomically:YES];
             }
-//        }
+        }
+
     }
 }
 
