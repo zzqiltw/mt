@@ -10,6 +10,7 @@
 		5789A28F7D004880A326ED68 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA60FFFCF37544E68D23B39F /* libPods.a */; };
 		6D11C6C61A4EEB0800527EF7 /* ZQTranslateHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D11C6C51A4EEB0800527EF7 /* ZQTranslateHeaderView.m */; };
 		6D11C6C81A4EEB1600527EF7 /* ZQTranslateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D11C6C71A4EEB1600527EF7 /* ZQTranslateHeaderView.xib */; };
+		6D31E4AB1B04F01C0067E5A6 /* ZQBLEUTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D31E4AA1B04F01C0067E5A6 /* ZQBLEUTool.m */; };
 		6D4DD48A1AE91BEE00FAB681 /* ZQBLEUModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4DD4891AE91BEE00FAB681 /* ZQBLEUModel.m */; };
 		6D4DD48C1AE922D500FAB681 /* testSrc.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D4DD48B1AE922D500FAB681 /* testSrc.plist */; };
 		6D5485B41AC90A5C00925287 /* ZQTranslateFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5485B31AC90A5C00925287 /* ZQTranslateFooterView.m */; };
@@ -73,6 +74,8 @@
 		6D11C6C41A4EEB0800527EF7 /* ZQTranslateHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQTranslateHeaderView.h; sourceTree = "<group>"; };
 		6D11C6C51A4EEB0800527EF7 /* ZQTranslateHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQTranslateHeaderView.m; sourceTree = "<group>"; };
 		6D11C6C71A4EEB1600527EF7 /* ZQTranslateHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZQTranslateHeaderView.xib; sourceTree = "<group>"; };
+		6D31E4A91B04F01C0067E5A6 /* ZQBLEUTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQBLEUTool.h; sourceTree = "<group>"; };
+		6D31E4AA1B04F01C0067E5A6 /* ZQBLEUTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQBLEUTool.m; sourceTree = "<group>"; };
 		6D4DD4881AE91BEE00FAB681 /* ZQBLEUModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQBLEUModel.h; sourceTree = "<group>"; };
 		6D4DD4891AE91BEE00FAB681 /* ZQBLEUModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQBLEUModel.m; sourceTree = "<group>"; };
 		6D4DD48B1AE922D500FAB681 /* testSrc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = testSrc.plist; sourceTree = "<group>"; };
@@ -247,6 +250,8 @@
 			children = (
 				6DA14CB41AA20EEB00B4C6FC /* ZQTranslateTools.h */,
 				6DA14CB51AA20EEB00B4C6FC /* ZQTranslateTools.m */,
+				6D31E4A91B04F01C0067E5A6 /* ZQBLEUTool.h */,
+				6D31E4AA1B04F01C0067E5A6 /* ZQBLEUTool.m */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -605,6 +610,7 @@
 				6DE1BBEE1A4EFC6400E895CD /* ActionButton.m in Sources */,
 				6DB0352D1AB2B90F00CACAFC /* MBProgressHUD+ZQ.m in Sources */,
 				6DA14CB11AA2067D00B4C6FC /* UIImage+IW.m in Sources */,
+				6D31E4AB1B04F01C0067E5A6 /* ZQBLEUTool.m in Sources */,
 				6DB033781AA2B84200CACAFC /* NSObject+MJCoding.m in Sources */,
 				6DB033C71AA413B400CACAFC /* ZQYoudaoTranslateResult.m in Sources */,
 				6D11C6C61A4EEB0800527EF7 /* ZQTranslateHeaderView.m in Sources */,

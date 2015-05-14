@@ -11,7 +11,7 @@
 
 @interface ZQTranslateViewCell ()
 
-//@property (nonatomic, weak) UILabel *srcText;
+@property (nonatomic, weak) UILabel *srcText;
 @property (weak, nonatomic) UILabel *translateText;
 @property (weak, nonatomic) UIImageView *icon;
 @property (nonatomic, strong) UIImageView *bgView;
@@ -27,13 +27,13 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-//        UILabel *srcTextLabel = [[UILabel alloc] init];
-//        srcTextLabel.numberOfLines = 0;
-//        srcTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
-//        srcTextLabel.font = TextFont;
-//        srcTextLabel.textColor = [UIColor lightGrayColor];
-//        [self.contentView addSubview:srcTextLabel];
-//        self.srcText = srcTextLabel;
+        UILabel *srcTextLabel = [[UILabel alloc] init];
+        srcTextLabel.numberOfLines = 0;
+        srcTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        srcTextLabel.font = TextFont;
+        srcTextLabel.textColor = [UIColor lightGrayColor];
+        [self.contentView addSubview:srcTextLabel];
+        self.srcText = srcTextLabel;
         
         UILabel *translateText = [[UILabel alloc] init];
         translateText.numberOfLines = 0;
@@ -95,7 +95,7 @@
     
     self.icon.image = [UIImage imageNamed:translateFrame.model.iconName];
     self.translateText.text = translateFrame.model.text;
-//    self.srcText.text = translateFrame.model.srcText;
+    self.srcText.text = translateFrame.model.srcText;
 }
 
 - (void)layoutSubviews
@@ -105,7 +105,7 @@
     self.icon.frame = self.translateFrame.iconFrame;
     self.icon.layer.cornerRadius = self.icon.frame.size.width * 0.5f;
     self.translateText.frame = self.translateFrame.textFrame;
-//    self.srcText.frame = self.translateFrame.srcTextFrame;
+    self.srcText.frame = self.translateFrame.srcTextFrame;
 //    self.sepaView.frame = CGRectMake(0, 0, self.frame.size.width, 1);
     self.bgView.frame = self.translateFrame.bgFrame;
 }

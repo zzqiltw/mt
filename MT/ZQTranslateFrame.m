@@ -21,11 +21,11 @@
 {
     _iconFrame = CGRectMake(8, 20, 30, 30);
  
-//    CGSize srcLabelsize = [model.srcText sizeWithFont:TextFont constrainedToSize:CGSizeMake(260, 200)];
-//    _srcTextFrame = CGRectMake(Margin + CGRectGetMaxX(_iconFrame), _iconFrame.origin.y - Margin * 0.5, srcLabelsize.width, srcLabelsize.height);
+    CGSize srcLabelsize = [model.srcText sizeWithFont:TextFont constrainedToSize:CGSizeMake(260, 200)];
+    _srcTextFrame = CGRectMake(Margin + CGRectGetMaxX(_iconFrame), _iconFrame.origin.y - Margin * 0.5, srcLabelsize.width, srcLabelsize.height);
     
     CGSize labelsize = [model.text sizeWithFont:TextFont constrainedToSize:CGSizeMake(260, 200)];
-    _textFrame = CGRectMake(Margin + CGRectGetMaxX(_iconFrame), _iconFrame.origin.y, labelsize.width, labelsize.height);
+    _textFrame = CGRectMake(Margin + CGRectGetMaxX(_iconFrame), CGRectGetMaxY(_srcTextFrame), labelsize.width, labelsize.height);
 
     _rowHeight = Margin * 1.5 + MAX(CGRectGetMaxY(_textFrame), CGRectGetMaxY(_iconFrame));
     

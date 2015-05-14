@@ -12,7 +12,7 @@
 @interface ZQTranslateFrame : NSObject
 
 @property (nonatomic, assign, readonly) CGRect iconFrame;
-//@property (nonatomic, assign, readonly) CGRect srcTextFrame;
+@property (nonatomic, assign, readonly) CGRect srcTextFrame;
 @property (nonatomic, assign, readonly) CGRect textFrame;
 @property (nonatomic, assign, readonly) CGFloat rowHeight;
 @property (nonatomic, assign, readonly) CGRect bgFrame;
