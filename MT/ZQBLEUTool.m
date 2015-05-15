@@ -7,7 +7,6 @@
 //
 
 #import "ZQBLEUTool.h"
-
 @interface ZQBLEUTool()
 @property (nonatomic, strong) NSMutableArray *pValues;
 
@@ -58,19 +57,32 @@
 - (NSString *)addSpace2CNStringAndLower:(NSString *)searchText ofType:(TranslateType)type
 {
     NSMutableString *tmpStr = [NSMutableString stringWithString:searchText];
+    NSUInteger length = tmpStr.length;
+    NSString *biaodianStr = @",.!?，。？！";
+    
+    for (NSInteger i = 0; i < length; ++i) {
+        NSString *single = [searchText substringWithRange:NSMakeRange(i, 1)];
+        if ([biaodianStr rangeOfString:single].location != NSNotFound) {
+            NSInteger j = [tmpStr rangeOfString:single].location;
+            [tmpStr insertString:@" " atIndex:j];
+            if (j != length - 1) {
+                [tmpStr insertString:@" " atIndex:j + 2];
+            }
+        }
+    }
+    NSLog(@"======%@", tmpStr);
     
     if (type == TranslateTypeCn2En) {
         return [tmpStr lowercaseString];
     }
     
-    NSMutableString *str = [NSMutableString stringWithString:tmpStr];
     if (type == TranslateTypeEn2Cn) {// 英文翻译成中文，翻译结果是中文，需要切分
-        NSUInteger length = str.length;
         for (NSInteger i = 1; i < length * 2 - 1; i += 2) {
-            [str insertString:@" " atIndex:i];
+            [tmpStr insertString:@" " atIndex:i];
         }
     }
-    return str;
+    NSLog(@"======%@", tmpStr);
+    return tmpStr;
 }
 
 - (NSInteger)getCountOfString:(NSString *)s Ngram:(NSInteger)n
@@ -82,7 +94,7 @@
 - (NSDictionary *)clipString:(NSString *)s ofNgram:(NSInteger)n
 {
     NSArray *strs = [s componentsSeparatedByCharactersInSet:[self whiteSpaceAndPunctuationCharset]];
-
+    
     NSInteger count = strs.count;
     NSMutableArray *strings = [[NSMutableArray alloc] init];
     for (NSInteger i = 0; i < count - n + 1; ++i) {
@@ -99,19 +111,20 @@
 {
     NSMutableCharacterSet *charset = [[NSMutableCharacterSet alloc] init];
     [charset formUnionWithCharacterSet:[NSCharacterSet whitespaceCharacterSet]];
-//    [charset formUnionWithCharacterSet:[NSCharacterSet punctuationCharacterSet]];
+    //    [charset formUnionWithCharacterSet:[NSCharacterSet punctuationCharacterSet]];
     return charset;
 }
 
 - (double)getPValueOfString:(NSString *)s strs:(NSArray *)strs Ngram:(NSInteger)n
 {
     NSDictionary *map = [self clipString:s ofNgram:n];
+    NSLog(@"map:%@", map);
     double result = 0.0;
     NSMutableArray *strMaps = [[NSMutableArray alloc] init];
     for (NSString *str in strs) {
         [strMaps addObject:[self clipString:str ofNgram:n]];
     }
-
+    NSLog(@"strmaps:%@", strMaps);
     for (NSString *key in map.allKeys) {
         NSInteger count = [map[key] intValue];
         NSInteger tmpResult = 0;
@@ -124,6 +137,7 @@
         tmpResult = MIN(max, count);
         result += tmpResult;
     }
+    NSLog(@"%lf/%ld", result, (long)[self getCountOfString:s Ngram:n]);
     result = result / (double)[self getCountOfString:s Ngram:n];
     return result;
 }
@@ -150,7 +164,7 @@
     
     double score = 0.0;
     double bp = [self getBPOfString:s strs:strs];
-
+    
     double weight = 1.0 / (double)n;
     if (self.pValues == nil) {
         self.pValues = [[NSMutableArray alloc] init];
@@ -163,11 +177,13 @@
         [self.pValues addObject:@(p3)];
         [self.pValues addObject:@(p4)];
     }
+    NSLog(@"pvalues:%@", self.pValues);
+    
     for (NSInteger i = 0; i < n; ++i) {
         score += log([self.pValues[i] doubleValue]);
     }
     score = bp * exp(weight * score);
-
+    
     return score;
     
 }
