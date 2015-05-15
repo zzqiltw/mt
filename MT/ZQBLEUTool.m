@@ -164,7 +164,7 @@
         [self.pValues addObject:@(p4)];
     }
     for (NSInteger i = 0; i < n; ++i) {
-        score += log([_pValues[i] doubleValue]);
+        score += log([self.pValues[i] doubleValue]);
     }
     score = bp * exp(weight * score);
 

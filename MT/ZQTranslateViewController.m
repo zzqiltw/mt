@@ -17,6 +17,7 @@
 #import <TSMessage.h>
 #import "MBProgressHUD+ZQ.h"
 #import "ZQBLEUModel.h"
+#import "ZQBLEUTool.h"
 
 #define ZQTestSentenceTranslateResultFilePath  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"testSrcAnd4TraOutputFile400_499"]
 const NSInteger ZQCount = 100;
@@ -35,6 +36,17 @@ typedef enum {
 @property (nonatomic, strong) NSMutableArray *bleuSrc;
 @property (nonatomic, strong) NSMutableArray *bleuModels;
 @property (nonatomic, assign) NSInteger stepCount;
+
+@property (nonatomic, assign) BOOL baiduGet;
+@property (nonatomic, assign) BOOL bingGet;
+@property (nonatomic, assign) BOOL youdaoGet;
+@property (nonatomic, assign) BOOL googleGet;
+
+@property (nonatomic, copy) NSString *baiduResult;
+@property (nonatomic, copy) NSString *bingResult;
+@property (nonatomic, copy) NSString *googleResult;
+@property (nonatomic, copy) NSString *youdaoResult;
+
 
 @end
 
@@ -98,24 +110,74 @@ typedef enum {
 
 - (void)footerView:(ZQTranslateFooterView *)footerView didClickButton:(UIButton *)button
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"分析译文" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"查看BLEU评价结果", @"查看系统融合结果", nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-    [actionSheet showInView:self.view];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case ZQActionSheetIndexTypeBLEU:
-            NSLog(@"BLEU");
-            break;
-        case ZQActionSheetIndexTypeSystemCombine:
-            NSLog(@"System Combine");
-            break;
-        default:
-            break;
+//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"分析译文" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"查看BLEU评价结果", @"查看系统融合结果", nil];
+//    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+//    [actionSheet showInView:self.view];
+    
+    if (self.googleGet && self.baiduGet && self.bingGet && self.youdaoGet) {
+        ZQBLEUTool *bleuTool = [[ZQBLEUTool alloc] init];
+        
+        NSArray *baiduRefArray = @[self.youdaoResult, self.bingResult, self.googleResult];
+        double baiduScore = [bleuTool getBLUEScoreofFirst:self.baiduResult andStrings:baiduRefArray Ngram:1 ofType:self.type];
+        NSLog(@"baidu%@-----%lf", baiduRefArray, baiduScore);
+        
+        NSArray *bingRefArray = @[self.youdaoResult, self.baiduResult, self.googleResult];
+        double bingScore = [bleuTool getBLUEScoreofFirst:self.bingResult andStrings:bingRefArray Ngram:1 ofType:self.type];
+        NSLog(@"bing%@-----%lf", bingRefArray, bingScore);
+        
+        NSArray *googleRefArray = @[self.youdaoResult, self.bingResult, self.baiduResult];
+        double googleScore = [bleuTool getBLUEScoreofFirst:self.googleResult andStrings:googleRefArray Ngram:1 ofType:self.type];
+        NSLog(@"google%@-----%lf", googleRefArray, googleScore);
+        
+        NSArray *youdaoRefArray = @[self.baiduResult, self.bingResult, self.googleResult];
+        double youdaoScore = [bleuTool getBLUEScoreofFirst:self.youdaoResult andStrings:youdaoRefArray Ngram:1 ofType:self.type];
+        NSLog(@"youdao%@-----%lf", youdaoRefArray, youdaoScore);
+        
+        for (ZQTranslateFrame *tf in self.translateModelFrameList) {
+            ZQTranslateModel *model = tf.model;
+            switch (model.type) {
+                case TranslateResultSupporterBaidu:
+                    model.bleuScore = baiduScore;
+                    break;
+                case TranslateResultSupporterBing:
+                    model.bleuScore = bingScore;
+                    break;
+                case TranslateResultSupporterGoogle:
+                    model.bleuScore = googleScore;
+                    break;
+                case TranslateResultSupporterYoudao:
+                    model.bleuScore = youdaoScore;
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        [self.translateModelFrameList sortUsingComparator:^NSComparisonResult(ZQTranslateFrame *obj1, ZQTranslateFrame *obj2) {
+            return obj1.model.bleuScore < obj2.model.bleuScore;
+        }];
+        
+        [self.tableView reloadData];
+        [TSMessage showNotificationInViewController:self title:@"排序完毕" subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
+    } else {
+        [MBProgressHUD showError:@"译文未全部采集完毕"];
     }
 }
+
+//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    
+//    switch (buttonIndex) {
+//        case ZQActionSheetIndexTypeBLEU:
+//            NSLog(@"BLEU");
+//            break;
+//        case ZQActionSheetIndexTypeSystemCombine:
+//            NSLog(@"System Combine");
+//            break;
+//        default:
+//            break;
+//    }
+//}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -179,15 +241,21 @@ typedef enum {
     [self clearInputField];
 }
 
-- (void)refreshDataWithIcon:(NSString *)icon text:(NSString *)text srcText:(NSString *)srcText
+- (void)refreshDataWithIcon:(NSString *)icon text:(NSString *)text srcText:(NSString *)srcText ofType:(TranslateResultSupporter)type
+{
+    [self addTranslateFrameWithIcon:icon text:text srcText:srcText ofType:type score:0];
+    [self.tableView reloadData];
+}
+
+- (void)addTranslateFrameWithIcon:(NSString *)icon text:(NSString *)text srcText:(NSString *)srcText ofType:(TranslateResultSupporter)type score:(double)score
 {
     ZQTranslateModel *model = [[ZQTranslateModel alloc] init];
-    model.iconName = icon;
     model.srcText = [NSString stringWithFormat:@"原文:%@", srcText];
     model.text = [NSString stringWithFormat:@"译文:%@", text];
+    model.type = type;
+    model.bleuScore = score;
     ZQTranslateFrame *modelFrame = [[ZQTranslateFrame alloc] initWithModel:model];
     [self.translateModelFrameList addObject:modelFrame];
-    [self.tableView reloadData];
 }
 
 - (void)hidHudAndEvaluaBtn:(MBProgressHUD *)hud
@@ -212,24 +280,32 @@ typedef enum {
 //    }
 //}
 
-
 - (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender withInput:(NSString *)srcText
 {
+    self.baiduGet = NO;
+    self.bingGet = NO;
+    self.youdaoGet = NO;
+    self.googleGet = NO;
+
     self.footerView.hidden = YES;
     [self.translateModelFrameList removeAllObjects];
     
     MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加载"];
     
     [ZQTranslateTools googleTranslate:srcText ofType:self.type success:^(NSString *googleResult) {
-        [self refreshDataWithIcon:@"google.png" text:googleResult srcText:srcText];
+        self.googleResult = googleResult;
+        [self refreshDataWithIcon:@"google.png" text:self.googleResult srcText:srcText ofType:TranslateResultSupporterGoogle];
         [self hidHudAndEvaluaBtn:hud];
+        self.googleGet = YES;
     } failure:^(NSError *error) {
         
     }];
     
     [ZQTranslateTools bingTranslate:srcText ofType:self.type success:^(NSString *bingResult) {
-        [self refreshDataWithIcon:@"biying.png" text:bingResult srcText:srcText];
+        self.bingResult = bingResult;
+        [self refreshDataWithIcon:@"biying.png" text:self.bingResult srcText:srcText ofType:TranslateResultSupporterBing];
         [self hidHudAndEvaluaBtn:hud];
+        self.bingGet = YES;
     } failure:^(NSError *error) {
         
     }];
@@ -237,9 +313,11 @@ typedef enum {
     [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
         
         ZQBaiduTranslateResultItem *item = result.trans_result[0];
-        [self refreshDataWithIcon:@"baidu.png" text:item.dst srcText:srcText];
+        self.baiduResult = item.dst;
+        [self refreshDataWithIcon:@"baidu.png" text:self.baiduResult srcText:srcText ofType:TranslateResultSupporterBaidu];
         
         [self hidHudAndEvaluaBtn:hud];
+        self.baiduGet = YES;
     } failure:^(NSError *error) {
         [hud hide:YES];
         [MBProgressHUD showError:@"百度翻译结果加载失败"];
@@ -247,16 +325,11 @@ typedef enum {
     }];
     
     [ZQTranslateTools youdaoTranslate:srcText ofType:self.type success:^(ZQYoudaoTranslateResult *youdaoResult) {
-        
-        NSMutableArray *youdaoResultTexts = [NSMutableArray array];
-        for (NSString *locResult in youdaoResult.translation) {
-            [youdaoResultTexts addObject:locResult];
-        }
-        for (NSString *resultText in youdaoResultTexts) {
-            [self refreshDataWithIcon:@"youdao.png" text:resultText srcText:srcText];
-        }
+        self.youdaoResult = youdaoResult.translation.firstObject;
+        [self refreshDataWithIcon:@"youdao.png" text:self.youdaoResult srcText:srcText ofType:TranslateResultSupporterYoudao];
         
         [self hidHudAndEvaluaBtn:hud];
+        self.youdaoGet = YES;
     } failure:^(NSError *error) {
         //        [hud hide:YES];
         //        [MBProgressHUD showError:@"加载失败"];

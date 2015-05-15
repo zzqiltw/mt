@@ -8,10 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #define TextFont [UIFont systemFontOfSize:16]
+
+typedef enum{
+    TranslateResultSupporterBaidu,
+    TranslateResultSupporterGoogle,
+    TranslateResultSupporterYoudao,
+    TranslateResultSupporterBing
+} TranslateResultSupporter;
+
 @interface ZQTranslateModel : NSObject
 
-@property (nonatomic, copy) NSString *iconName;
+@property (nonatomic, copy, readonly) NSString *iconName;
 @property (nonatomic, copy) NSString *srcText;
 @property (nonatomic, copy) NSString *text;
+@property (nonatomic, assign) TranslateResultSupporter type;
+@property (nonatomic, assign) double bleuScore;
 
 @end
