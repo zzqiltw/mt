@@ -20,7 +20,7 @@
 #import "ZQBLEUTool.h"
 
 #define ZQTestSentenceTranslateResultFilePath  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"testSrcAnd4TraOutputFile400_499"]
-const NSInteger ZQCount = 100;
+static const NSInteger ZQNGram = 2;
 
 typedef enum {
     ZQActionSheetIndexTypeCancel,
@@ -118,20 +118,20 @@ typedef enum {
         ZQBLEUTool *bleuTool = [[ZQBLEUTool alloc] init];
         
         NSArray *baiduRefArray = @[self.youdaoResult, self.bingResult, self.googleResult];
-        double baiduScore = [bleuTool getBLUEScoreofFirst:self.baiduResult andStrings:baiduRefArray Ngram:1 ofType:self.type];
-        NSLog(@"baidu%@-----%lf", baiduRefArray, baiduScore);
+        double baiduScore = [bleuTool getBLUEScoreofFirst:self.baiduResult andStrings:baiduRefArray Ngram:ZQNGram ofType:self.type];
+        NSLog(@"baidu\n%@--%@-----%lf", self.baiduResult, baiduRefArray, baiduScore);
         
         NSArray *bingRefArray = @[self.youdaoResult, self.baiduResult, self.googleResult];
-        double bingScore = [bleuTool getBLUEScoreofFirst:self.bingResult andStrings:bingRefArray Ngram:1 ofType:self.type];
-        NSLog(@"bing%@-----%lf", bingRefArray, bingScore);
+        double bingScore = [bleuTool getBLUEScoreofFirst:self.bingResult andStrings:bingRefArray Ngram:ZQNGram ofType:self.type];
+        NSLog(@"bing\n%@--%@-----%lf", self.bingResult,bingRefArray, bingScore);
         
         NSArray *googleRefArray = @[self.youdaoResult, self.bingResult, self.baiduResult];
-        double googleScore = [bleuTool getBLUEScoreofFirst:self.googleResult andStrings:googleRefArray Ngram:1 ofType:self.type];
-        NSLog(@"google%@-----%lf", googleRefArray, googleScore);
+        double googleScore = [bleuTool getBLUEScoreofFirst:self.googleResult andStrings:googleRefArray Ngram:ZQNGram ofType:self.type];
+        NSLog(@"google\n%@--%@-----%lf", self.googleResult,googleRefArray, googleScore);
         
         NSArray *youdaoRefArray = @[self.baiduResult, self.bingResult, self.googleResult];
-        double youdaoScore = [bleuTool getBLUEScoreofFirst:self.youdaoResult andStrings:youdaoRefArray Ngram:1 ofType:self.type];
-        NSLog(@"youdao%@-----%lf", youdaoRefArray, youdaoScore);
+        double youdaoScore = [bleuTool getBLUEScoreofFirst:self.youdaoResult andStrings:youdaoRefArray Ngram:ZQNGram ofType:self.type];
+        NSLog(@"youdao\n%@--%@-----%lf", self.youdaoResult, youdaoRefArray, youdaoScore);
         
         for (ZQTranslateFrame *tf in self.translateModelFrameList) {
             ZQTranslateModel *model = tf.model;

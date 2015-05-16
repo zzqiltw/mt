@@ -60,17 +60,32 @@
     NSUInteger length = tmpStr.length;
     NSString *biaodianStr = @",.!?，。？！";
     
+    /**
+     *  句子中标点无空格版本
+     */
+    //    NSInteger j = -2;
+    //    for (NSInteger i = 0; i < length; ++i) {
+    //        NSString *single = [searchText substringWithRange:NSMakeRange(i, 1)];
+    //        if ([biaodianStr rangeOfString:single].location != NSNotFound) {
+    //            j = [tmpStr rangeOfString:single options:NSCaseInsensitiveSearch range:NSMakeRange(j+2, tmpStr.length-j-2)].location;
+    //            [tmpStr insertString:@" " atIndex:j];
+    //            if (i != length - 1) {
+    //                [tmpStr insertString:@" " atIndex:j+2];
+    //            }
+    //        }
+    //    }
+    
+    /**
+     *  句子中标点有空格版本
+     */
+    NSInteger j = -2;
     for (NSInteger i = 0; i < length; ++i) {
         NSString *single = [searchText substringWithRange:NSMakeRange(i, 1)];
         if ([biaodianStr rangeOfString:single].location != NSNotFound) {
-            NSInteger j = [tmpStr rangeOfString:single].location;
+            j = [tmpStr rangeOfString:single options:NSCaseInsensitiveSearch range:NSMakeRange(j+2, tmpStr.length-j-2)].location;
             [tmpStr insertString:@" " atIndex:j];
-            if (j != length - 1) {
-                [tmpStr insertString:@" " atIndex:j + 2];
-            }
         }
     }
-    NSLog(@"======%@", tmpStr);
     
     if (type == TranslateTypeCn2En) {
         return [tmpStr lowercaseString];
@@ -81,7 +96,7 @@
             [tmpStr insertString:@" " atIndex:i];
         }
     }
-    NSLog(@"======%@", tmpStr);
+
     return tmpStr;
 }
 
@@ -118,13 +133,13 @@
 - (double)getPValueOfString:(NSString *)s strs:(NSArray *)strs Ngram:(NSInteger)n
 {
     NSDictionary *map = [self clipString:s ofNgram:n];
-    NSLog(@"map:%@", map);
+//    NSLog(@"map:%@", map);
     double result = 0.0;
     NSMutableArray *strMaps = [[NSMutableArray alloc] init];
     for (NSString *str in strs) {
         [strMaps addObject:[self clipString:str ofNgram:n]];
     }
-    NSLog(@"strmaps:%@", strMaps);
+//    NSLog(@"strmaps:%@", strMaps);
     for (NSString *key in map.allKeys) {
         NSInteger count = [map[key] intValue];
         NSInteger tmpResult = 0;
@@ -137,7 +152,7 @@
         tmpResult = MIN(max, count);
         result += tmpResult;
     }
-    NSLog(@"%lf/%ld", result, (long)[self getCountOfString:s Ngram:n]);
+//    NSLog(@"%lf/%ld", result, (long)[self getCountOfString:s Ngram:n]);
     result = result / (double)[self getCountOfString:s Ngram:n];
     return result;
 }
@@ -166,18 +181,16 @@
     double bp = [self getBPOfString:s strs:strs];
     
     double weight = 1.0 / (double)n;
-    if (self.pValues == nil) {
-        self.pValues = [[NSMutableArray alloc] init];
-        double p1 = [self getPValueOfString:s strs:strs Ngram:1];
-        double p2 = [self getPValueOfString:s strs:strs Ngram:2];
-        double p3 = [self getPValueOfString:s strs:strs Ngram:3];
-        double p4 = [self getPValueOfString:s strs:strs Ngram:4];
-        [self.pValues addObject:@(p1)];
-        [self.pValues addObject:@(p2)];
-        [self.pValues addObject:@(p3)];
-        [self.pValues addObject:@(p4)];
-    }
-    NSLog(@"pvalues:%@", self.pValues);
+    
+    self.pValues = [[NSMutableArray alloc] init];
+    double p1 = [self getPValueOfString:s strs:strs Ngram:1];
+    double p2 = [self getPValueOfString:s strs:strs Ngram:2];
+    double p3 = [self getPValueOfString:s strs:strs Ngram:3];
+    double p4 = [self getPValueOfString:s strs:strs Ngram:4];
+    [self.pValues addObject:@(p1)];
+    [self.pValues addObject:@(p2)];
+    [self.pValues addObject:@(p3)];
+    [self.pValues addObject:@(p4)];
     
     for (NSInteger i = 0; i < n; ++i) {
         score += log([self.pValues[i] doubleValue]);
