@@ -158,6 +158,7 @@ typedef enum {
         }];
         
         [self.tableView reloadData];
+        self.footerView.hidden = YES;
         [TSMessage showNotificationInViewController:self title:@"排序完毕" subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
     } else {
         [MBProgressHUD showError:@"译文未全部采集完毕"];
@@ -258,7 +259,7 @@ typedef enum {
     [self.translateModelFrameList addObject:modelFrame];
 }
 
-- (void)hidHudAndEvaluaBtn:(MBProgressHUD *)hud
+- (void)hidHudAndShowEvaluaBtn:(MBProgressHUD *)hud
 {
     [hud hide:YES];
     self.footerView.hidden = NO;
@@ -295,7 +296,7 @@ typedef enum {
     [ZQTranslateTools googleTranslate:srcText ofType:self.type success:^(NSString *googleResult) {
         self.googleResult = googleResult;
         [self refreshDataWithIcon:@"google.png" text:self.googleResult srcText:srcText ofType:TranslateResultSupporterGoogle];
-        [self hidHudAndEvaluaBtn:hud];
+        [self hidHudAndShowEvaluaBtn:hud];
         self.googleGet = YES;
     } failure:^(NSError *error) {
         
@@ -304,7 +305,7 @@ typedef enum {
     [ZQTranslateTools bingTranslate:srcText ofType:self.type success:^(NSString *bingResult) {
         self.bingResult = bingResult;
         [self refreshDataWithIcon:@"biying.png" text:self.bingResult srcText:srcText ofType:TranslateResultSupporterBing];
-        [self hidHudAndEvaluaBtn:hud];
+        [self hidHudAndShowEvaluaBtn:hud];
         self.bingGet = YES;
     } failure:^(NSError *error) {
         
@@ -316,7 +317,7 @@ typedef enum {
         self.baiduResult = item.dst;
         [self refreshDataWithIcon:@"baidu.png" text:self.baiduResult srcText:srcText ofType:TranslateResultSupporterBaidu];
         
-        [self hidHudAndEvaluaBtn:hud];
+        [self hidHudAndShowEvaluaBtn:hud];
         self.baiduGet = YES;
     } failure:^(NSError *error) {
         [hud hide:YES];
@@ -328,7 +329,7 @@ typedef enum {
         self.youdaoResult = youdaoResult.translation.firstObject;
         [self refreshDataWithIcon:@"youdao.png" text:self.youdaoResult srcText:srcText ofType:TranslateResultSupporterYoudao];
         
-        [self hidHudAndEvaluaBtn:hud];
+        [self hidHudAndShowEvaluaBtn:hud];
         self.youdaoGet = YES;
     } failure:^(NSError *error) {
         //        [hud hide:YES];
