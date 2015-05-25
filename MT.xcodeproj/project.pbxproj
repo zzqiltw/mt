@@ -15,6 +15,9 @@
 		6D4DD48C1AE922D500FAB681 /* testSrc.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D4DD48B1AE922D500FAB681 /* testSrc.plist */; };
 		6D5485B41AC90A5C00925287 /* ZQTranslateFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5485B31AC90A5C00925287 /* ZQTranslateFooterView.m */; };
 		6D57FAAE1AC43A5500AB2BE3 /* NSString+ZQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D57FAAD1AC43A5500AB2BE3 /* NSString+ZQ.m */; };
+		6D5CB9A91B121D5500B790F6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D5CB9A81B121D5500B790F6 /* AVFoundation.framework */; };
+		6D5CB9AB1B121E9A00B790F6 /* bleu.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6D5CB9AA1B121E9A00B790F6 /* bleu.pdf */; };
+		6D5EDD351B122AA000A9364E /* ZQPDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5EDD341B122AA000A9364E /* ZQPDFViewController.m */; };
 		6D8DA98B1A4DC4B400E99AFB /* ZQNavigationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DA98A1A4DC4B400E99AFB /* ZQNavigationButton.m */; };
 		6D8DA98E1A4E42A300E99AFB /* ZQTranslateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DA98D1A4E42A300E99AFB /* ZQTranslateViewController.m */; };
 		6DA14CB11AA2067D00B4C6FC /* UIImage+IW.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA14CB01AA2067D00B4C6FC /* UIImage+IW.m */; };
@@ -83,6 +86,10 @@
 		6D5485B31AC90A5C00925287 /* ZQTranslateFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQTranslateFooterView.m; sourceTree = "<group>"; };
 		6D57FAAC1AC43A5500AB2BE3 /* NSString+ZQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ZQ.h"; sourceTree = "<group>"; };
 		6D57FAAD1AC43A5500AB2BE3 /* NSString+ZQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ZQ.m"; sourceTree = "<group>"; };
+		6D5CB9A81B121D5500B790F6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		6D5CB9AA1B121E9A00B790F6 /* bleu.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = bleu.pdf; sourceTree = "<group>"; };
+		6D5EDD331B122AA000A9364E /* ZQPDFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQPDFViewController.h; sourceTree = "<group>"; };
+		6D5EDD341B122AA000A9364E /* ZQPDFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQPDFViewController.m; sourceTree = "<group>"; };
 		6D8DA9891A4DC4B400E99AFB /* ZQNavigationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQNavigationButton.h; sourceTree = "<group>"; };
 		6D8DA98A1A4DC4B400E99AFB /* ZQNavigationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQNavigationButton.m; sourceTree = "<group>"; };
 		6D8DA98C1A4E42A300E99AFB /* ZQTranslateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQTranslateViewController.h; sourceTree = "<group>"; };
@@ -165,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D5CB9A91B121D5500B790F6 /* AVFoundation.framework in Frameworks */,
 				6DBBF62B1A4DBADD00B28671 /* CoreGraphics.framework in Frameworks */,
 				6DBBF62D1A4DBADD00B28671 /* UIKit.framework in Frameworks */,
 				6DBBF6291A4DBADD00B28671 /* Foundation.framework in Frameworks */,
@@ -190,6 +198,8 @@
 			children = (
 				6D8DA98C1A4E42A300E99AFB /* ZQTranslateViewController.h */,
 				6D8DA98D1A4E42A300E99AFB /* ZQTranslateViewController.m */,
+				6D5EDD331B122AA000A9364E /* ZQPDFViewController.h */,
+				6D5EDD341B122AA000A9364E /* ZQPDFViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -335,6 +345,7 @@
 		6DBBF6271A4DBADD00B28671 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D5CB9A81B121D5500B790F6 /* AVFoundation.framework */,
 				6DBBF6281A4DBADD00B28671 /* Foundation.framework */,
 				6DBBF62A1A4DBADD00B28671 /* CoreGraphics.framework */,
 				6DBBF62C1A4DBADD00B28671 /* UIKit.framework */,
@@ -360,6 +371,7 @@
 		6DBBF62F1A4DBADD00B28671 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6D5CB9AA1B121E9A00B790F6 /* bleu.pdf */,
 				6DA342AC1AEC80C1005AA351 /* devSrc.plist */,
 				6D4DD48B1AE922D500FAB681 /* testSrc.plist */,
 				6DE1BBF11A4EFEAB00E895CD /* bg2.jpg */,
@@ -528,6 +540,7 @@
 				6D4DD48C1AE922D500FAB681 /* testSrc.plist in Resources */,
 				6DBBF63F1A4DBADD00B28671 /* Main_iPad.storyboard in Resources */,
 				6DBBF6441A4DBADD00B28671 /* Images.xcassets in Resources */,
+				6D5CB9AB1B121E9A00B790F6 /* bleu.pdf in Resources */,
 				6DB0352C1AB2B90F00CACAFC /* MBProgressHUD+ZQ.bundle in Resources */,
 				6DBBF63C1A4DBADD00B28671 /* Main_iPhone.storyboard in Resources */,
 				6DA342AD1AEC80C1005AA351 /* devSrc.plist in Resources */,
@@ -586,6 +599,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D5EDD351B122AA000A9364E /* ZQPDFViewController.m in Sources */,
 				6DB033731AA2B84200CACAFC /* MJIvar.m in Sources */,
 				6DBBF6351A4DBADD00B28671 /* main.m in Sources */,
 				6DB033741AA2B84200CACAFC /* MJMember.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "ZQTranslateViewCell.h"
+#import <AVFoundation/AVFoundation.h>
 #import "UIImage+IW.h"
 
 @interface ZQTranslateViewCell ()
@@ -16,10 +17,35 @@
 @property (weak, nonatomic) UIImageView *icon;
 @property (nonatomic, strong) UIImageView *bgView;
 @property (nonatomic, weak) UIView *sepaView;
+@property (nonatomic, weak) UIButton *recordBtn;
+@property (nonatomic, strong) AVSpeechSynthesizer *av;
 
 @end
 
 @implementation ZQTranslateViewCell
+
+- (AVSpeechSynthesizer *)av
+{
+    if (_av == nil) {
+        AVSpeechSynthesizer *av = [[AVSpeechSynthesizer alloc] init];
+        _av = av;
+    }
+    return _av;
+}
+
+- (UIButton *)recordBtn
+{
+    if (_recordBtn == nil) {
+        UIImage *recordImg = [UIImage imageNamed:@"recorder"];
+        UIButton *recordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [recordBtn setImage:recordImg forState:UIControlStateNormal];
+        recordBtn.frame = CGRectMake(0, 0, recordImg.size.width * 0.7, recordImg.size.height * 0.7);
+        self.accessoryView = recordBtn;
+        [recordBtn addTarget:self action:@selector(recordBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        _recordBtn = recordBtn;
+    }
+    return _recordBtn;
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -49,6 +75,8 @@
         imageView.layer.borderWidth = 1.0f;
         [self.contentView addSubview:imageView];
         self.icon = imageView;
+        
+        self.accessoryView = self.recordBtn;
         
 //        UIView *sepaView = [[UIView alloc] init];
 //        sepaView.backgroundColor = [UIColor colorWithRed:30/255.0 green:164/255.0 blue:160/255.0 alpha:0.5f];
@@ -108,6 +136,13 @@
     self.srcText.frame = self.translateFrame.srcTextFrame;
 //    self.sepaView.frame = CGRectMake(0, 0, self.frame.size.width, 1);
     self.bgView.frame = self.translateFrame.bgFrame;
+}
+
+- (void)recordBtnClick:(UIButton *)button
+{
+    AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc]initWithString:[self.translateFrame.model.text substringFromIndex:2]];
+    utterance.rate = AVSpeechUtteranceMinimumSpeechRate;
+    [self.av speakUtterance:utterance];
 }
 
 

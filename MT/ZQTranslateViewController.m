@@ -18,6 +18,7 @@
 #import "MBProgressHUD+ZQ.h"
 #import "ZQBLEUModel.h"
 #import "ZQBLEUTool.h"
+#import "ZQPDFViewController.h"
 
 #define ZQTestSentenceTranslateResultFilePath  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"testSrcAnd4TraOutputFile400_499"]
 static const NSInteger ZQNGram = 2;
@@ -88,6 +89,8 @@ typedef enum {
     
     self.stepCount = 0;
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"参考" style:UIBarButtonItemStyleDone target:self action:@selector(refClick)];
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
@@ -108,30 +111,35 @@ typedef enum {
     self.tableView.tableFooterView = footerView;
 }
 
+- (void)refClick
+{
+    ZQPDFViewController *pdfVC = [[ZQPDFViewController alloc] init];
+    pdfVC.filename = @"bleu.pdf";
+    [self.navigationController pushViewController:pdfVC animated:YES];
+}
+
 - (void)footerView:(ZQTranslateFooterView *)footerView didClickButton:(UIButton *)button
 {
-//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"分析译文" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"查看BLEU评价结果", @"查看系统融合结果", nil];
-//    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-//    [actionSheet showInView:self.view];
+
     
     if (self.googleGet && self.baiduGet && self.bingGet && self.youdaoGet) {
         ZQBLEUTool *bleuTool = [[ZQBLEUTool alloc] init];
         
         NSArray *baiduRefArray = @[self.youdaoResult, self.bingResult, self.googleResult];
         double baiduScore = [bleuTool getBLUEScoreofFirst:self.baiduResult andStrings:baiduRefArray Ngram:ZQNGram ofType:self.type];
-        NSLog(@"baidu\n%@--%@-----%lf", self.baiduResult, baiduRefArray, baiduScore);
+
         
         NSArray *bingRefArray = @[self.youdaoResult, self.baiduResult, self.googleResult];
         double bingScore = [bleuTool getBLUEScoreofFirst:self.bingResult andStrings:bingRefArray Ngram:ZQNGram ofType:self.type];
-        NSLog(@"bing\n%@--%@-----%lf", self.bingResult,bingRefArray, bingScore);
+
         
         NSArray *googleRefArray = @[self.youdaoResult, self.bingResult, self.baiduResult];
         double googleScore = [bleuTool getBLUEScoreofFirst:self.googleResult andStrings:googleRefArray Ngram:ZQNGram ofType:self.type];
-        NSLog(@"google\n%@--%@-----%lf", self.googleResult,googleRefArray, googleScore);
+
         
         NSArray *youdaoRefArray = @[self.baiduResult, self.bingResult, self.googleResult];
         double youdaoScore = [bleuTool getBLUEScoreofFirst:self.youdaoResult andStrings:youdaoRefArray Ngram:ZQNGram ofType:self.type];
-        NSLog(@"youdao\n%@--%@-----%lf", self.youdaoResult, youdaoRefArray, youdaoScore);
+
         
         for (ZQTranslateFrame *tf in self.translateModelFrameList) {
             ZQTranslateModel *model = tf.model;
