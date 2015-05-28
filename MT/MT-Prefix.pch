@@ -23,6 +23,12 @@
 #define BaiduAPIKey @"XtX8U9p1lMowpKm7gKZxCiIY"
 #define BaiduURL @"http://openapi.baidu.com/public/2.0/bmt/translate"
 
+#define WordCutApiKey @"f3N822N1fkSaYdXhVKopwtCfEWLofXaXnfaT1A0P"
+#define WordCutURLString @"http://ltpapi.voicecloud.cn/analysis/"
+
+#define TimeOutInterval 10.0f
+
+
 typedef NS_ENUM(NSInteger, TranslateType) {
     TranslateTypeEn2Cn,
     TranslateTypeCn2En

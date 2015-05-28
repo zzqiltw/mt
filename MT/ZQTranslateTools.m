@@ -9,7 +9,6 @@
 #import "ZQTranslateTools.h"
 #import <AFNetworking/AFNetworking.h>
 
-#define TimeOutInterval 10.0f
 @implementation ZQTranslateTools
 
 + (void)baiduTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(ZQBaiduTranslateResult *))success failure:(void (^)(NSError *))failure

@@ -26,6 +26,8 @@
 		6DA95BCB1A4EF38C00154004 /* ZQKeyboardToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA95BCA1A4EF38C00154004 /* ZQKeyboardToolView.m */; };
 		6DA95BCD1A4EF39900154004 /* ZQKeyboardToolView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA95BCC1A4EF39900154004 /* ZQKeyboardToolView.xib */; };
 		6DAA252B1B175F4900CD3908 /* ZQLDPathTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAA252A1B175F4900CD3908 /* ZQLDPathTool.m */; };
+		6DAA252E1B175FA300CD3908 /* ZQWordCutTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAA252D1B175FA300CD3908 /* ZQWordCutTool.m */; };
+		6DAA25321B1766E500CD3908 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAA25311B1766E500CD3908 /* Foundation+Log.m */; };
 		6DB033591AA2B79300CACAFC /* ZQBaiduTranslateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB033581AA2B79300CACAFC /* ZQBaiduTranslateResult.m */; };
 		6DB0335C1AA2B80600CACAFC /* ZQBaiduTranslateResultItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0335B1AA2B80600CACAFC /* ZQBaiduTranslateResultItem.m */; };
 		6DB033721AA2B84200CACAFC /* MJArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB033601AA2B84200CACAFC /* MJArgument.m */; };
@@ -106,6 +108,9 @@
 		6DAA25241B1754BB00CD3908 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
 		6DAA25291B175F4900CD3908 /* ZQLDPathTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQLDPathTool.h; sourceTree = "<group>"; };
 		6DAA252A1B175F4900CD3908 /* ZQLDPathTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQLDPathTool.m; sourceTree = "<group>"; };
+		6DAA252C1B175FA300CD3908 /* ZQWordCutTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQWordCutTool.h; sourceTree = "<group>"; };
+		6DAA252D1B175FA300CD3908 /* ZQWordCutTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQWordCutTool.m; sourceTree = "<group>"; };
+		6DAA25311B1766E500CD3908 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		6DB033571AA2B79300CACAFC /* ZQBaiduTranslateResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQBaiduTranslateResult.h; sourceTree = "<group>"; };
 		6DB033581AA2B79300CACAFC /* ZQBaiduTranslateResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQBaiduTranslateResult.m; sourceTree = "<group>"; };
 		6DB0335A1AA2B80600CACAFC /* ZQBaiduTranslateResultItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQBaiduTranslateResultItem.h; sourceTree = "<group>"; };
@@ -248,6 +253,7 @@
 		6DA14CB21AA2068200B4C6FC /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				6DAA25311B1766E500CD3908 /* Foundation+Log.m */,
 				6DB035291AB2B90F00CACAFC /* MBProgressHUD+ZQ.bundle */,
 				6DB0352A1AB2B90F00CACAFC /* MBProgressHUD+ZQ.h */,
 				6DB0352B1AB2B90F00CACAFC /* MBProgressHUD+ZQ.m */,
@@ -268,6 +274,8 @@
 				6D31E4AA1B04F01C0067E5A6 /* ZQBLEUTool.m */,
 				6DAA25291B175F4900CD3908 /* ZQLDPathTool.h */,
 				6DAA252A1B175F4900CD3908 /* ZQLDPathTool.m */,
+				6DAA252C1B175FA300CD3908 /* ZQWordCutTool.h */,
+				6DAA252D1B175FA300CD3908 /* ZQWordCutTool.m */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -612,6 +620,7 @@
 				6DB033741AA2B84200CACAFC /* MJMember.m in Sources */,
 				6D5485B41AC90A5C00925287 /* ZQTranslateFooterView.m in Sources */,
 				6DB033721AA2B84200CACAFC /* MJArgument.m in Sources */,
+				6DAA252E1B175FA300CD3908 /* ZQWordCutTool.m in Sources */,
 				6DB033761AA2B84200CACAFC /* MJType.m in Sources */,
 				6DBBF6391A4DBADD00B28671 /* ZQAppDelegate.m in Sources */,
 				6D8DA98B1A4DC4B400E99AFB /* ZQNavigationButton.m in Sources */,
@@ -628,6 +637,7 @@
 				6DB033751AA2B84200CACAFC /* MJMethod.m in Sources */,
 				6DB033CA1AA4142500CACAFC /* ZQYoudaoTranslateResultWebItem.m in Sources */,
 				6DB033791AA2B84200CACAFC /* NSObject+MJKeyValue.m in Sources */,
+				6DAA25321B1766E500CD3908 /* Foundation+Log.m in Sources */,
 				6DE1BBEE1A4EFC6400E895CD /* ActionButton.m in Sources */,
 				6DB0352D1AB2B90F00CACAFC /* MBProgressHUD+ZQ.m in Sources */,
 				6DA14CB11AA2067D00B4C6FC /* UIImage+IW.m in Sources */,

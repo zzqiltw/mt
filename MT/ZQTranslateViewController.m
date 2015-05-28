@@ -19,6 +19,7 @@
 #import "ZQBLEUModel.h"
 #import "ZQBLEUTool.h"
 #import "ZQPDFViewController.h"
+#import "ZQWordCutTool.h"
 
 #define ZQTestSentenceTranslateResultFilePath  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"testSrcAnd4TraOutputFile400_499"]
 static const NSInteger ZQNGram = 2;
@@ -296,6 +297,14 @@ typedef enum {
 
     self.footerView.hidden = YES;
     [self.translateModelFrameList removeAllObjects];
+    
+    ZQWordCutTool *wordCutTool = [ZQWordCutTool sharedWordCutTool];
+    [wordCutTool cutCNWord:srcText success:^(NSArray *result) {
+        NSLog(@"%@", result);
+    } failure:^(NSError *error) {
+        NSLog(@"word cut failed: %@", error.localizedDescription);
+    }];
+    return;
     
     MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加载"];
     
