@@ -120,8 +120,6 @@ typedef enum {
 
 - (void)footerView:(ZQTranslateFooterView *)footerView didClickButton:(UIButton *)button
 {
-
-    
     if (self.googleGet && self.baiduGet && self.bingGet && self.youdaoGet) {
         ZQBLEUTool *bleuTool = [[ZQBLEUTool alloc] init];
         
@@ -140,7 +138,7 @@ typedef enum {
         NSArray *youdaoRefArray = @[self.baiduResult, self.bingResult, self.googleResult];
         double youdaoScore = [bleuTool getBLUEScoreofFirst:self.youdaoResult andStrings:youdaoRefArray Ngram:ZQNGram ofType:self.type];
 
-        
+        NSLog(@"%@ %@", youdaoRefArray, _youdaoResult);
         for (ZQTranslateFrame *tf in self.translateModelFrameList) {
             ZQTranslateModel *model = tf.model;
             switch (model.type) {
