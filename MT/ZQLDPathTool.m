@@ -33,12 +33,43 @@
 @implementation ZQLDPathTool
 SingletonM(LDPathTool)
 
-- (int)ldCalcPath {
-    self.r1 = [[NSMutableArray alloc] init];
-    self.r2 = [[NSMutableArray alloc] init];
+- (NSArray *)combineOfFourSentences:(NSArray *)sl1 second:(NSArray *)sl2 third:(NSArray *)sl3 four:(NSArray *)sl4
+{
+    NSArray *r12 = [self combineOfTwoSentences:sl1 second:sl2];
+    NSArray *r13 = [self combineOfTwoSentences:sl1 second:sl3];
+    NSArray *r14 = [self combineOfTwoSentences:sl1 second:sl4];
+    NSArray *r123 = [self combineOfTwoSentences:r12 second:r13];
+    NSArray *r124 = [self combineOfTwoSentences:r12 second:r14];
+    
+    return [self combineOfTwoSentences:r123 second:r124];
+}
 
-    int len1 = self.s1.count;
-    int len2 = self.s2.count;
+- (NSArray *)combineOfTwoSentences:(NSArray *)sl1 second:(NSArray *)sl2
+{
+    NSMutableArray *r1 = [NSMutableArray array];
+    NSMutableArray *r2 = [NSMutableArray array];
+    [self ldCalcPathOfTwoSentences:sl1 second:sl2 result1:r1 result2:r2];
+    for (int i = r1.count - 1; i >= 0; --i) {
+        if ([r1[i] isEqualToString:@"_"]) {
+            [r1 removeObjectAtIndex:i];
+        } else {
+            break;
+        }
+    }
+    [r1 enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isEqualToString:@"_"]) {
+            NSString *replace = r2[idx];
+            [r1 replaceObjectAtIndex:idx withObject:replace];
+        }
+    }];
+    return r1;
+}
+
+- (int)ldCalcPathOfTwoSentences:(NSArray *)s1 second:(NSArray *)s2 result1:(NSMutableArray *)r1 result2:(NSMutableArray *)r2
+{
+
+    int len1 = s1.count;
+    int len2 = s2.count;
     NSMutableArray *array = [NSMutableArray array];
     for (int i = 0; i <= len1; ++i) {
         NSMutableArray *subArray = [NSMutableArray array];
@@ -64,36 +95,35 @@ SingletonM(LDPathTool)
             } else {
                 array[i][j] = [ZQArrayData arrayDataWithDist:((ZQArrayData *)array[i][j-1]).dist + 1 pre_x:i pre_y:j-1];
             }
-            min_dist = ((ZQArrayData *)array[i - 1][j - 1]).dist + ([[(NSString *)self.s1[i-1] lowercaseString] isEqualToString:[(NSString *)self.s2[j - 1] lowercaseString]] ? 0 : 1);
+            min_dist = ((ZQArrayData *)array[i - 1][j - 1]).dist + ([[(NSString *)s1[i-1] lowercaseString] isEqualToString:[(NSString *)s2[j - 1] lowercaseString]] ? 0 : 1);
             if (min_dist < ((ZQArrayData *)array[i][j]).dist) {
                 array[i][j] = [ZQArrayData arrayDataWithDist:min_dist pre_x:i-1 pre_y:j-1];
             }
         }
     }
-    [self storeResult:array index_x:len1 index_y:len2];
+    [self storeResult:array index_x:len1 index_y:len2 r1:r1 r2:r2 s1:s1 s2:s2];
     min_dist = ((ZQArrayData *)array[len1][len2]).dist;
-    NSLog(@"r1=%@, r2 = %@", self.r1, self.r2);
     return min_dist;
 }
 
-- (void)storeResult:(NSMutableArray *)array index_x:(int)index_x index_y:(int)index_y
+- (void)storeResult:(NSMutableArray *)array index_x:(int)index_x index_y:(int)index_y r1:(NSMutableArray *)r1 r2:(NSMutableArray *)r2 s1:(NSArray *)s1 s2:(NSArray *)s2
 {
     if (index_x == 0 && index_y == 0) {
         return;
     }
     
     if ((((ZQArrayData *)array[index_x][index_y]).pre_x < index_x) && (((ZQArrayData *)array[index_x][index_y]).pre_y < index_y)) {
-        [self storeResult:array index_x:index_x - 1 index_y:index_y - 1];
-        [self.r1 addObject:self.s1[index_x - 1]];
-        [self.r2 addObject:self.s2[index_y - 1]];
+        [self storeResult:array index_x:index_x - 1 index_y:index_y - 1 r1:r1 r2:r2 s1:s1 s2:s2];
+        [r1 addObject:s1[index_x - 1]];
+        [r2 addObject:s2[index_y - 1]];
     } else if (((ZQArrayData *)array[index_x][index_y]).pre_x < index_x) {
-        [self storeResult:array index_x:index_x - 1 index_y:index_y];
-        [self.r1 addObject:self.s1[index_x - 1]];
-        [self.r2 addObject:@"_"];
+        [self storeResult:array index_x:index_x - 1 index_y:index_y r1:r1 r2:r2 s1:s1 s2:s2];
+        [r1 addObject:s1[index_x - 1]];
+        [r2 addObject:@"_"];
     } else {
-        [self storeResult:array index_x:index_x index_y:index_y - 1];
-        [self.r1 addObject:@"_"];
-        [self.r2 addObject:self.s2[index_y - 1]];
+        [self storeResult:array index_x:index_x index_y:index_y - 1 r1:r1 r2:r2 s1:s1 s2:s2];
+        [r1 addObject:@"_"];
+        [r2 addObject:s2[index_y - 1]];
     }
 }
 

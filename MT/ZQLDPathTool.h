@@ -13,11 +13,5 @@
 
 SingletonH(LDPathTool)
 
-@property (nonatomic, strong) NSArray *s1;
-@property (nonatomic, strong) NSArray *s2;
-
-@property (nonatomic, strong) NSMutableArray *r1;
-@property (nonatomic, strong) NSMutableArray *r2;
-- (int)ldCalcPath;
-
+- (NSArray *)combineOfFourSentences:(NSArray *)sl1 second:(NSArray *)sl2 third:(NSArray *)sl3 four:(NSArray *)sl4;
 @end
