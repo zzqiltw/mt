@@ -20,9 +20,9 @@
 }
 
 
-- (IBAction)quitKb:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(keyboardToolView:didClickQuitBtn:)]) {
-        [self.delegate keyboardToolView:self didClickQuitBtn:sender];
+- (IBAction)voiceInput:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(keyboardToolView:didClickVoiceInputBtn:)]) {
+        [self.delegate keyboardToolView:self didClickVoiceInputBtn:sender];
     }
 }
 

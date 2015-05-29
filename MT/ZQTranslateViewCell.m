@@ -35,8 +35,10 @@
 
 - (UIButton *)recordBtn
 {
+#warning 网络没有连接的时候，hud不能取消。
+#warning play.png没整好
     if (_recordBtn == nil) {
-        UIImage *recordImg = [UIImage imageNamed:@"recorder"];
+        UIImage *recordImg = [UIImage imageNamed:@"play"];
         UIButton *recordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [recordBtn setImage:recordImg forState:UIControlStateNormal];
         recordBtn.frame = CGRectMake(0, 0, recordImg.size.width * 0.7, recordImg.size.height * 0.7);

@@ -49,7 +49,6 @@
 		6DBBF6351A4DBADD00B28671 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBF6341A4DBADD00B28671 /* main.m */; };
 		6DBBF6391A4DBADD00B28671 /* ZQAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBF6381A4DBADD00B28671 /* ZQAppDelegate.m */; };
 		6DBBF63C1A4DBADD00B28671 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DBBF63A1A4DBADD00B28671 /* Main_iPhone.storyboard */; };
-		6DBBF63F1A4DBADD00B28671 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DBBF63D1A4DBADD00B28671 /* Main_iPad.storyboard */; };
 		6DBBF6421A4DBADD00B28671 /* ZQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBF6411A4DBADD00B28671 /* ZQViewController.m */; };
 		6DBBF6441A4DBADD00B28671 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DBBF6431A4DBADD00B28671 /* Images.xcassets */; };
 		6DBBF64B1A4DBADD00B28671 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBBF64A1A4DBADD00B28671 /* XCTest.framework */; };
@@ -64,6 +63,7 @@
 		6DE1BBEE1A4EFC6400E895CD /* ActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE1BBED1A4EFC6400E895CD /* ActionButton.m */; };
 		6DE1BBF21A4EFEAB00E895CD /* bg2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE1BBF11A4EFEAB00E895CD /* bg2.jpg */; };
 		6DF9C5B21B1825AE0021A108 /* ZQLDPathTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DF9C5B11B1825AE0021A108 /* ZQLDPathTool.m */; };
+		6DF9C5B51B18B12A0021A108 /* ZQVoiceRecognizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DF9C5B41B18B12A0021A108 /* ZQVoiceRecognizeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,7 +150,6 @@
 		6DBBF6371A4DBADD00B28671 /* ZQAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZQAppDelegate.h; sourceTree = "<group>"; };
 		6DBBF6381A4DBADD00B28671 /* ZQAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZQAppDelegate.m; sourceTree = "<group>"; };
 		6DBBF63B1A4DBADD00B28671 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		6DBBF63E1A4DBADD00B28671 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		6DBBF6401A4DBADD00B28671 /* ZQViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZQViewController.h; sourceTree = "<group>"; };
 		6DBBF6411A4DBADD00B28671 /* ZQViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZQViewController.m; sourceTree = "<group>"; };
 		6DBBF6431A4DBADD00B28671 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -172,6 +171,8 @@
 		6DE1BBF11A4EFEAB00E895CD /* bg2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg2.jpg; sourceTree = "<group>"; };
 		6DF9C5B01B1825AE0021A108 /* ZQLDPathTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQLDPathTool.h; sourceTree = "<group>"; };
 		6DF9C5B11B1825AE0021A108 /* ZQLDPathTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQLDPathTool.m; sourceTree = "<group>"; };
+		6DF9C5B31B18B12A0021A108 /* ZQVoiceRecognizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQVoiceRecognizeViewController.h; sourceTree = "<group>"; };
+		6DF9C5B41B18B12A0021A108 /* ZQVoiceRecognizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQVoiceRecognizeViewController.m; sourceTree = "<group>"; };
 		AC5DDF80B56A46E48BDEBD4A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		EA60FFFCF37544E68D23B39F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -207,6 +208,8 @@
 			children = (
 				6D8DA98C1A4E42A300E99AFB /* ZQTranslateViewController.h */,
 				6D8DA98D1A4E42A300E99AFB /* ZQTranslateViewController.m */,
+				6DF9C5B31B18B12A0021A108 /* ZQVoiceRecognizeViewController.h */,
+				6DF9C5B41B18B12A0021A108 /* ZQVoiceRecognizeViewController.m */,
 				6D5EDD331B122AA000A9364E /* ZQPDFViewController.h */,
 				6D5EDD341B122AA000A9364E /* ZQPDFViewController.m */,
 			);
@@ -377,7 +380,6 @@
 				6DBBF6611A4DBDCA00B28671 /* Other */,
 				6DBBF6601A4DBDC300B28671 /* Main */,
 				6DBBF63A1A4DBADD00B28671 /* Main_iPhone.storyboard */,
-				6DBBF6431A4DBADD00B28671 /* Images.xcassets */,
 				6DBBF62F1A4DBADD00B28671 /* Supporting Files */,
 			);
 			path = MT;
@@ -386,6 +388,7 @@
 		6DBBF62F1A4DBADD00B28671 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6DBBF6431A4DBADD00B28671 /* Images.xcassets */,
 				6D5CB9AA1B121E9A00B790F6 /* bleu.pdf */,
 				6DA342AC1AEC80C1005AA351 /* devSrc.plist */,
 				6D4DD48B1AE922D500FAB681 /* testSrc.plist */,
@@ -432,7 +435,6 @@
 			children = (
 				6DBBF6371A4DBADD00B28671 /* ZQAppDelegate.h */,
 				6DBBF6381A4DBADD00B28671 /* ZQAppDelegate.m */,
-				6DBBF63D1A4DBADD00B28671 /* Main_iPad.storyboard */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -553,7 +555,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D4DD48C1AE922D500FAB681 /* testSrc.plist in Resources */,
-				6DBBF63F1A4DBADD00B28671 /* Main_iPad.storyboard in Resources */,
 				6DBBF6441A4DBADD00B28671 /* Images.xcassets in Resources */,
 				6D5CB9AB1B121E9A00B790F6 /* bleu.pdf in Resources */,
 				6DB0352C1AB2B90F00CACAFC /* MBProgressHUD+ZQ.bundle in Resources */,
@@ -636,6 +637,7 @@
 				6DD5B3091A52885200AE332E /* ZQTranslateFrame.m in Sources */,
 				6DD5B3061A503F0400AE332E /* ZQTranslateModel.m in Sources */,
 				6DB033751AA2B84200CACAFC /* MJMethod.m in Sources */,
+				6DF9C5B51B18B12A0021A108 /* ZQVoiceRecognizeViewController.m in Sources */,
 				6DB033CA1AA4142500CACAFC /* ZQYoudaoTranslateResultWebItem.m in Sources */,
 				6DB033791AA2B84200CACAFC /* NSObject+MJKeyValue.m in Sources */,
 				6DAA25321B1766E500CD3908 /* Foundation+Log.m in Sources */,
@@ -686,14 +688,6 @@
 				6DBBF63B1A4DBADD00B28671 /* Base */,
 			);
 			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		6DBBF63D1A4DBADD00B28671 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6DBBF63E1A4DBADD00B28671 /* Base */,
-			);
-			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		6DBBF6531A4DBADD00B28671 /* InfoPlist.strings */ = {

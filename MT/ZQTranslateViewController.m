@@ -21,6 +21,7 @@
 #import "ZQPDFViewController.h"
 #import "ZQWordCutTool.h"
 #import "ZQLDPathTool.h"
+#import "ZQVoiceRecognizeViewController.h"
 
 #define ZQTestSentenceTranslateResultFilePath  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"testSrcAnd4TraOutputFile400_499"]
 static const NSInteger ZQNGram = 2;
@@ -284,10 +285,13 @@ typedef enum {
 }
 
 
-- (void)keyboardToolView:(ZQKeyboardToolView *)toolView didClickQuitBtn:(id)sender
+- (void)keyboardToolView:(ZQKeyboardToolView *)toolView didClickVoiceInputBtn:(id)sender
 {
     [self quitKb];
     self.footerView.hidden = YES;
+    
+    ZQVoiceRecognizeViewController *voiceVc = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"ZQVoiceRecognizeViewController"];
+    [self.navigationController pushViewController:voiceVc animated:YES];
 }
 
 - (void)keyboardToolView:(ZQKeyboardToolView *)toolView didClickClearBtn:(id)sender
@@ -361,7 +365,7 @@ typedef enum {
     self.footerView.hidden = YES;
     [self.translateModelFrameList removeAllObjects];
     
-    MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加载..."];
+    MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加载"];
     
     [ZQTranslateTools googleTranslate:srcText ofType:self.type success:^(NSString *googleResult) {
         self.googleResult = googleResult;
@@ -369,7 +373,7 @@ typedef enum {
         self.googleGet = YES;
         [self hidHudAndShowEvaluaBtn:hud];
     } failure:^(NSError *error) {
-        
+        [self failed:hud];
     }];
     
     [ZQTranslateTools bingTranslate:srcText ofType:self.type success:^(NSString *bingResult) {
@@ -378,7 +382,7 @@ typedef enum {
         self.bingGet = YES;
         [self hidHudAndShowEvaluaBtn:hud];
     } failure:^(NSError *error) {
-        
+        [self failed:hud];
     }];
     
     [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
@@ -390,8 +394,7 @@ typedef enum {
         self.baiduGet = YES;
         [self hidHudAndShowEvaluaBtn:hud];
     } failure:^(NSError *error) {
-        [MBProgressHUD showError:@"百度翻译结果加载失败"];
-        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
+        [self failed:hud];
     }];
     
     [ZQTranslateTools youdaoTranslate:srcText ofType:self.type success:^(ZQYoudaoTranslateResult *youdaoResult) {
@@ -400,9 +403,7 @@ typedef enum {
         self.youdaoGet = YES;
         [self hidHudAndShowEvaluaBtn:hud];
     } failure:^(NSError *error) {
-        //        [hud hide:YES];
-        //        [MBProgressHUD showError:@"加载失败"];
-        //        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
+        [self failed:hud];
     }];
 
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -462,6 +463,15 @@ typedef enum {
 //        }
 //        
 //    });
+}
+
+- (void)failed:(MBProgressHUD *)hud
+{
+    if (!self.googleGet && !self.baiduGet && !self.bingGet && !self.youdaoGet) {
+        [hud hide:YES];
+        [MBProgressHUD showError:@"加载失败"];
+        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
+    }
 }
 
 

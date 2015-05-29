@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -14,9 +14,9 @@
                     <rect key="frame" x="20" y="7" width="110" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.16862745100000001" green="0.73333333329999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
-                    <state key="normal" title="退出编辑"/>
+                    <state key="normal" title="语音输入"/>
                     <connections>
-                        <action selector="quitKb:" destination="cLZ-1H-T9j" eventType="touchUpInside" id="e87-lZ-GM7"/>
+                        <action selector="voiceInput:" destination="cLZ-1H-T9j" eventType="touchUpInside" id="mry-fG-jla"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBe-NA-zEh" customClass="ActionButton">
