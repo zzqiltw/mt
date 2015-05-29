@@ -33,15 +33,23 @@
 @implementation ZQLDPathTool
 SingletonM(LDPathTool)
 
-- (NSArray *)combineOfFourSentences:(NSArray *)sl1 second:(NSArray *)sl2 third:(NSArray *)sl3 four:(NSArray *)sl4
+- (NSString *)combineOfFourSentences:(NSArray *)sl1 second:(NSArray *)sl2 third:(NSArray *)sl3 four:(NSArray *)sl4 type:(TranslateType)type
 {
     NSArray *r12 = [self combineOfTwoSentences:sl1 second:sl2];
     NSArray *r13 = [self combineOfTwoSentences:sl1 second:sl3];
     NSArray *r14 = [self combineOfTwoSentences:sl1 second:sl4];
     NSArray *r123 = [self combineOfTwoSentences:r12 second:r13];
     NSArray *r124 = [self combineOfTwoSentences:r12 second:r14];
+    NSArray *final = [self combineOfTwoSentences:r123 second:r124];
     
-    return [self combineOfTwoSentences:r123 second:r124];
+    NSMutableString *result = [NSMutableString string];
+    for (NSString *subString in final) {
+        [result appendString:subString];
+        if (type == TranslateTypeCn2En) {
+            [result appendString:@" "];
+        }
+    }
+    return [result copy];
 }
 
 - (NSArray *)combineOfTwoSentences:(NSArray *)sl1 second:(NSArray *)sl2

@@ -20,6 +20,7 @@
 #import "ZQBLEUTool.h"
 #import "ZQPDFViewController.h"
 #import "ZQWordCutTool.h"
+#import "ZQLDPathTool.h"
 
 #define ZQTestSentenceTranslateResultFilePath  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"testSrcAnd4TraOutputFile400_499"]
 static const NSInteger ZQNGram = 2;
@@ -164,11 +165,49 @@ typedef enum {
             return obj1.model.bleuScore < obj2.model.bleuScore;
         }];
         
+        [self systemCombine];
         [self.tableView reloadData];
         self.footerView.hidden = YES;
-        [TSMessage showNotificationInViewController:self title:@"排序完毕" subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
+        [TSMessage showNotificationInViewController:self title:@"译文质量排序完毕" subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
     } else {
         [MBProgressHUD showError:@"译文未全部采集完毕"];
+    }
+}
+
+- (void)systemCombine
+{
+    NSMutableArray *array = [NSMutableArray array];
+    __block NSMutableString *cnWords = [NSMutableString string];
+    __block NSString *finalSystemCombine = nil;
+    [self.translateModelFrameList enumerateObjectsUsingBlock:^(ZQTranslateFrame *obj, NSUInteger idx, BOOL *stop) {
+        NSString *each = [obj.model.text substringFromIndex:3];
+        if (self.type == TranslateTypeEn2Cn) {
+            [cnWords appendString:each];
+            [cnWords appendString:@"|"];
+        } else {
+            [array addObject:[each componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+        }
+    }];
+    if (self.type == TranslateTypeEn2Cn) {
+        [[ZQWordCutTool sharedWordCutTool] cutCNWord:cnWords success:^(NSArray *result) {
+            NSLog(@"result = %@", result);
+            NSMutableArray *eachSentence = [NSMutableArray array];
+            for (NSString *subString in result) {
+                if ([subString isEqualToString:@"|"]) {
+                    [array addObject:[eachSentence copy]];
+                    [eachSentence removeAllObjects];
+                } else {
+                    [eachSentence addObject:subString];
+                }
+            }
+            finalSystemCombine = [[ZQLDPathTool sharedLDPathTool] combineOfFourSentences:array[0] second:array[1] third:array[2] four:array[3] type:self.type];
+            NSLog(@"finalSystemCombine = %@", finalSystemCombine);
+        } failure:^(NSError *error) {
+            NSLog(@"error==");
+        }];
+    } else {
+        finalSystemCombine = [[ZQLDPathTool sharedLDPathTool] combineOfFourSentences:array[0] second:array[1] third:array[2] four:array[3] type:self.type];
+        NSLog(@"%@", finalSystemCombine);
     }
 }
 
@@ -297,14 +336,6 @@ typedef enum {
 
     self.footerView.hidden = YES;
     [self.translateModelFrameList removeAllObjects];
-    
-    ZQWordCutTool *wordCutTool = [ZQWordCutTool sharedWordCutTool];
-    [wordCutTool cutCNWord:srcText success:^(NSArray *result) {
-        NSLog(@"%@", result);
-    } failure:^(NSError *error) {
-        NSLog(@"word cut failed: %@", error.localizedDescription);
-    }];
-    return;
     
     MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在加载"];
     
