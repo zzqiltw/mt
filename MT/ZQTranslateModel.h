@@ -13,12 +13,13 @@ typedef enum{
     TranslateResultSupporterBaidu,
     TranslateResultSupporterGoogle,
     TranslateResultSupporterYoudao,
-    TranslateResultSupporterBing
+    TranslateResultSupporterBing,
+    TranslateResultSupporterNone
 } TranslateResultSupporter;
 
 @interface ZQTranslateModel : NSObject
 
-@property (nonatomic, copy, readonly) NSString *iconName;
+@property (nonatomic, copy) NSString *iconName;
 @property (nonatomic, copy) NSString *srcText;
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, assign) TranslateResultSupporter type;

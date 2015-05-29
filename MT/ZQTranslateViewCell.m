@@ -140,7 +140,7 @@
 
 - (void)recordBtnClick:(UIButton *)button
 {
-    AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc]initWithString:[self.translateFrame.model.text substringFromIndex:2]];
+    AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc]initWithString:[self.translateFrame.model.text substringFromIndex:0]];
     utterance.rate = AVSpeechUtteranceMinimumSpeechRate;
     [self.av speakUtterance:utterance];
 }
