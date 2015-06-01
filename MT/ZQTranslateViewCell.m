@@ -35,8 +35,6 @@
 
 - (UIButton *)recordBtn
 {
-#warning 网络没有连接的时候，hud不能取消。
-#warning play.png没整好
     if (_recordBtn == nil) {
         UIImage *recordImg = [UIImage imageNamed:@"play"];
         UIButton *recordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -143,6 +141,11 @@
 - (void)recordBtnClick:(UIButton *)button
 {
     AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc]initWithString:[self.translateFrame.model.text substringFromIndex:0]];
+    if (self.translateFrame.model.CEorEC == TranslateTypeCn2En) {
+        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+    } else {
+        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh-CN"];
+    }
     utterance.rate = AVSpeechUtteranceMinimumSpeechRate;
     [self.av speakUtterance:utterance];
 }

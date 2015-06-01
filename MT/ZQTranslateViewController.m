@@ -56,6 +56,7 @@ typedef enum {
 
 @implementation ZQTranslateViewController
 
+#pragma mark - Lazy Initialize
 - (NSMutableArray *)bleuModels
 {
     if (_bleuModels == nil) {
@@ -86,6 +87,7 @@ typedef enum {
     return _translateModelFrameList;
 }
 
+#pragma mark - Life Cycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -114,6 +116,28 @@ typedef enum {
     self.tableView.tableFooterView = footerView;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.type = [[NSUserDefaults standardUserDefaults] integerForKey:TranslateTypeKey];
+    
+    NSString *title = [NSString stringWithFormat:@"%@", self.type == TranslateTypeEn2Cn ? @"英译汉模式" : @"汉译英模式"];
+    self.title = title;
+    [TSMessage showNotificationInViewController:self title:title subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
+    
+    ZQTranslateHeaderView *headerView = [[ZQTranslateHeaderView alloc] init];
+    headerView.modeType = title;
+    headerView.delegate = self;
+    self.tableView.tableHeaderView = headerView;
+    
+    ZQKeyboardToolView *toolView = [[ZQKeyboardToolView alloc] init];
+    toolView.delegate = self;
+    
+    [headerView setInputFieldAccessoryView:toolView];
+}
+
+#pragma mark - Actions
 - (void)refClick
 {
     ZQPDFViewController *pdfVC = [[ZQPDFViewController alloc] init];
@@ -121,6 +145,7 @@ typedef enum {
     [self.navigationController pushViewController:pdfVC animated:YES];
 }
 
+#pragma mark - ZQTranslateFooterViewDelegate
 - (void)footerView:(ZQTranslateFooterView *)footerView didClickButton:(UIButton *)button
 {
     if (self.googleGet && self.baiduGet && self.bingGet && self.youdaoGet) {
@@ -177,6 +202,30 @@ typedef enum {
     }
 }
 
+- (void)failed:(MBProgressHUD *)hud
+{
+    if (!self.googleGet && !self.baiduGet && !self.bingGet && !self.youdaoGet) {
+        [hud hide:YES];
+        [MBProgressHUD showError:@"加载失败"];
+        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
+    }
+}
+
+
+- (void)quitKb
+{
+    ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
+    [headerView quitKb];
+}
+
+- (void)clearInputField
+{
+    ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
+    [headerView clearInputField];
+    self.footerView.hidden = YES;
+}
+
+#pragma mark - Private
 - (void)systemCombine
 {
     NSMutableArray *array = [NSMutableArray array];
@@ -222,41 +271,45 @@ typedef enum {
     [self.tableView reloadData];
 }
 
-//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    
-//    switch (buttonIndex) {
-//        case ZQActionSheetIndexTypeBLEU:
-//            NSLog(@"BLEU");
-//            break;
-//        case ZQActionSheetIndexTypeSystemCombine:
-//            NSLog(@"System Combine");
-//            break;
-//        default:
-//            break;
-//    }
-//}
-
-- (void)viewWillAppear:(BOOL)animated
+- (void)refreshDataWithIcon:(NSString *)icon text:(NSString *)text srcText:(NSString *)srcText ofType:(TranslateResultSupporter)type
 {
-    [super viewWillAppear:animated];
-    
-    self.type = [[NSUserDefaults standardUserDefaults] integerForKey:TranslateTypeKey];
-    
-    NSString *title = [NSString stringWithFormat:@"%@", self.type == TranslateTypeEn2Cn ? @"英译汉模式" : @"汉译英模式"];
-    self.title = title;
-    [TSMessage showNotificationInViewController:self title:title subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
-    
-    ZQTranslateHeaderView *headerView = [[ZQTranslateHeaderView alloc] init];
-    headerView.modeType = title;
-    headerView.delegate = self;
-    self.tableView.tableHeaderView = headerView;
-    
-    ZQKeyboardToolView *toolView = [[ZQKeyboardToolView alloc] init];
-    toolView.delegate = self;
-    
-    [headerView setInputFieldAccessoryView:toolView];
+    [self addTranslateFrameWithIcon:icon text:text srcText:srcText ofType:type score:0];
+    [self.tableView reloadData];
 }
+
+- (void)addTranslateFrameWithIcon:(NSString *)icon text:(NSString *)text srcText:(NSString *)srcText ofType:(TranslateResultSupporter)type score:(double)score
+{
+    ZQTranslateModel *model = [[ZQTranslateModel alloc] init];
+    model.srcText = [NSString stringWithFormat:@"%@", srcText];
+    model.text = [NSString stringWithFormat:@"%@", text];
+    model.type = type;
+    model.bleuScore = score;
+    model.CEorEC = self.type;
+    ZQTranslateFrame *modelFrame = [[ZQTranslateFrame alloc] initWithModel:model];
+    [self.translateModelFrameList addObject:modelFrame];
+}
+
+- (void)addTranslateFrameToTopWithIcon:(NSString *)icon text:(NSString *)text srcText:(NSString *)srcText ofType:(TranslateResultSupporter)type score:(double)score
+{
+    ZQTranslateModel *model = [[ZQTranslateModel alloc] init];
+    model.srcText = [NSString stringWithFormat:@"%@", srcText];
+    model.text = [NSString stringWithFormat:@"%@", text];
+    model.type = type;
+    model.bleuScore = score;
+    model.iconName = icon;
+    model.CEorEC = self.type;
+    ZQTranslateFrame *modelFrame = [[ZQTranslateFrame alloc] initWithModel:model];
+    [self.translateModelFrameList insertObject:modelFrame atIndex:0];
+}
+
+- (void)hidHudAndShowEvaluaBtn:(MBProgressHUD *)hud
+{
+    if (self.googleGet && self.baiduGet && self.bingGet && self.youdaoGet) {
+        [hud hide:YES];
+        self.footerView.hidden = NO;
+    }
+}
+
 
 
 #pragma mark - Table view data source
@@ -284,7 +337,7 @@ typedef enum {
     return cell;
 }
 
-
+#pragma mark - ZQKeyboardToolViewDelegate
 - (void)keyboardToolView:(ZQKeyboardToolView *)toolView didClickVoiceInputBtn:(id)sender
 {
     [self quitKb];
@@ -302,42 +355,6 @@ typedef enum {
     [self clearInputField];
 }
 
-- (void)refreshDataWithIcon:(NSString *)icon text:(NSString *)text srcText:(NSString *)srcText ofType:(TranslateResultSupporter)type
-{
-    [self addTranslateFrameWithIcon:icon text:text srcText:srcText ofType:type score:0];
-    [self.tableView reloadData];
-}
-
-- (void)addTranslateFrameWithIcon:(NSString *)icon text:(NSString *)text srcText:(NSString *)srcText ofType:(TranslateResultSupporter)type score:(double)score
-{
-    ZQTranslateModel *model = [[ZQTranslateModel alloc] init];
-    model.srcText = [NSString stringWithFormat:@"%@", srcText];
-    model.text = [NSString stringWithFormat:@"%@", text];
-    model.type = type;
-    model.bleuScore = score;
-    ZQTranslateFrame *modelFrame = [[ZQTranslateFrame alloc] initWithModel:model];
-    [self.translateModelFrameList addObject:modelFrame];
-}
-
-- (void)addTranslateFrameToTopWithIcon:(NSString *)icon text:(NSString *)text srcText:(NSString *)srcText ofType:(TranslateResultSupporter)type score:(double)score
-{
-    ZQTranslateModel *model = [[ZQTranslateModel alloc] init];
-    model.srcText = [NSString stringWithFormat:@"%@", srcText];
-    model.text = [NSString stringWithFormat:@"%@", text];
-    model.type = type;
-    model.bleuScore = score;
-    model.iconName = icon;
-    ZQTranslateFrame *modelFrame = [[ZQTranslateFrame alloc] initWithModel:model];
-    [self.translateModelFrameList insertObject:modelFrame atIndex:0];
-}
-
-- (void)hidHudAndShowEvaluaBtn:(MBProgressHUD *)hud
-{
-    if (self.googleGet && self.baiduGet && self.bingGet && self.youdaoGet) {
-        [hud hide:YES];
-        self.footerView.hidden = NO;
-    }
-}
 
 //- (void)saveBleuModel:(ZQBLEUModel *)model ofIndex:(NSInteger)i
 //{
@@ -355,6 +372,7 @@ typedef enum {
 //    }
 //}
 
+#pragma mark - ZQTranslateHeaderViewDelegate
 - (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender withInput:(NSString *)srcText
 {
     self.baiduGet = NO;
@@ -465,26 +483,5 @@ typedef enum {
 //    });
 }
 
-- (void)failed:(MBProgressHUD *)hud
-{
-    if (!self.googleGet && !self.baiduGet && !self.bingGet && !self.youdaoGet) {
-        [hud hide:YES];
-        [MBProgressHUD showError:@"加载失败"];
-        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
-    }
-}
 
-
-- (void)quitKb
-{
-    ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
-    [headerView quitKb];
-}
-
-- (void)clearInputField
-{
-    ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
-    [headerView clearInputField];
-    self.footerView.hidden = YES;
-}
 @end

@@ -8,6 +8,7 @@
 
 #import "ZQVoiceRecognizeViewController.h"
 #import "ActionButton.h"
+#import "ZQRecordTool.h"
 @interface ZQVoiceRecognizeViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (weak, nonatomic) IBOutlet ActionButton *recordBtn;
@@ -35,13 +36,20 @@ static NSString * const msgEnd = @"正在将录音转换成文字";
 
 
 - (IBAction)touchDownRecord:(id)sender {
-    NSLog(@"touchDownRecord");
     self.messageLabel.text = msgBegin;
+    
+    ZQRecordTool *recordTool = [ZQRecordTool sharedRecordTool];
+    [recordTool startRecord];
 }
 
 - (IBAction)touchUp:(id)sender {
-    NSLog(@"touchUp");
+
     self.messageLabel.text = msgEnd;
+    ZQRecordTool *recordTool = [ZQRecordTool sharedRecordTool];
+    [recordTool stopRecording];
+    
+    NSString *recordData = [recordTool getRecordData];
+    NSLog(@"%@", recordData.length);
 }
 
 @end

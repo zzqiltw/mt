@@ -25,4 +25,6 @@ typedef enum{
 @property (nonatomic, assign) TranslateResultSupporter type;
 @property (nonatomic, assign) double bleuScore;
 
+@property (nonatomic, assign) TranslateType CEorEC;
+
 @end

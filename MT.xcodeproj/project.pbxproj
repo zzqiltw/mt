@@ -27,6 +27,7 @@
 		6DA95BCD1A4EF39900154004 /* ZQKeyboardToolView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA95BCC1A4EF39900154004 /* ZQKeyboardToolView.xib */; };
 		6DAA252E1B175FA300CD3908 /* ZQWordCutTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAA252D1B175FA300CD3908 /* ZQWordCutTool.m */; };
 		6DAA25321B1766E500CD3908 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAA25311B1766E500CD3908 /* Foundation+Log.m */; };
+		6DACB4A81B1B02DF00893CF8 /* ZQRecordTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DACB4A71B1B02DF00893CF8 /* ZQRecordTool.m */; };
 		6DB033591AA2B79300CACAFC /* ZQBaiduTranslateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB033581AA2B79300CACAFC /* ZQBaiduTranslateResult.m */; };
 		6DB0335C1AA2B80600CACAFC /* ZQBaiduTranslateResultItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0335B1AA2B80600CACAFC /* ZQBaiduTranslateResultItem.m */; };
 		6DB033721AA2B84200CACAFC /* MJArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB033601AA2B84200CACAFC /* MJArgument.m */; };
@@ -109,6 +110,8 @@
 		6DAA252C1B175FA300CD3908 /* ZQWordCutTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQWordCutTool.h; sourceTree = "<group>"; };
 		6DAA252D1B175FA300CD3908 /* ZQWordCutTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQWordCutTool.m; sourceTree = "<group>"; };
 		6DAA25311B1766E500CD3908 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		6DACB4A61B1B02DF00893CF8 /* ZQRecordTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQRecordTool.h; sourceTree = "<group>"; };
+		6DACB4A71B1B02DF00893CF8 /* ZQRecordTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQRecordTool.m; sourceTree = "<group>"; };
 		6DB033571AA2B79300CACAFC /* ZQBaiduTranslateResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQBaiduTranslateResult.h; sourceTree = "<group>"; };
 		6DB033581AA2B79300CACAFC /* ZQBaiduTranslateResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQBaiduTranslateResult.m; sourceTree = "<group>"; };
 		6DB0335A1AA2B80600CACAFC /* ZQBaiduTranslateResultItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQBaiduTranslateResultItem.h; sourceTree = "<group>"; };
@@ -279,6 +282,8 @@
 				6DF9C5B11B1825AE0021A108 /* ZQLDPathTool.m */,
 				6DAA252C1B175FA300CD3908 /* ZQWordCutTool.h */,
 				6DAA252D1B175FA300CD3908 /* ZQWordCutTool.m */,
+				6DACB4A61B1B02DF00893CF8 /* ZQRecordTool.h */,
+				6DACB4A71B1B02DF00893CF8 /* ZQRecordTool.m */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -638,6 +643,7 @@
 				6DD5B3061A503F0400AE332E /* ZQTranslateModel.m in Sources */,
 				6DB033751AA2B84200CACAFC /* MJMethod.m in Sources */,
 				6DF9C5B51B18B12A0021A108 /* ZQVoiceRecognizeViewController.m in Sources */,
+				6DACB4A81B1B02DF00893CF8 /* ZQRecordTool.m in Sources */,
 				6DB033CA1AA4142500CACAFC /* ZQYoudaoTranslateResultWebItem.m in Sources */,
 				6DB033791AA2B84200CACAFC /* NSObject+MJKeyValue.m in Sources */,
 				6DAA25321B1766E500CD3908 /* Foundation+Log.m in Sources */,
