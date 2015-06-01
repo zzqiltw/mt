@@ -8,10 +8,12 @@
 
 #import "ZQVoiceRecognizeViewController.h"
 #import "ActionButton.h"
-#import "ZQRecordTool.h"
-@interface ZQVoiceRecognizeViewController ()
+#import <iflyMSC/IFlySpeechRecognizer.h>
+
+@interface ZQVoiceRecognizeViewController ()<IFlySpeechRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (weak, nonatomic) IBOutlet ActionButton *recordBtn;
+@property (nonatomic, weak) IFlySpeechRecognizer *recognizer;
 - (IBAction)touchDownRecord:(id)sender;
 - (IBAction)touchUp:(id)sender;
 
@@ -32,24 +34,36 @@ static NSString * const msgEnd = @"正在将录音转换成文字";
 {
     [super viewWillAppear:animated];
     self.messageLabel.text = msgPre;
+    
+    self.recognizer = [IFlySpeechRecognizer sharedInstance];
+    self.recognizer.delegate = self;
+    
+    [self.recognizer setParameter:@"iat" forKey:@"domain"];
+    [self.recognizer setParameter:@"8000" forKey:@"sample_rate"];
+    
 }
 
 
 - (IBAction)touchDownRecord:(id)sender {
     self.messageLabel.text = msgBegin;
     
-    ZQRecordTool *recordTool = [ZQRecordTool sharedRecordTool];
-    [recordTool startRecord];
+    [self.recognizer startListening];
 }
 
 - (IBAction)touchUp:(id)sender {
-
     self.messageLabel.text = msgEnd;
-    ZQRecordTool *recordTool = [ZQRecordTool sharedRecordTool];
-    [recordTool stopRecording];
     
-    NSString *recordData = [recordTool getRecordData];
-    NSLog(@"%@", recordData.length);
+    [self.recognizer stopListening];
+}
+
+- (void)onResults:(NSArray *)results isLast:(BOOL)isLast
+{
+    NSLog(@"语音识别success:%@", results);
+}
+
+- (void)onError:(IFlySpeechError *)errorCode
+{
+    NSLog(@"语音识别error:%@", errorCode);
 }
 
 @end

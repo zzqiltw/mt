@@ -18,6 +18,10 @@
 		6D5CB9A91B121D5500B790F6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D5CB9A81B121D5500B790F6 /* AVFoundation.framework */; };
 		6D5CB9AB1B121E9A00B790F6 /* bleu.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6D5CB9AA1B121E9A00B790F6 /* bleu.pdf */; };
 		6D5EDD351B122AA000A9364E /* ZQPDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5EDD341B122AA000A9364E /* ZQPDFViewController.m */; };
+		6D65B3F61B1C2EA00026468F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D65B3F51B1C2EA00026468F /* AddressBook.framework */; };
+		6D65B3F81B1C2EAB0026468F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D65B3F71B1C2EAB0026468F /* SystemConfiguration.framework */; };
+		6D65B3FA1B1C2EB20026468F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D65B3F91B1C2EB20026468F /* AudioToolbox.framework */; };
+		6D65B3FC1B1C2ECE0026468F /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D65B3FB1B1C2ECE0026468F /* iflyMSC.framework */; };
 		6D8DA98B1A4DC4B400E99AFB /* ZQNavigationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DA98A1A4DC4B400E99AFB /* ZQNavigationButton.m */; };
 		6D8DA98E1A4E42A300E99AFB /* ZQTranslateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DA98D1A4E42A300E99AFB /* ZQTranslateViewController.m */; };
 		6DA14CB11AA2067D00B4C6FC /* UIImage+IW.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA14CB01AA2067D00B4C6FC /* UIImage+IW.m */; };
@@ -27,7 +31,6 @@
 		6DA95BCD1A4EF39900154004 /* ZQKeyboardToolView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA95BCC1A4EF39900154004 /* ZQKeyboardToolView.xib */; };
 		6DAA252E1B175FA300CD3908 /* ZQWordCutTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAA252D1B175FA300CD3908 /* ZQWordCutTool.m */; };
 		6DAA25321B1766E500CD3908 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAA25311B1766E500CD3908 /* Foundation+Log.m */; };
-		6DACB4A81B1B02DF00893CF8 /* ZQRecordTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DACB4A71B1B02DF00893CF8 /* ZQRecordTool.m */; };
 		6DB033591AA2B79300CACAFC /* ZQBaiduTranslateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB033581AA2B79300CACAFC /* ZQBaiduTranslateResult.m */; };
 		6DB0335C1AA2B80600CACAFC /* ZQBaiduTranslateResultItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0335B1AA2B80600CACAFC /* ZQBaiduTranslateResultItem.m */; };
 		6DB033721AA2B84200CACAFC /* MJArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB033601AA2B84200CACAFC /* MJArgument.m */; };
@@ -94,6 +97,10 @@
 		6D5CB9AA1B121E9A00B790F6 /* bleu.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = bleu.pdf; sourceTree = "<group>"; };
 		6D5EDD331B122AA000A9364E /* ZQPDFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQPDFViewController.h; sourceTree = "<group>"; };
 		6D5EDD341B122AA000A9364E /* ZQPDFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQPDFViewController.m; sourceTree = "<group>"; };
+		6D65B3F51B1C2EA00026468F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		6D65B3F71B1C2EAB0026468F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6D65B3F91B1C2EB20026468F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		6D65B3FB1B1C2ECE0026468F /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iflyMSC.framework; path = lib/iflyMSC.framework; sourceTree = "<group>"; };
 		6D8DA9891A4DC4B400E99AFB /* ZQNavigationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQNavigationButton.h; sourceTree = "<group>"; };
 		6D8DA98A1A4DC4B400E99AFB /* ZQNavigationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQNavigationButton.m; sourceTree = "<group>"; };
 		6D8DA98C1A4E42A300E99AFB /* ZQTranslateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQTranslateViewController.h; sourceTree = "<group>"; };
@@ -110,8 +117,6 @@
 		6DAA252C1B175FA300CD3908 /* ZQWordCutTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQWordCutTool.h; sourceTree = "<group>"; };
 		6DAA252D1B175FA300CD3908 /* ZQWordCutTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQWordCutTool.m; sourceTree = "<group>"; };
 		6DAA25311B1766E500CD3908 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
-		6DACB4A61B1B02DF00893CF8 /* ZQRecordTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQRecordTool.h; sourceTree = "<group>"; };
-		6DACB4A71B1B02DF00893CF8 /* ZQRecordTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQRecordTool.m; sourceTree = "<group>"; };
 		6DB033571AA2B79300CACAFC /* ZQBaiduTranslateResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQBaiduTranslateResult.h; sourceTree = "<group>"; };
 		6DB033581AA2B79300CACAFC /* ZQBaiduTranslateResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQBaiduTranslateResult.m; sourceTree = "<group>"; };
 		6DB0335A1AA2B80600CACAFC /* ZQBaiduTranslateResultItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQBaiduTranslateResultItem.h; sourceTree = "<group>"; };
@@ -185,6 +190,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D65B3FC1B1C2ECE0026468F /* iflyMSC.framework in Frameworks */,
+				6D65B3FA1B1C2EB20026468F /* AudioToolbox.framework in Frameworks */,
+				6D65B3F81B1C2EAB0026468F /* SystemConfiguration.framework in Frameworks */,
+				6D65B3F61B1C2EA00026468F /* AddressBook.framework in Frameworks */,
 				6D5CB9A91B121D5500B790F6 /* AVFoundation.framework in Frameworks */,
 				6DBBF62B1A4DBADD00B28671 /* CoreGraphics.framework in Frameworks */,
 				6DBBF62D1A4DBADD00B28671 /* UIKit.framework in Frameworks */,
@@ -282,8 +291,6 @@
 				6DF9C5B11B1825AE0021A108 /* ZQLDPathTool.m */,
 				6DAA252C1B175FA300CD3908 /* ZQWordCutTool.h */,
 				6DAA252D1B175FA300CD3908 /* ZQWordCutTool.m */,
-				6DACB4A61B1B02DF00893CF8 /* ZQRecordTool.h */,
-				6DACB4A71B1B02DF00893CF8 /* ZQRecordTool.m */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -368,6 +375,10 @@
 		6DBBF6271A4DBADD00B28671 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D65B3FB1B1C2ECE0026468F /* iflyMSC.framework */,
+				6D65B3F91B1C2EB20026468F /* AudioToolbox.framework */,
+				6D65B3F71B1C2EAB0026468F /* SystemConfiguration.framework */,
+				6D65B3F51B1C2EA00026468F /* AddressBook.framework */,
 				6D5CB9A81B121D5500B790F6 /* AVFoundation.framework */,
 				6DBBF6281A4DBADD00B28671 /* Foundation.framework */,
 				6DBBF62A1A4DBADD00B28671 /* CoreGraphics.framework */,
@@ -643,7 +654,6 @@
 				6DD5B3061A503F0400AE332E /* ZQTranslateModel.m in Sources */,
 				6DB033751AA2B84200CACAFC /* MJMethod.m in Sources */,
 				6DF9C5B51B18B12A0021A108 /* ZQVoiceRecognizeViewController.m in Sources */,
-				6DACB4A81B1B02DF00893CF8 /* ZQRecordTool.m in Sources */,
 				6DB033CA1AA4142500CACAFC /* ZQYoudaoTranslateResultWebItem.m in Sources */,
 				6DB033791AA2B84200CACAFC /* NSObject+MJKeyValue.m in Sources */,
 				6DAA25321B1766E500CD3908 /* Foundation+Log.m in Sources */,
@@ -725,6 +735,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -765,6 +776,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -785,9 +797,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MT/MT-Prefix.pch";
 				INFOPLIST_FILE = "MT/MT-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -799,9 +819,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MT/MT-Prefix.pch";
 				INFOPLIST_FILE = "MT/MT-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
