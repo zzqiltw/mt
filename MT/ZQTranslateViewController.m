@@ -274,7 +274,9 @@ typedef enum {
 {
     NSString *text = noti.userInfo[GetRecognizeSentenceNotificationKey];
     NSLog(@"收到通知%@", text);
-    [((ZQTranslateHeaderView *)self.tableView.tableHeaderView) setTextForInput:text];
+    ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
+    [headerView setTextForInput:text];
+    [headerView letInputTextViewBecomeFirstResponder];
 }
 
 - (void)handleSentenceArray:(NSArray *)array
@@ -360,6 +362,7 @@ typedef enum {
     self.footerView.hidden = YES;
     
     ZQVoiceRecognizeViewController *voiceVc = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"ZQVoiceRecognizeViewController"];
+    voiceVc.type = self.type;
     [self.navigationController pushViewController:voiceVc animated:YES];
 }
 

@@ -19,6 +19,7 @@
 - (void)setInputFieldAccessoryView:(UIView *)inputAccessoryView;
 - (void)quitKb;
 - (void)clearInputField;
+- (void)letInputTextViewBecomeFirstResponder;
 
 @end
 

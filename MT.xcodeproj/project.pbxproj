@@ -32,6 +32,7 @@
 		6D69AA6A1B1C8D0C00915ABF /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D69AA611B1C8D0C00915ABF /* SBJson4StreamWriter.m */; };
 		6D69AA6B1B1C8D0C00915ABF /* SBJson4StreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D69AA631B1C8D0C00915ABF /* SBJson4StreamWriterState.m */; };
 		6D69AA6C1B1C8D0C00915ABF /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D69AA651B1C8D0C00915ABF /* SBJson4Writer.m */; };
+		6D69AA6F1B1C92DA00915ABF /* ZQSpeechSynthesizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D69AA6E1B1C92DA00915ABF /* ZQSpeechSynthesizer.m */; };
 		6D8DA98B1A4DC4B400E99AFB /* ZQNavigationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DA98A1A4DC4B400E99AFB /* ZQNavigationButton.m */; };
 		6D8DA98E1A4E42A300E99AFB /* ZQTranslateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DA98D1A4E42A300E99AFB /* ZQTranslateViewController.m */; };
 		6DA14CB11AA2067D00B4C6FC /* UIImage+IW.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA14CB01AA2067D00B4C6FC /* UIImage+IW.m */; };
@@ -130,6 +131,8 @@
 		6D69AA631B1C8D0C00915ABF /* SBJson4StreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriterState.m; sourceTree = "<group>"; };
 		6D69AA641B1C8D0C00915ABF /* SBJson4Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Writer.h; sourceTree = "<group>"; };
 		6D69AA651B1C8D0C00915ABF /* SBJson4Writer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4Writer.m; sourceTree = "<group>"; };
+		6D69AA6D1B1C92DA00915ABF /* ZQSpeechSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQSpeechSynthesizer.h; sourceTree = "<group>"; };
+		6D69AA6E1B1C92DA00915ABF /* ZQSpeechSynthesizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQSpeechSynthesizer.m; sourceTree = "<group>"; };
 		6D8DA9891A4DC4B400E99AFB /* ZQNavigationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQNavigationButton.h; sourceTree = "<group>"; };
 		6D8DA98A1A4DC4B400E99AFB /* ZQNavigationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQNavigationButton.m; sourceTree = "<group>"; };
 		6D8DA98C1A4E42A300E99AFB /* ZQTranslateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQTranslateViewController.h; sourceTree = "<group>"; };
@@ -347,6 +350,8 @@
 				6DAA252D1B175FA300CD3908 /* ZQWordCutTool.m */,
 				6D69AA531B1C8C4900915ABF /* ISRDataHelper.h */,
 				6D69AA541B1C8C4900915ABF /* ISRDataHelper.m */,
+				6D69AA6D1B1C92DA00915ABF /* ZQSpeechSynthesizer.h */,
+				6D69AA6E1B1C92DA00915ABF /* ZQSpeechSynthesizer.m */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -714,6 +719,7 @@
 				6DB0337A1AA2B84200CACAFC /* NSObject+MJMember.m in Sources */,
 				6D69AA671B1C8D0C00915ABF /* SBJson4StreamParser.m in Sources */,
 				6DA95BCB1A4EF38C00154004 /* ZQKeyboardToolView.m in Sources */,
+				6D69AA6F1B1C92DA00915ABF /* ZQSpeechSynthesizer.m in Sources */,
 				6D69AA681B1C8D0C00915ABF /* SBJson4StreamParserState.m in Sources */,
 				6DD5B3091A52885200AE332E /* ZQTranslateFrame.m in Sources */,
 				6DD5B3061A503F0400AE332E /* ZQTranslateModel.m in Sources */,

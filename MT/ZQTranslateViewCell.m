@@ -9,6 +9,7 @@
 #import "ZQTranslateViewCell.h"
 #import <AVFoundation/AVFoundation.h>
 #import "UIImage+IW.h"
+#import "ZQSpeechSynthesizer.h"
 
 @interface ZQTranslateViewCell ()
 
@@ -148,6 +149,8 @@
     }
     utterance.rate = AVSpeechUtteranceMinimumSpeechRate;
     [self.av speakUtterance:utterance];
+
+//    [[ZQSpeechSynthesizer sharedSpeechSynthesizer] speech:self.translateFrame.model.text];
 }
 
 

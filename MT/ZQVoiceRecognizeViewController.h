@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ZQVoiceRecognizeViewController : UIViewController
+@property (nonatomic, assign) TranslateType type;
 
 @end

@@ -57,7 +57,11 @@ static NSString * const msgError = @"识别错误，请重新录音";
     self.recognizer = [IFlySpeechRecognizer sharedInstance];
     self.recognizer.delegate = self;
     
-    [self.recognizer setParameter:@"iat" forKey:@"domain"];
+    if (self.type == TranslateTypeEn2Cn) {
+        [self.recognizer setParameter:@"en_us" forKey:@"language"];
+    } else {
+        [self.recognizer setParameter:@"iat" forKey:@"domain"];
+    }
 }
 
 - (IBAction)touchDownRecord:(id)sender {

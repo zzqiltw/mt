@@ -34,9 +34,11 @@
 {
     if (_placeHolderLabel == nil) {
         UILabel *placeHolderLabel = [[UILabel alloc] init];
+        placeHolderLabel.font = [UIFont systemFontOfSize:13];
         placeHolderLabel.text = PlaceHolder;
         placeHolderLabel.textColor = [UIColor lightGrayColor];
         _placeHolderLabel = placeHolderLabel;
+        _placeHolderLabel.hidden = NO;
         [self.textView addSubview:_placeHolderLabel];
     }
     return _placeHolderLabel;
@@ -58,12 +60,17 @@
 {
     [super layoutSubviews];
     self.bgView.frame = self.frame;
-    self.placeHolderLabel.frame = self.textView.bounds;
+    self.placeHolderLabel.frame = CGRectInset(self.textView.bounds, 5, 2);
 }
 
 - (void)setTextForInput:(NSString *)text
 {
     self.textView.text = text;
+}
+
+- (void)letInputTextViewBecomeFirstResponder
+{
+    [self.textView becomeFirstResponder];
 }
 
 - (void)setModeType:(NSString *)modeType
@@ -79,15 +86,14 @@
 - (void)quitKb
 {
     [self.textView endEditing:YES];
+    [self.textView resignFirstResponder];
 //    self.textView.text = PlaceHolder;
-    
 }
 
 - (void)clearInputField
 {
-//    self.textView.text = PlaceHolder;
     self.textView.text = @"";
-    [self.textView becomeFirstResponder];
+    self.placeHolderLabel.hidden = NO;
 }
 
 - (IBAction)clickTranslateBtn:(id)sender {
@@ -102,11 +108,12 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if (self.inputText == nil) {
-        textView.text = @"";
-    } else {
-        self.inputText = nil;
-    }
+//    if (self.inputText == nil) {
+//        textView.text = @"";
+//    } else {
+//        self.inputText = nil;
+//    }
+    self.placeHolderLabel.hidden = YES;
 }
 
 @end
