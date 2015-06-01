@@ -22,6 +22,8 @@
 		6D65B3F81B1C2EAB0026468F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D65B3F71B1C2EAB0026468F /* SystemConfiguration.framework */; };
 		6D65B3FA1B1C2EB20026468F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D65B3F91B1C2EB20026468F /* AudioToolbox.framework */; };
 		6D65B3FC1B1C2ECE0026468F /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D65B3FB1B1C2ECE0026468F /* iflyMSC.framework */; };
+		6D65B3FE1B1C42A00026468F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D65B3FD1B1C42A00026468F /* libz.dylib */; };
+		6D65B4001B1C43780026468F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D65B3FF1B1C43780026468F /* CoreTelephony.framework */; };
 		6D8DA98B1A4DC4B400E99AFB /* ZQNavigationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DA98A1A4DC4B400E99AFB /* ZQNavigationButton.m */; };
 		6D8DA98E1A4E42A300E99AFB /* ZQTranslateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DA98D1A4E42A300E99AFB /* ZQTranslateViewController.m */; };
 		6DA14CB11AA2067D00B4C6FC /* UIImage+IW.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA14CB01AA2067D00B4C6FC /* UIImage+IW.m */; };
@@ -101,6 +103,8 @@
 		6D65B3F71B1C2EAB0026468F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6D65B3F91B1C2EB20026468F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6D65B3FB1B1C2ECE0026468F /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iflyMSC.framework; path = lib/iflyMSC.framework; sourceTree = "<group>"; };
+		6D65B3FD1B1C42A00026468F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		6D65B3FF1B1C43780026468F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		6D8DA9891A4DC4B400E99AFB /* ZQNavigationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQNavigationButton.h; sourceTree = "<group>"; };
 		6D8DA98A1A4DC4B400E99AFB /* ZQNavigationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQNavigationButton.m; sourceTree = "<group>"; };
 		6D8DA98C1A4E42A300E99AFB /* ZQTranslateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQTranslateViewController.h; sourceTree = "<group>"; };
@@ -190,6 +194,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D65B4001B1C43780026468F /* CoreTelephony.framework in Frameworks */,
+				6D65B3FE1B1C42A00026468F /* libz.dylib in Frameworks */,
 				6D65B3FC1B1C2ECE0026468F /* iflyMSC.framework in Frameworks */,
 				6D65B3FA1B1C2EB20026468F /* AudioToolbox.framework in Frameworks */,
 				6D65B3F81B1C2EAB0026468F /* SystemConfiguration.framework in Frameworks */,
@@ -375,6 +381,8 @@
 		6DBBF6271A4DBADD00B28671 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D65B3FF1B1C43780026468F /* CoreTelephony.framework */,
+				6D65B3FD1B1C42A00026468F /* libz.dylib */,
 				6D65B3FB1B1C2ECE0026468F /* iflyMSC.framework */,
 				6D65B3F91B1C2EB20026468F /* AudioToolbox.framework */,
 				6D65B3F71B1C2EAB0026468F /* SystemConfiguration.framework */,
@@ -808,7 +816,22 @@
 					"$(inherited)",
 					"$(SRCROOT)/lib",
 				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					ImageIO,
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					Security,
+					"-framework",
+					SystemConfiguration,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -831,6 +854,7 @@
 					"$(SRCROOT)/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

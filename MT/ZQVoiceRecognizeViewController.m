@@ -35,18 +35,33 @@ static NSString * const msgEnd = @"正在将录音转换成文字";
     [super viewWillAppear:animated];
     self.messageLabel.text = msgPre;
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self stopAll];
+    [super viewWillDisappear:animated];
+}
+
+- (void)stopAll
+{
+    [self.recognizer cancel];
+    self.recognizer.delegate = nil;
+}
+
+- (void)preparedAll
+{
     self.recognizer = [IFlySpeechRecognizer sharedInstance];
     self.recognizer.delegate = self;
     
     [self.recognizer setParameter:@"iat" forKey:@"domain"];
-    [self.recognizer setParameter:@"8000" forKey:@"sample_rate"];
-    
+    [self.recognizer setParameter:@"plain" forKey:@"result_type"];
 }
-
 
 - (IBAction)touchDownRecord:(id)sender {
     self.messageLabel.text = msgBegin;
     
+    [self preparedAll];
     [self.recognizer startListening];
 }
 
@@ -59,11 +74,13 @@ static NSString * const msgEnd = @"正在将录音转换成文字";
 - (void)onResults:(NSArray *)results isLast:(BOOL)isLast
 {
     NSLog(@"语音识别success:%@", results);
+    
+    [self stopAll];
 }
 
 - (void)onError:(IFlySpeechError *)errorCode
 {
-    NSLog(@"语音识别error:%@", errorCode);
+    NSLog(@"语音识别error:%d", errorCode.errorCode);
 }
 
 @end
