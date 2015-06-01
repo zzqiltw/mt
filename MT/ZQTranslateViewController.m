@@ -276,7 +276,7 @@ typedef enum {
     NSLog(@"收到通知%@", text);
     ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
     [headerView setTextForInput:text];
-    [headerView letInputTextViewBecomeFirstResponder];
+//    [headerView letInputTextViewBecomeFirstResponder];
 }
 
 - (void)handleSentenceArray:(NSArray *)array
