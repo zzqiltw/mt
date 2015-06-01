@@ -28,6 +28,8 @@
 
 #define TimeOutInterval 10.0f
 
+#define GetRecognizeSentenceNotification @"GetRecognizeSentenceNotification"
+#define GetRecognizeSentenceNotificationKey @"GetRecognizeSentenceNotificationKey"
 
 typedef NS_ENUM(NSInteger, TranslateType) {
     TranslateTypeEn2Cn,

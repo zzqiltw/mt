@@ -114,6 +114,16 @@ typedef enum {
     footerView.delegate = self;
     self.footerView = footerView;
     self.tableView.tableFooterView = footerView;
+    
+    ZQTranslateHeaderView *headerView = [[ZQTranslateHeaderView alloc] init];
+//    headerView.modeType = title;
+    headerView.delegate = self;
+    self.tableView.tableHeaderView = headerView;
+    
+    ZQKeyboardToolView *toolView = [[ZQKeyboardToolView alloc] init];
+    toolView.delegate = self;
+    
+    [headerView setInputFieldAccessoryView:toolView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -126,15 +136,12 @@ typedef enum {
     self.title = title;
     [TSMessage showNotificationInViewController:self title:title subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
     
-    ZQTranslateHeaderView *headerView = [[ZQTranslateHeaderView alloc] init];
-    headerView.modeType = title;
-    headerView.delegate = self;
-    self.tableView.tableHeaderView = headerView;
-    
-    ZQKeyboardToolView *toolView = [[ZQKeyboardToolView alloc] init];
-    toolView.delegate = self;
-    
-    [headerView setInputFieldAccessoryView:toolView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRecognizedSentence:) name:GetRecognizeSentenceNotification object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Actions
@@ -143,6 +150,30 @@ typedef enum {
     ZQPDFViewController *pdfVC = [[ZQPDFViewController alloc] init];
     pdfVC.filename = @"bleu.pdf";
     [self.navigationController pushViewController:pdfVC animated:YES];
+}
+
+
+- (void)failed:(MBProgressHUD *)hud
+{
+    if (!self.googleGet && !self.baiduGet && !self.bingGet && !self.youdaoGet) {
+        [hud hide:YES];
+        [MBProgressHUD showError:@"加载失败"];
+        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
+    }
+}
+
+
+- (void)quitKb
+{
+    ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
+    [headerView quitKb];
+}
+
+- (void)clearInputField
+{
+    ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
+    [headerView clearInputField];
+    self.footerView.hidden = YES;
 }
 
 #pragma mark - ZQTranslateFooterViewDelegate
@@ -202,28 +233,6 @@ typedef enum {
     }
 }
 
-- (void)failed:(MBProgressHUD *)hud
-{
-    if (!self.googleGet && !self.baiduGet && !self.bingGet && !self.youdaoGet) {
-        [hud hide:YES];
-        [MBProgressHUD showError:@"加载失败"];
-        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
-    }
-}
-
-
-- (void)quitKb
-{
-    ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
-    [headerView quitKb];
-}
-
-- (void)clearInputField
-{
-    ZQTranslateHeaderView *headerView = (ZQTranslateHeaderView *)self.tableView.tableHeaderView;
-    [headerView clearInputField];
-    self.footerView.hidden = YES;
-}
 
 #pragma mark - Private
 - (void)systemCombine
@@ -259,6 +268,13 @@ typedef enum {
         [self handleSentenceArray:array];
         
     }
+}
+
+- (void)handleRecognizedSentence:(NSNotification *)noti
+{
+    NSString *text = noti.userInfo[GetRecognizeSentenceNotificationKey];
+    NSLog(@"收到通知%@", text);
+    [((ZQTranslateHeaderView *)self.tableView.tableHeaderView) setTextForInput:text];
 }
 
 - (void)handleSentenceArray:(NSArray *)array

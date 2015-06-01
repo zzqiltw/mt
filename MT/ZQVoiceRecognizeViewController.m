@@ -8,6 +8,7 @@
 
 #import "ZQVoiceRecognizeViewController.h"
 #import "ActionButton.h"
+#import "ISRDataHelper.h"
 #import <iflyMSC/IFlySpeechRecognizer.h>
 
 @interface ZQVoiceRecognizeViewController ()<IFlySpeechRecognizerDelegate>
@@ -24,6 +25,8 @@
 static NSString * const msgPre = @"按住按钮进行录音";
 static NSString * const msgBegin = @"正在录音";
 static NSString * const msgEnd = @"正在将录音转换成文字";
+static NSString * const msgSuccess = @"识别错误成功";
+static NSString * const msgError = @"识别错误，请重新录音";
 
 - (void)viewDidLoad
 {
@@ -55,7 +58,6 @@ static NSString * const msgEnd = @"正在将录音转换成文字";
     self.recognizer.delegate = self;
     
     [self.recognizer setParameter:@"iat" forKey:@"domain"];
-    [self.recognizer setParameter:@"plain" forKey:@"result_type"];
 }
 
 - (IBAction)touchDownRecord:(id)sender {
@@ -73,14 +75,27 @@ static NSString * const msgEnd = @"正在将录音转换成文字";
 
 - (void)onResults:(NSArray *)results isLast:(BOOL)isLast
 {
-    NSLog(@"语音识别success:%@", results);
+    NSMutableString *resultString = [[NSMutableString alloc] init];
+    NSDictionary *dic = results[0];
     
+    for (NSString *key in dic) {
+        [resultString appendFormat:@"%@",key];
+    }
+    self.messageLabel.text = msgSuccess;
+    NSString * resultFromJson =  [[ISRDataHelper shareInstance] getResultFromJson:resultString];
+    
+    NSLog(@"语音识别success:%@", resultFromJson);
+
     [self stopAll];
+    [self.navigationController popViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:GetRecognizeSentenceNotification object:nil userInfo:@{GetRecognizeSentenceNotificationKey : resultFromJson}];
 }
 
 - (void)onError:(IFlySpeechError *)errorCode
 {
     NSLog(@"语音识别error:%d", errorCode.errorCode);
+    self.messageLabel.text = msgError;
+    [self stopAll];
 }
 
 @end

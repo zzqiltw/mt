@@ -15,6 +15,7 @@
 @property (nonatomic, copy) NSString *modeType;
 @property (nonatomic, weak) id<ZQTranslateHeaderViewDelegate> delegate;
 
+- (void)setTextForInput:(NSString *)text;
 - (void)setInputFieldAccessoryView:(UIView *)inputAccessoryView;
 - (void)quitKb;
 - (void)clearInputField;

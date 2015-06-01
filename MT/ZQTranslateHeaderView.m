@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet MBAutoGrowingTextView *textView;
 
+@property (nonatomic, weak) UILabel *placeHolderLabel;
 @property (nonatomic, copy) NSString *inputText;
 
 @property (nonatomic, copy) NSString *showingPlaceHold;
@@ -29,12 +30,25 @@
 
 @implementation ZQTranslateHeaderView
 
+- (UILabel *)placeHolderLabel
+{
+    if (_placeHolderLabel == nil) {
+        UILabel *placeHolderLabel = [[UILabel alloc] init];
+        placeHolderLabel.text = PlaceHolder;
+        placeHolderLabel.textColor = [UIColor lightGrayColor];
+        _placeHolderLabel = placeHolderLabel;
+        [self.textView addSubview:_placeHolderLabel];
+    }
+    return _placeHolderLabel;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self = [[[NSBundle mainBundle] loadNibNamed:@"ZQTranslateHeaderView" owner:nil options:nil] lastObject];
-        self.textView.text = PlaceHolder;
+        self.textView.textColor = [UIColor blackColor];
+//        self.textView.text = PlaceHolder;
         self.textView.delegate = self;
     }
     return self;
@@ -44,6 +58,12 @@
 {
     [super layoutSubviews];
     self.bgView.frame = self.frame;
+    self.placeHolderLabel.frame = self.textView.bounds;
+}
+
+- (void)setTextForInput:(NSString *)text
+{
+    self.textView.text = text;
 }
 
 - (void)setModeType:(NSString *)modeType
@@ -59,7 +79,8 @@
 - (void)quitKb
 {
     [self.textView endEditing:YES];
-    self.textView.text = PlaceHolder;
+//    self.textView.text = PlaceHolder;
+    
 }
 
 - (void)clearInputField
