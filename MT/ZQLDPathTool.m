@@ -33,45 +33,7 @@
 @implementation ZQLDPathTool
 SingletonM(LDPathTool)
 
-- (NSString *)combineOfFourSentences:(NSArray *)sl1 second:(NSArray *)sl2 third:(NSArray *)sl3 four:(NSArray *)sl4 type:(TranslateType)type
-{
-    NSArray *r12 = [self combineOfTwoSentences:sl1 second:sl2];
-    NSArray *r13 = [self combineOfTwoSentences:sl1 second:sl3];
-    NSArray *r14 = [self combineOfTwoSentences:sl1 second:sl4];
-    NSArray *r123 = [self combineOfTwoSentences:r12 second:r13];
-    NSArray *r124 = [self combineOfTwoSentences:r12 second:r14];
-    NSArray *final = [self combineOfTwoSentences:r123 second:r124];
-    
-    NSMutableString *result = [NSMutableString string];
-    for (NSString *subString in final) {
-        [result appendString:subString];
-        if (type == TranslateTypeCn2En) {
-            [result appendString:@" "];
-        }
-    }
-    return [result copy];
-}
 
-- (NSArray *)combineOfTwoSentences:(NSArray *)sl1 second:(NSArray *)sl2
-{
-    NSMutableArray *r1 = [NSMutableArray array];
-    NSMutableArray *r2 = [NSMutableArray array];
-    [self ldCalcPathOfTwoSentences:sl1 second:sl2 result1:r1 result2:r2];
-    for (int i = r1.count - 1; i >= 0; --i) {
-        if ([r1[i] isEqualToString:@"_"]) {
-            [r1 removeObjectAtIndex:i];
-        } else {
-            break;
-        }
-    }
-    [r1 enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
-        if ([obj isEqualToString:@"_"]) {
-            NSString *replace = r2[idx];
-            [r1 replaceObjectAtIndex:idx withObject:replace];
-        }
-    }];
-    return r1;
-}
 
 - (int)ldCalcPathOfTwoSentences:(NSArray *)s1 second:(NSArray *)s2 result1:(NSMutableArray *)r1 result2:(NSMutableArray *)r2
 {
@@ -135,5 +97,48 @@ SingletonM(LDPathTool)
     }
 }
 
+- (NSString *)combineOfFourSentences:(NSArray *)sl1 second:(NSArray *)sl2 third:(NSArray *)sl3 four:(NSArray *)sl4 type:(TranslateType)type
+{
+    
+    NSArray *final = [self combineOfTwoSentences:sl1 second:sl2];
+    
+    
+    //    NSArray *r12 = [self combineOfTwoSentences:sl1 second:sl2];
+    //    NSArray *r13 = [self combineOfTwoSentences:sl1 second:sl3];
+    //    NSArray *r14 = [self combineOfTwoSentences:sl1 second:sl4];
+    //    NSArray *r123 = [self combineOfTwoSentences:r12 second:r13];
+    //    NSArray *r124 = [self combineOfTwoSentences:r12 second:r14];
+    //    NSArray *final = [self combineOfTwoSentences:r123 second:r124];
+    
+    NSMutableString *result = [NSMutableString string];
+    for (NSString *subString in final) {
+        [result appendString:subString];
+        if (type == TranslateTypeCn2En) {
+            [result appendString:@" "];
+        }
+    }
+    return [result copy];
+}
+
+- (NSArray *)combineOfTwoSentences:(NSArray *)sl1 second:(NSArray *)sl2
+{
+    NSMutableArray *r1 = [NSMutableArray array];
+    NSMutableArray *r2 = [NSMutableArray array];
+    [self ldCalcPathOfTwoSentences:sl1 second:sl2 result1:r1 result2:r2];
+    for (int i = r1.count - 1; i >= 0; --i) {
+        if ([r1[i] isEqualToString:@"_"]) {
+            [r1 removeObjectAtIndex:i];
+        } else {
+            break;
+        }
+    }
+    [r1 enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isEqualToString:@"_"]) {
+            NSString *replace = r2[idx];
+            [r1 replaceObjectAtIndex:idx withObject:replace];
+        }
+    }];
+    return r1;
+}
 
 @end

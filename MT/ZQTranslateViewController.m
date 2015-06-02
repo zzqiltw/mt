@@ -220,11 +220,8 @@ typedef enum {
             return obj1.model.bleuScore < obj2.model.bleuScore;
         }];
         [self systemCombine];
-        [UIView animateWithDuration:0.7 animations:^{
-            self.footerView.alpha = 0.3;
-        } completion:^(BOOL finished) {
-            self.footerView.hidden = YES;
-        }];
+        
+        self.footerView.hidden = YES;
     } else {
         [MBProgressHUD showError:@"译文未全部采集完毕"];
     }
@@ -263,7 +260,7 @@ typedef enum {
             NSLog(@"result = %@", result);
             NSMutableArray *eachSentence = [NSMutableArray array];
             for (NSString *subString in result) {
-                if ([subString isEqualToString:@"|"]) {
+                if ([subString isEqualToString:@"|"] || ([subString rangeOfString:@"|"].location != NSNotFound)) {
                     [array addObject:[eachSentence copy]];
                     [eachSentence removeAllObjects];
                 } else {
@@ -294,7 +291,7 @@ typedef enum {
     NSString *finalSystemCombine = [[ZQLDPathTool sharedLDPathTool] combineOfFourSentences:array[0] second:array[1] third:array[2] four:array[3] type:self.type];
     NSLog(@"finalSystemCombine = %@", finalSystemCombine);
     
-    [self addTranslateFrameToTopWithIcon:@"mt" text:finalSystemCombine srcText:@"系统融合" ofType:TranslateResultSupporterNone score:0];
+    [self addTranslateFrameToTopWithIcon:@"mt" text:finalSystemCombine srcText:@"猜最优译文是" ofType:TranslateResultSupporterNone score:0];
     [TSMessage showNotificationInViewController:self title:@"译文质量排序完毕" subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
     [self.tableView reloadData];
 }
