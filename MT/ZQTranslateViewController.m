@@ -34,7 +34,6 @@ typedef enum {
 
 @interface ZQTranslateViewController () <ZQKeyboardToolViewDelegate, ZQTranslateHeaderViewDelegate, ZQTranslateFooterViewDelegate,UIActionSheetDelegate>
 
-@property (nonatomic, assign) TranslateType type;
 @property (nonatomic, strong) NSMutableArray *translateModelFrameList;
 @property (nonatomic, weak) ZQTranslateFooterView *footerView;
 @property (nonatomic, strong) NSMutableArray *bleuSrc;
@@ -130,9 +129,7 @@ typedef enum {
 {
     [super viewWillAppear:animated];
     
-    self.type = [[NSUserDefaults standardUserDefaults] integerForKey:TranslateTypeKey];
-    
-    NSString *title = [NSString stringWithFormat:@"%@", self.type == TranslateTypeEn2Cn ? @"EC Translation Mode" : @"汉译英模式"];
+    NSString *title = [NSString stringWithFormat:@"%@", self.type == TranslateTypeEn2Cn ? @"英译汉模式" : @"汉译英模式"];
     self.title = title;
     [TSMessage showNotificationInViewController:self title:title subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
     

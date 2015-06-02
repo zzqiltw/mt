@@ -21,10 +21,6 @@
 
 @implementation ZQViewController
 
-
-
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -37,24 +33,17 @@
 
 
 - (IBAction)cn2En:(ZQNavigationButton *)sender {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:TranslateTypeCn2En forKey:TranslateTypeKey];
-    [defaults synchronize];
-    
-    [self pushToTranslateVC];
+    [self pushToTranslateVC:TranslateTypeCn2En];
 }
 
 - (IBAction)en2Cn:(ZQNavigationButton *)sender {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:TranslateTypeEn2Cn forKey:TranslateTypeKey];
-    [defaults synchronize];
-    
-    [self pushToTranslateVC];
+    [self pushToTranslateVC:TranslateTypeEn2Cn];
 }
 
-- (void)pushToTranslateVC
+- (void)pushToTranslateVC:(TranslateType)type
 {
     ZQTranslateViewController *vc = [[ZQTranslateViewController alloc] init];
+    vc.type = type;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

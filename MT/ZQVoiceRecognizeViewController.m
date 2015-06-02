@@ -72,6 +72,9 @@ static NSString * const msgError = @"语音服务识别失败";
 }
 
 - (IBAction)touchUp:(id)sender {
+    if (self.messageLabel.text isEqualToString:msgError) {
+        return;
+    }
     self.messageLabel.text = msgEnd;
     
     [self.recognizer stopListening];

@@ -10,5 +10,5 @@
 
 
 @interface ZQTranslateViewController : UITableViewController
-
+@property (nonatomic, assign) TranslateType type;
 @end
