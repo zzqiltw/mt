@@ -12,7 +12,7 @@
 
 @interface ZQTranslateHeaderView : UIView
 
-@property (nonatomic, copy) NSString *modeType;
+@property (nonatomic, assign) TranslateType modeType;
 @property (nonatomic, weak) id<ZQTranslateHeaderViewDelegate> delegate;
 
 - (void)setTextForInput:(NSString *)text;

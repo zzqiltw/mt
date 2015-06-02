@@ -116,7 +116,7 @@ typedef enum {
     self.tableView.tableFooterView = footerView;
     
     ZQTranslateHeaderView *headerView = [[ZQTranslateHeaderView alloc] init];
-//    headerView.modeType = title;
+    headerView.modeType = self.type;
     headerView.delegate = self;
     self.tableView.tableHeaderView = headerView;
     
@@ -132,7 +132,7 @@ typedef enum {
     
     self.type = [[NSUserDefaults standardUserDefaults] integerForKey:TranslateTypeKey];
     
-    NSString *title = [NSString stringWithFormat:@"%@", self.type == TranslateTypeEn2Cn ? @"英译汉模式" : @"汉译英模式"];
+    NSString *title = [NSString stringWithFormat:@"%@", self.type == TranslateTypeEn2Cn ? @"EC Translation Mode" : @"汉译英模式"];
     self.title = title;
     [TSMessage showNotificationInViewController:self title:title subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
     
@@ -262,7 +262,7 @@ typedef enum {
             }
             [self handleSentenceArray:array];
         } failure:^(NSError *error) {
-            NSLog(@"error==");
+            [MBProgressHUD showError:@"分词服务暂不可使用"];
         }];
     } else {
         [self handleSentenceArray:array];

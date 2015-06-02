@@ -25,8 +25,8 @@
 static NSString * const msgPre = @"按住按钮进行录音";
 static NSString * const msgBegin = @"正在录音";
 static NSString * const msgEnd = @"正在将录音转换成文字";
-static NSString * const msgSuccess = @"识别错误成功";
-static NSString * const msgError = @"识别错误，请重新录音";
+static NSString * const msgSuccess = @"识别成功";
+static NSString * const msgError = @"语音服务识别失败";
 
 - (void)viewDidLoad
 {

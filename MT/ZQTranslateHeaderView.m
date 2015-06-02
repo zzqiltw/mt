@@ -10,7 +10,8 @@
 #import "ZQTranslateHeaderView.h"
 #import <MBAutoGrowingTextView.h>
 
-#define PlaceHolder @"请输入要翻译的内容"
+static NSString * const PlaceHolderCN = @"请输入要翻译的内容";
+static NSString * const PlaceHolderEN = @"Please input the content to be translated";
 
 @interface ZQTranslateHeaderView () <UITextViewDelegate>
 
@@ -35,7 +36,6 @@
     if (_placeHolderLabel == nil) {
         UILabel *placeHolderLabel = [[UILabel alloc] init];
         placeHolderLabel.font = [UIFont systemFontOfSize:13];
-        placeHolderLabel.text = PlaceHolder;
         placeHolderLabel.textColor = [UIColor lightGrayColor];
         _placeHolderLabel = placeHolderLabel;
         _placeHolderLabel.hidden = NO;
@@ -73,9 +73,15 @@
     [self.textView becomeFirstResponder];
 }
 
-- (void)setModeType:(NSString *)modeType
+- (void)setModeType:(TranslateType)modeType
 {
     _modeType = modeType;
+    
+    if (modeType == TranslateTypeEn2Cn) {
+        self.placeHolderLabel.text = PlaceHolderEN;
+    } else {
+        self.placeHolderLabel.text = PlaceHolderCN;
+    }
 }
 
 - (void)setInputFieldAccessoryView:(UIView *)inputAccessoryView
