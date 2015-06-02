@@ -234,10 +234,22 @@ typedef enum {
 #pragma mark - Private
 - (void)systemCombine
 {
-    NSMutableArray *array = [NSMutableArray array];
+    __block NSMutableArray *array = [NSMutableArray array];
     __block NSMutableString *cnWords = [NSMutableString string];
+    __block NSMutableArray *textArray = [NSMutableArray array];
+    
     [self.translateModelFrameList enumerateObjectsUsingBlock:^(ZQTranslateFrame *obj, NSUInteger idx, BOOL *stop) {
-        NSString *each = [obj.model.text substringFromIndex:0];
+        if (self.type == TranslateTypeEn2Cn && obj.model.type == TranslateResultSupporterBaidu) {
+            [textArray insertObject:obj.model.text atIndex:0];
+        } else if (self.type == TranslateTypeCn2En && obj.model.type == TranslateResultSupporterGoogle) {
+            [textArray insertObject:obj.model.text atIndex:0];
+        } else {
+            [textArray addObject:obj.model.text];
+        }
+    }];
+    
+    [textArray enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        NSString *each = [obj substringFromIndex:0];
         if (self.type == TranslateTypeEn2Cn) {
             [cnWords appendString:each];
             [cnWords appendString:@"|"];
@@ -245,6 +257,7 @@ typedef enum {
             [array addObject:[each componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
         }
     }];
+    
     if (self.type == TranslateTypeEn2Cn) {
         [[ZQWordCutTool sharedWordCutTool] cutCNWord:cnWords success:^(NSArray *result) {
             NSLog(@"result = %@", result);
@@ -263,7 +276,6 @@ typedef enum {
         }];
     } else {
         [self handleSentenceArray:array];
-        
     }
 }
 
@@ -278,6 +290,7 @@ typedef enum {
 
 - (void)handleSentenceArray:(NSArray *)array
 {
+    NSLog(@"finalSystemCombineArray:%@", array);
     NSString *finalSystemCombine = [[ZQLDPathTool sharedLDPathTool] combineOfFourSentences:array[0] second:array[1] third:array[2] four:array[3] type:self.type];
     NSLog(@"finalSystemCombine = %@", finalSystemCombine);
     
