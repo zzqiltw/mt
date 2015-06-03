@@ -177,7 +177,7 @@ typedef enum {
 - (void)footerView:(ZQTranslateFooterView *)footerView didClickButton:(UIButton *)button
 {
     if (self.googleGet && self.baiduGet && self.bingGet && self.youdaoGet) {
-//        [MBProgressHUD showMessage:@"正在分析..."];
+        MBProgressHUD *hud = [MBProgressHUD showMessage:@"正在分析..."];
         ZQBLEUTool *bleuTool = [[ZQBLEUTool alloc] init];
         
         NSArray *baiduRefArray = @[self.youdaoResult, self.bingResult, self.googleResult];
@@ -219,7 +219,7 @@ typedef enum {
         [self.translateModelFrameList sortUsingComparator:^NSComparisonResult(ZQTranslateFrame *obj1, ZQTranslateFrame *obj2) {
             return obj1.model.bleuScore < obj2.model.bleuScore;
         }];
-        [self systemCombine];
+        [self systemCombineWithHud:hud];
         
         self.footerView.hidden = YES;
     } else {
@@ -229,7 +229,7 @@ typedef enum {
 
 
 #pragma mark - Private
-- (void)systemCombine
+- (void)systemCombineWithHud:(MBProgressHUD *)hud
 {
     __block NSMutableArray *array = [NSMutableArray array];
     __block NSMutableString *cnWords = [NSMutableString string];
@@ -261,6 +261,7 @@ typedef enum {
             NSMutableArray *eachSentence = [NSMutableArray array];
             for (NSString *subString in result) {
                 if ([subString isEqualToString:@"|"] || ([subString rangeOfString:@"|"].location != NSNotFound)) {
+                    [eachSentence addObject:[subString stringByReplacingCharactersInRange:[subString rangeOfString:@"|"] withString:@""]];
                     [array addObject:[eachSentence copy]];
                     [eachSentence removeAllObjects];
                 } else {
@@ -268,11 +269,14 @@ typedef enum {
                 }
             }
             [self handleSentenceArray:array];
+            [hud hide:YES];
         } failure:^(NSError *error) {
+            [hud hide:YES];
             [MBProgressHUD showError:@"分词服务暂不可使用"];
         }];
     } else {
         [self handleSentenceArray:array];
+        [hud hide:YES];
     }
 }
 

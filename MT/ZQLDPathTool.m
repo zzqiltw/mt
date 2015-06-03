@@ -38,8 +38,8 @@ SingletonM(LDPathTool)
 - (int)ldCalcPathOfTwoSentences:(NSArray *)s1 second:(NSArray *)s2 result1:(NSMutableArray *)r1 result2:(NSMutableArray *)r2
 {
 
-    int len1 = s1.count;
-    int len2 = s2.count;
+    NSInteger len1 = s1.count;
+    NSInteger len2 = s2.count;
     NSMutableArray *array = [NSMutableArray array];
     for (int i = 0; i <= len1; ++i) {
         NSMutableArray *subArray = [NSMutableArray array];
@@ -76,7 +76,7 @@ SingletonM(LDPathTool)
     return min_dist;
 }
 
-- (void)storeResult:(NSMutableArray *)array index_x:(int)index_x index_y:(int)index_y r1:(NSMutableArray *)r1 r2:(NSMutableArray *)r2 s1:(NSArray *)s1 s2:(NSArray *)s2
+- (void)storeResult:(NSMutableArray *)array index_x:(NSInteger)index_x index_y:(NSInteger)index_y r1:(NSMutableArray *)r1 r2:(NSMutableArray *)r2 s1:(NSArray *)s1 s2:(NSArray *)s2
 {
     if (index_x == 0 && index_y == 0) {
         return;
@@ -99,16 +99,11 @@ SingletonM(LDPathTool)
 
 - (NSString *)combineOfFourSentences:(NSArray *)sl1 second:(NSArray *)sl2 third:(NSArray *)sl3 four:(NSArray *)sl4 type:(TranslateType)type
 {
+//    NSArray *r12 = [self combineOfTwoSentences:sl1 second:sl2];
+//    NSArray *r123 = [self combineOfTwoSentences:r12 second:sl3];
+//    NSArray *final = [self combineOfTwoSentences:r123 second:sl4];
     
     NSArray *final = [self combineOfTwoSentences:sl1 second:sl2];
-    
-    
-    //    NSArray *r12 = [self combineOfTwoSentences:sl1 second:sl2];
-    //    NSArray *r13 = [self combineOfTwoSentences:sl1 second:sl3];
-    //    NSArray *r14 = [self combineOfTwoSentences:sl1 second:sl4];
-    //    NSArray *r123 = [self combineOfTwoSentences:r12 second:r13];
-    //    NSArray *r124 = [self combineOfTwoSentences:r12 second:r14];
-    //    NSArray *final = [self combineOfTwoSentences:r123 second:r124];
     
     NSMutableString *result = [NSMutableString string];
     for (NSString *subString in final) {
@@ -125,7 +120,7 @@ SingletonM(LDPathTool)
     NSMutableArray *r1 = [NSMutableArray array];
     NSMutableArray *r2 = [NSMutableArray array];
     [self ldCalcPathOfTwoSentences:sl1 second:sl2 result1:r1 result2:r2];
-    for (int i = r1.count - 1; i >= 0; --i) {
+    for (NSInteger i = r1.count - 1; i >= 0; --i) {
         if ([r1[i] isEqualToString:@"_"]) {
             [r1 removeObjectAtIndex:i];
         } else {
