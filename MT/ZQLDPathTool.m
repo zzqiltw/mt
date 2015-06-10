@@ -99,11 +99,11 @@ SingletonM(LDPathTool)
 
 - (NSString *)combineOfFourSentences:(NSArray *)sl1 second:(NSArray *)sl2 third:(NSArray *)sl3 four:(NSArray *)sl4 type:(TranslateType)type
 {
-//    NSArray *r12 = [self combineOfTwoSentences:sl1 second:sl2];
-//    NSArray *r123 = [self combineOfTwoSentences:r12 second:sl3];
-//    NSArray *final = [self combineOfTwoSentences:r123 second:sl4];
+    NSArray *r12 = [self combineOfTwoSentences:sl1 second:sl2];
+    NSArray *r123 = [self combineOfTwoSentences:r12 second:sl3];
+    NSArray *final = [self combineOfTwoSentences:r123 second:sl4];
     
-    NSArray *final = [self combineOfTwoSentences:sl1 second:sl2];
+//    NSArray *final = [self combineOfTwoSentences:sl1 second:sl2];
     
     NSMutableString *result = [NSMutableString string];
     for (NSString *subString in final) {
