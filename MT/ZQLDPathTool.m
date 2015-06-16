@@ -102,12 +102,15 @@ SingletonM(LDPathTool)
     NSArray *r12 = [self combineOfTwoSentences:sl1 second:sl2];
     NSArray *r123 = [self combineOfTwoSentences:r12 second:sl3];
     NSArray *final = [self combineOfTwoSentences:r123 second:sl4];
-    
 //    NSArray *final = [self combineOfTwoSentences:sl1 second:sl2];
     
     NSMutableString *result = [NSMutableString string];
     for (NSString *subString in final) {
-        [result appendString:subString];
+        if ([final indexOfObject:subString] != 0) {
+            [result appendString:subString.lowercaseString];
+        } else {
+            [result appendString:subString];
+        }
         if (type == TranslateTypeCn2En) {
             [result appendString:@" "];
         }
