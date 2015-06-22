@@ -31,6 +31,12 @@ static NSString * const msgError = @"语音服务识别失败";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.messageLabel.backgroundColor =  [UIColor colorWithWhite:1.0 alpha:1.0];
+    self.messageLabel.layer.cornerRadius = 10;
+    self.messageLabel.layer.borderColor = [UIColor colorWithRed:74/255.0 green:160/255.0 blue:163/255.0 alpha:1].CGColor;
+    self.messageLabel.layer.borderWidth = 1;
+    self.messageLabel.clipsToBounds = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -96,15 +96,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按住按钮进行录音" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="aCE-f6-LDQ">
-                                <rect key="frame" x="0.0" y="101" width="320" height="21"/>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按住按钮进行录音" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="aCE-f6-LDQ">
+                                <rect key="frame" x="50" y="101" width="220" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="C5U-iW-XfN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="et7-jy-WaG" customClass="ActionButton">
-                                <rect key="frame" x="110" y="234" width="100" height="100"/>
+                                <rect key="frame" x="110" y="284" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="AAG-5u-kbY"/>
@@ -123,9 +126,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="sCi-3i-BHp" firstAttribute="top" secondItem="ok5-yy-hyf" secondAttribute="top" id="1bh-tb-RUc"/>
-                            <constraint firstItem="aCE-f6-LDQ" firstAttribute="leading" secondItem="ok5-yy-hyf" secondAttribute="leading" id="B6b-Ve-qNU"/>
-                            <constraint firstAttribute="centerY" secondItem="et7-jy-WaG" secondAttribute="centerY" id="P83-st-CP9"/>
-                            <constraint firstAttribute="trailing" secondItem="aCE-f6-LDQ" secondAttribute="trailing" id="Sma-H2-bqV"/>
+                            <constraint firstItem="aCE-f6-LDQ" firstAttribute="leading" secondItem="ok5-yy-hyf" secondAttribute="leading" constant="50" id="B6b-Ve-qNU"/>
+                            <constraint firstAttribute="centerY" secondItem="et7-jy-WaG" secondAttribute="centerY" constant="-50" id="P83-st-CP9"/>
+                            <constraint firstAttribute="trailing" secondItem="aCE-f6-LDQ" secondAttribute="trailing" constant="50" id="Sma-H2-bqV"/>
                             <constraint firstItem="sCi-3i-BHp" firstAttribute="leading" secondItem="ok5-yy-hyf" secondAttribute="leading" id="WNh-Dv-dl3"/>
                             <constraint firstItem="smp-lF-lEz" firstAttribute="top" secondItem="sCi-3i-BHp" secondAttribute="bottom" id="dBQ-zG-d95"/>
                             <constraint firstItem="aCE-f6-LDQ" firstAttribute="top" secondItem="qBS-Bt-bge" secondAttribute="bottom" constant="81" id="fRb-ew-XKl"/>

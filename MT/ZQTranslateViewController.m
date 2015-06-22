@@ -405,6 +405,10 @@ typedef enum {
 #pragma mark - ZQTranslateHeaderViewDelegate
 - (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender withInput:(NSString *)srcText
 {
+    if (srcText.length == 0) {
+        [MBProgressHUD showError:@"请输入需要翻译的句子！"];
+        return;
+    }
     self.baiduGet = NO;
     self.bingGet = NO;
     self.youdaoGet = NO;
