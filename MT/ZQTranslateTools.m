@@ -7,7 +7,7 @@
 //
 
 #import "ZQTranslateTools.h"
-#import <AFNetworking/AFNetworking.h>
+#import "ZQHTTPTools.h"
 
 @implementation ZQTranslateTools
 
@@ -26,14 +26,12 @@
     params[@"client_id"] = BaiduAPIKey;
     params[@"q"] = srcText;
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer.timeoutInterval = TimeOutInterval;
-    [manager GET:BaiduURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [ZQHTTPTools httpJsonGet:BaiduURL params:params success:^(NSDictionary *responseObject) {
         ZQBaiduTranslateResult *result = [ZQBaiduTranslateResult objectWithKeyValues:responseObject];
         if (success) {
             success(result);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSError *error) {
         NSLog(@"baidu error%@", error.localizedDescription);
         if (failure) {
             failure(error);
@@ -43,17 +41,16 @@
 
 + (void)youdaoTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(ZQYoudaoTranslateResult *))success failure:(void (^)(NSError *))failure
 {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSString *encodedText = [srcText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *urlString = [NSString stringWithFormat:
                            @"http://fanyi.youdao.com/openapi.do?keyfrom=testtestest&key=815265506&type=data&doctype=json&version=1.1&q=%@", encodedText];
-    manager.requestSerializer.timeoutInterval = TimeOutInterval;
-    [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    [ZQHTTPTools httpJsonGet:urlString params:nil success:^(NSDictionary *responseObject) {
         ZQYoudaoTranslateResult *result = [ZQYoudaoTranslateResult objectWithKeyValues:responseObject];
         if (success) {
             success(result);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSError *error) {
         NSLog(@"youdao error%@", error.localizedDescription);
         if (failure) {
             failure(error);
@@ -108,8 +105,6 @@
  */
 + (void)googleTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
 {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *urlString = @"http://brisk.eu.org/api/translate.php";
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     if (type == TranslateTypeCn2En) {
@@ -120,9 +115,8 @@
         params[@"to"] = @"zh-CN";
     }
     params[@"text"] = srcText;
-    manager.requestSerializer.timeoutInterval = TimeOutInterval * 2;
 
-    [manager GET:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [ZQHTTPTools httpPlainGet:urlString params:params success:^(NSData *responseObject) {
         NSString *resultSetOri = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSString *resultSet = [NSString replaceUnicode:resultSetOri];
         NSUInteger location = [resultSet rangeOfString:@"res"].location + 6;
@@ -132,7 +126,7 @@
         if (success) {
             success(resultString);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSError *error) {
         NSLog(@"google error%@", error.localizedDescription);
     }];
 }
@@ -145,9 +139,6 @@
 
 + (void)bingTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
 {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
     NSString *urlString = @"http://api.microsofttranslator.com/v2/Http.svc/Translate";
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     //以下两个appId均可用
@@ -161,9 +152,9 @@
         params[@"from"] = @"en";
         params[@"to"] = @"zh-CN";
     }
-    manager.requestSerializer.timeoutInterval = TimeOutInterval * 2;
+    
+    [ZQHTTPTools httpPlainGet:urlString params:params success:^(NSData *responseObject) {
 
-    [manager GET:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *resultSet = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSRange range = [resultSet rangeOfString:@"/\">"];
         NSUInteger location = range.location + 3;
@@ -172,21 +163,8 @@
         if (success) {
             success(result);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSError *error) {
         NSLog(@"bing error%@", error.localizedDescription);
-    }];
-}
-
-+ (void)icibaTranslate:(NSString *)srcText ofType:(TranslateType)type
-{
-    NSString *encodedText = [srcText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *urlString = [NSString stringWithFormat:@"http://dict-co.iciba.com/api/dictionary.php?w=%@&key=B642361EC9E04B97EF436ED054A7C24A", encodedText];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"%@,%@", [responseObject class], [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
     }];
 }
 

@@ -7,15 +7,12 @@
 //
 
 #import "ZQWordCutTool.h"
-#import <AFNetworking.h>
+#import "ZQHTTPTools.h"
 @implementation ZQWordCutTool
 SingletonM(WordCutTool)
 
 - (void)cutCNWord:(NSString *)cnWord success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure
 {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    manager.requestSerializer.timeoutInterval = TimeOutInterval;
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"api_key"] = WordCutApiKey;
@@ -23,7 +20,8 @@ SingletonM(WordCutTool)
     params[@"pattern"] = @"ws";
     params[@"format"] = @"plain";
     params[@"has_key"] = @"false";
-    [manager GET:WordCutURLString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    [ZQHTTPTools httpPlainGet:WordCutURLString params:params success:^(NSData *responseObject) {
         if (success) {
             NSString *str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             NSArray *result = [str componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -33,7 +31,7 @@ SingletonM(WordCutTool)
                 success(@[str]);
             }
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSError *error) {
         if (failure) {
             failure(error);
         }
