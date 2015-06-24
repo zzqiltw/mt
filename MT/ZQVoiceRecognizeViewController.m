@@ -62,11 +62,11 @@ static NSString * const msgError = @"语音服务识别失败";
 {
     self.recognizer = [IFlySpeechRecognizer sharedInstance];
     self.recognizer.delegate = self;
-    
+    [self.recognizer setParameter:@"iat" forKey:@"domain"];
     if (self.type == TranslateTypeEn2Cn) {
         [self.recognizer setParameter:@"en_us" forKey:@"language"];
     } else {
-        [self.recognizer setParameter:@"iat" forKey:@"domain"];
+        [self.recognizer setParameter:@"cn_zh" forKey:@"language"];
     }
 }
 

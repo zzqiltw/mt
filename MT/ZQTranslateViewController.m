@@ -373,6 +373,7 @@ typedef enum {
     self.footerView.hidden = YES;
     
     ZQVoiceRecognizeViewController *voiceVc = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"ZQVoiceRecognizeViewController"];
+
     voiceVc.type = self.type;
     [self.navigationController pushViewController:voiceVc animated:YES];
 }
