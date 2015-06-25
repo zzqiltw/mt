@@ -8,8 +8,14 @@
 
 #import "ZQHTTPTools.h"
 #import <AFNetworking.h>
+#import "MBProgressHUD+ZQ.h"
 @implementation ZQHTTPTools
 SingletonM(HTTPTools)
+
++ (void)showError
+{
+//    [MBProgressHUD showError:@"加载失败,请检查网络"];
+}
 
 + (void)httpJsonGet:(NSString *)urlString params:(NSDictionary *)params success:(void (^)(NSDictionary *responseObject))success failure:(void (^)(NSError *))failure
 {
@@ -20,6 +26,7 @@ SingletonM(HTTPTools)
             success(responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showError];
         if (failure) {
             failure(error);
         }
@@ -35,6 +42,7 @@ SingletonM(HTTPTools)
             success(responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showError];
         if (failure) {
             failure(error);
         }
@@ -51,6 +59,7 @@ SingletonM(HTTPTools)
             success(responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showError];
         if (failure) {
             failure(error);
         }
@@ -67,6 +76,7 @@ SingletonM(HTTPTools)
             success(responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showError];
         if (failure) {
             failure(error);
         }

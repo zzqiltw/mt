@@ -149,10 +149,14 @@ typedef enum {
     [self.navigationController pushViewController:pdfVC animated:YES];
 }
 
+- (BOOL)dontGetAnything
+{
+    return !self.googleGet && !self.baiduGet && !self.bingGet && !self.youdaoGet;
+}
 
 - (void)failed:(MBProgressHUD *)hud
 {
-    if (!self.googleGet && !self.baiduGet && !self.bingGet && !self.youdaoGet) {
+    if ([self dontGetAnything]) {
         [hud hide:YES];
         [MBProgressHUD showError:@"加载失败"];
         [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
@@ -386,23 +390,15 @@ typedef enum {
     [self clearInputField];
 }
 
-
-//- (void)saveBleuModel:(ZQBLEUModel *)model ofIndex:(NSInteger)i
-//{
-//    if (model.baiduGet && model.youdaoGet && model.googleGet && model.bingGet) {
-//        self.stepCount ++;
-//        NSLog(@"i=%ld step = %ld", i, (long)self.stepCount);
-//        if (self.stepCount == ZQCount) {
-//            NSArray *array = [ZQBLEUModel keyValuesArrayWithObjectArray:self.bleuModels];
-//            NSData *data = [NSJSONSerialization dataWithJSONObject:array options:0 error:nil];
-//            if (data.length > 0) {
-//                [data writeToFile:ZQTestSentenceTranslateResultFilePath atomically:YES];
-//            }
-//        }
-//
-//    }
-//}
-
+- (void)singleNoResult:(NSString *)supportor
+{
+    if (![self dontGetAnything]) { //说明只是Google没有Get
+        [MBProgressHUD hideHUD];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD showError:[NSString stringWithFormat:@"%@翻译无结果", supportor]];
+        });
+    }
+}
 #pragma mark - ZQTranslateHeaderViewDelegate
 - (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender withInput:(NSString *)srcText
 {
@@ -427,6 +423,7 @@ typedef enum {
         [self hidHudAndShowEvaluaBtn:hud];
     } failure:^(NSError *error) {
         [self failed:hud];
+        [self singleNoResult:@"Google"];
     }];
     
     [ZQTranslateTools bingTranslate:srcText ofType:self.type success:^(NSString *bingResult) {
@@ -436,6 +433,7 @@ typedef enum {
         [self hidHudAndShowEvaluaBtn:hud];
     } failure:^(NSError *error) {
         [self failed:hud];
+        [self singleNoResult:@"Bing"];
     }];
     
     [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
@@ -448,6 +446,7 @@ typedef enum {
         [self hidHudAndShowEvaluaBtn:hud];
     } failure:^(NSError *error) {
         [self failed:hud];
+        [self singleNoResult:@"Baidu"];
     }];
     
     [ZQTranslateTools youdaoTranslate:srcText ofType:self.type success:^(ZQYoudaoTranslateResult *youdaoResult) {
@@ -457,6 +456,7 @@ typedef enum {
         [self hidHudAndShowEvaluaBtn:hud];
     } failure:^(NSError *error) {
         [self failed:hud];
+        [self singleNoResult:@"Youdao"];
     }];
 
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

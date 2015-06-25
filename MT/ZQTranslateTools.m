@@ -105,7 +105,7 @@
  */
 + (void)googleTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
 {
-    NSString *urlString = @"http://brisk.eu.org/api/translate.php";
+    NSString *urlString = @"http://brisk.eu.org/api/translate.php1";
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     if (type == TranslateTypeCn2En) {
         params[@"from"] = @"zh-CN";
@@ -128,6 +128,9 @@
         }
     } failure:^(NSError *error) {
         NSLog(@"google error%@", error.localizedDescription);
+        if (failure) {
+            failure(error);
+        }
     }];
 }
 
@@ -164,6 +167,9 @@
             success(result);
         }
     } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+        }
         NSLog(@"bing error%@", error.localizedDescription);
     }];
 }
