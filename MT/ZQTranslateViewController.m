@@ -265,6 +265,7 @@ typedef enum {
             [hud hide:YES];
         } failure:^(NSError *error) {
             [hud hide:YES];
+            NSLog(@"分词error:%@", error.localizedDescription);
             [MBProgressHUD showError:@"分词服务暂不可使用"];
         }];
     } else {
@@ -505,7 +506,6 @@ typedef enum {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TimeOutInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:[NSString stringWithFormat:@"%@翻译无结果", supportor]];
-        self.footerView.hidden = NO;
     });
     
 }

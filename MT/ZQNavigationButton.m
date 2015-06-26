@@ -32,7 +32,7 @@
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.layer.masksToBounds = YES;
     self.layer.cornerRadius = self.frame.size.width * 0.5;
-    self.layer.borderColor = [UIColor colorWithRed:157/255.0 green:207/255.0 blue:155/255.0 alpha:1.0].CGColor;
+    self.layer.borderColor = [UIColor colorWithRed:148/255.0 green:223/255.0 blue:86/255.0 alpha:1.0].CGColor;
     self.layer.borderWidth = 1.3f;
 }
 
