@@ -141,16 +141,16 @@
 
 - (void)recordBtnClick:(UIButton *)button
 {
-    AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc]initWithString:[self.translateFrame.model.text substringFromIndex:0]];
-    if (self.translateFrame.model.CEorEC == TranslateTypeCn2En) {
-        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
-    } else {
-        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh-CN"];
-    }
-    utterance.rate = AVSpeechUtteranceMinimumSpeechRate;
-    [self.av speakUtterance:utterance];
+//    AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc]initWithString:[self.translateFrame.model.text substringFromIndex:0]];
+//    if (self.translateFrame.model.CEorEC == TranslateTypeCn2En) {
+//        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+//    } else {
+//        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh-CN"];
+//    }
+//    utterance.rate = AVSpeechUtteranceMinimumSpeechRate;
+//    [self.av speakUtterance:utterance];
 
-//    [[ZQSpeechSynthesizer sharedSpeechSynthesizer] speech:self.translateFrame.model.text];
+    [[ZQSpeechSynthesizer sharedSpeechSynthesizer] speech:self.translateFrame.model.text];
 }
 
 
