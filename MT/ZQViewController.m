@@ -42,14 +42,14 @@
 }
 
 - (IBAction)ocrTest:(id)sender {
-//    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
-//    //判断是否有摄像头
-//    if(![UIImagePickerController isSourceTypeAvailable:sourceType])
-//    {
-//        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//    }
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    //判断是否有摄像头
+    if(![UIImagePickerController isSourceTypeAvailable:sourceType])
+    {
+        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
 
-    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = self;   // 设置委托
@@ -62,18 +62,18 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    [picker dismissViewControllerAnimated:YES completion:nil];
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     if (image == nil) {
         image = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
-    NSData *imgData = UIImageJPEGRepresentation(image, 0.0001);
+    NSData *imgData = UIImageJPEGRepresentation(image, 0.001);
     NSString* encodeResult = [imgData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
 //    encodeResult = [encodeResult stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *httpUrl = @"http://apis.baidu.com/apistore/idlocr/ocr";
     NSString *httpArg = [NSString stringWithFormat:@"fromdevice=iPhone&clientip=10.10.10.0&detecttype=LocateRecognize&languagetype=CHN_ENG&imagetype=1&image=%@", encodeResult];
     [self request: httpUrl withHttpArg: httpArg];
     
-    [picker dismissViewControllerAnimated:YES completion:^{}];
 }
 
 -(void)request: (NSString*)httpUrl withHttpArg: (NSString*)HttpArg  {
