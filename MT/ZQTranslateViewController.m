@@ -404,7 +404,7 @@ typedef enum {
         [self hidHudAndShowEvaluaBtn:hud];
     } failure:^(NSError *error) {
         [self failed:hud];
-        [self singleNoResult:@"Google"];
+        [self singleNoResult:@"谷歌"];
     }];
     
     [ZQTranslateTools bingTranslate:srcText ofType:self.type success:^(NSString *bingResult) {
@@ -414,7 +414,7 @@ typedef enum {
         [self hidHudAndShowEvaluaBtn:hud];
     } failure:^(NSError *error) {
         [self failed:hud];
-        [self singleNoResult:@"Bing"];
+        [self singleNoResult:@"必应"];
     }];
     
     [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
@@ -427,7 +427,7 @@ typedef enum {
         [self hidHudAndShowEvaluaBtn:hud];
     } failure:^(NSError *error) {
         [self failed:hud];
-        [self singleNoResult:@"Baidu"];
+        [self singleNoResult:@"百度"];
     }];
     
     [ZQTranslateTools youdaoTranslate:srcText ofType:self.type success:^(ZQYoudaoTranslateResult *youdaoResult) {
@@ -437,7 +437,7 @@ typedef enum {
         [self hidHudAndShowEvaluaBtn:hud];
     } failure:^(NSError *error) {
         [self failed:hud];
-        [self singleNoResult:@"Youdao"];
+        [self singleNoResult:@"有道"];
     }];
 
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
