@@ -149,19 +149,7 @@ typedef enum {
     [self.navigationController pushViewController:pdfVC animated:YES];
 }
 
-- (BOOL)dontGetAnything
-{
-    return !self.googleGet && !self.baiduGet && !self.bingGet && !self.youdaoGet;
-}
 
-- (void)failed:(MBProgressHUD *)hud
-{
-    if ([self dontGetAnything]) {
-        [hud hide:YES];
-        [MBProgressHUD showError:@"加载失败"];
-        [TSMessage showNotificationInViewController:self title:@"请检查网络连接！" subtitle:nil type:TSMessageNotificationTypeWarning duration:0.8f canBeDismissedByUser:YES];
-    }
-}
 
 
 - (void)quitKb
@@ -227,7 +215,8 @@ typedef enum {
         
         self.footerView.hidden = YES;
     } else {
-        [MBProgressHUD showError:@"译文未全部采集完毕"];
+
+        [TSMessage showNotificationInViewController:self title:@"4个译文未全部采集完毕，请检查网络" subtitle:nil type:TSMessageNotificationTypeMessage duration:1.2f canBeDismissedByUser:YES];
     }
 }
 
@@ -390,15 +379,6 @@ typedef enum {
     [self clearInputField];
 }
 
-- (void)singleNoResult:(NSString *)supportor
-{
-    if (![self dontGetAnything]) { //说明只是Google没有Get
-        [MBProgressHUD hideHUD];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MBProgressHUD showError:[NSString stringWithFormat:@"%@翻译无结果", supportor]];
-        });
-    }
-}
 #pragma mark - ZQTranslateHeaderViewDelegate
 - (void)translateHeaderView:(ZQTranslateHeaderView *)headerView didClickTranslateBtn:(id)sender withInput:(NSString *)srcText
 {
@@ -516,6 +496,34 @@ typedef enum {
 //        }
 //        
 //    });
+}
+
+#pragma mark - Error Handler
+- (void)singleNoResult:(NSString *)supportor
+{
+    //说明只是单个的没有Get
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TimeOutInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:[NSString stringWithFormat:@"%@翻译无结果", supportor]];
+        self.footerView.hidden = NO;
+    });
+    
+}
+
+- (BOOL)dontGetAnything
+{
+    return !self.googleGet && !self.baiduGet && !self.bingGet && !self.youdaoGet;
+}
+
+- (void)failed:(MBProgressHUD *)hud
+{
+    // 超时判断
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((TimeOutInterval + 2) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if ([self dontGetAnything]) {
+            [hud hide:YES];
+            [MBProgressHUD showError:@"网络不给力..."];
+        }
+    });
 }
 
 

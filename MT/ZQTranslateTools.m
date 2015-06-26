@@ -105,7 +105,7 @@
  */
 + (void)googleTranslate:(NSString *)srcText ofType:(TranslateType)type success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
 {
-    NSString *urlString = @"http://brisk.eu.org/api/translate.php1";
+    NSString *urlString = @"http://brisk.eu.org/api/translate.php";
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     if (type == TranslateTypeCn2En) {
         params[@"from"] = @"zh-CN";
