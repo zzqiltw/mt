@@ -11,13 +11,34 @@
 
 @implementation ActionButton
 
+- (void)setup
+{
+//    self.titleLabel.textColor = ZQColor(48, 143, 255, 1.0);
+    self.titleLabel.textColor = ZQColor(118, 204, 202, 1.0);
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self setup];
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame]) {
+        [self setup];
+    }
+    return self;
+}
+
 - (void)drawRect:(CGRect)rect
 {
     CGRect bounds = CGRectInset(self.bounds, 1, 1);
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [UIColor colorWithWhite:1.0 alpha:0.4].CGColor);
-    CGContextSetStrokeColorWithColor(context, self.tintColor.CGColor);
-    CGContextSetLineWidth(context, 1);
+//    CGContextSetFillColorWithColor(context, ZQColor(74, 160, 160, 0.3).CGColor);
+    [[UIColor whiteColor] setFill];
+    CGContextSetStrokeColorWithColor(context, ZQColor(168, 238, 254, 1.0).CGColor);
+    CGContextSetLineWidth(context, 2);
     CGPathRef path = [UIBezierPath bezierPathWithRoundedRect:bounds cornerRadius:bounds.size.height / 2.0].CGPath;
     CGContextAddPath(context, path);
     CGContextFillPath(context);

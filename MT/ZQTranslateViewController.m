@@ -93,7 +93,7 @@ typedef enum {
     
     self.stepCount = 0;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"参考" style:UIBarButtonItemStyleDone target:self action:@selector(refClick)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"参考" style:UIBarButtonItemStyleDone target:self action:@selector(refClick)];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
@@ -142,12 +142,12 @@ typedef enum {
 }
 
 #pragma mark - Actions
-- (void)refClick
-{
-    ZQPDFViewController *pdfVC = [[ZQPDFViewController alloc] init];
-    pdfVC.filename = @"bleu.pdf";
-    [self.navigationController pushViewController:pdfVC animated:YES];
-}
+//- (void)refClick
+//{
+//    ZQPDFViewController *pdfVC = [[ZQPDFViewController alloc] init];
+//    pdfVC.filename = @"bleu.pdf";
+//    [self.navigationController pushViewController:pdfVC animated:YES];
+//}
 
 
 
