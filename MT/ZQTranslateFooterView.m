@@ -18,7 +18,7 @@
         UIButton *evaluationButton = [[UIButton alloc] init];
         evaluationButton.frame = CGRectMake(5, 5, 310, ZQFooterViewHeight);
         [evaluationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [evaluationButton setTitle:@"分析译文" forState:UIControlStateNormal];
+        [evaluationButton setTitle:@"猜最好" forState:UIControlStateNormal];
         evaluationButton.titleLabel.font = [UIFont systemFontOfSize:13];
         evaluationButton.backgroundColor = ZQColor(40, 175, 179, 0.7);
         [evaluationButton addTarget:self action:@selector(clickEvaluaBtn:) forControlEvents:UIControlEventTouchUpInside];

@@ -439,64 +439,6 @@ typedef enum {
         [self failed:hud];
         [self singleNoResult:@"有道"];
     }];
-
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        
-//        for (NSInteger i = 0; i < ZQCount; ++i) {
-//            NSInteger j = i + ZQCount * 2;
-//            ZQBLEUModel *bleuModel = [[ZQBLEUModel alloc] init];
-//            bleuModel.ID = j;
-//            bleuModel.src = self.bleuSrc[j];
-//            bleuModel.baiduGet = NO;
-//            bleuModel.googleGet = NO;
-//            bleuModel.bingGet = NO;
-//            bleuModel.youdaoGet = NO;
-//            
-//            [self.bleuModels addObject:bleuModel];
-//            
-//            [ZQTranslateTools bingTranslate:bleuModel.src ofType:self.type success:^(NSString *bingResult) {
-//                NSInteger currentIndex = [self.bleuModels indexOfObject:bleuModel];
-//
-//                bleuModel.bingTra = bingResult;
-//                bleuModel.bingGet = YES;
-//                [self saveBleuModel:bleuModel ofIndex:currentIndex];
-//            } failure:^(NSError *error) {
-//                
-//            }];
-//            
-//            [ZQTranslateTools baiduTranslate:bleuModel.src ofType:self.type success:^(ZQBaiduTranslateResult *result) {
-//                NSInteger currentIndex = [self.bleuModels indexOfObject:bleuModel];
-//
-//                ZQBaiduTranslateResultItem *item = result.trans_result[0];
-//                bleuModel.baiduTra = item.dst;
-//                
-//                bleuModel.baiduGet = YES;
-//                [self saveBleuModel:bleuModel ofIndex:currentIndex];
-//            } failure:^(NSError *error) {
-//            }];
-//            
-//            [ZQTranslateTools googleTranslate:bleuModel.src ofType:self.type success:^(NSString *googleResult) {
-//
-//                NSInteger currentIndex = [self.bleuModels indexOfObject:bleuModel];
-//                bleuModel.googleTra = googleResult;
-//                
-//                bleuModel.googleGet = YES;
-//                [self saveBleuModel:bleuModel ofIndex:currentIndex];
-//            } failure:^(NSError *error) {
-//                
-//            }];
-//            
-//            [ZQTranslateTools youdaoTranslate:bleuModel.src ofType:self.type success:^(ZQYoudaoTranslateResult *youdaoResult) {
-//                NSInteger currentIndex = [self.bleuModels indexOfObject:bleuModel];
-//                bleuModel.youdaoTra = youdaoResult.translation.firstObject;
-//                
-//                bleuModel.youdaoGet = YES;
-//                [self saveBleuModel:bleuModel ofIndex:currentIndex];
-//            } failure:^(NSError *error) {
-//            }];
-//        }
-//        
-//    });
 }
 
 #pragma mark - Error Handler
