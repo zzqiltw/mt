@@ -22,6 +22,7 @@
 #import "ZQWordCutTool.h"
 #import "ZQLDPathTool.h"
 #import "ZQVoiceRecognizeViewController.h"
+#import <AFNetworking.h>
 
 #define ZQTestSentenceTranslateResultFilePath  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"testSrcAnd4TraOutputFile400_499"]
 static const NSInteger ZQNGram = 2;
@@ -32,7 +33,7 @@ typedef enum {
     ZQActionSheetIndexTypeSystemCombine
 } ZQActionSheetIndexType;
 
-@interface ZQTranslateViewController () <ZQKeyboardToolViewDelegate, ZQTranslateHeaderViewDelegate, ZQTranslateFooterViewDelegate,UIActionSheetDelegate>
+@interface ZQTranslateViewController () <ZQKeyboardToolViewDelegate, ZQTranslateHeaderViewDelegate, ZQTranslateFooterViewDelegate,UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *translateModelFrameList;
 @property (nonatomic, weak) ZQTranslateFooterView *footerView;
@@ -142,8 +143,40 @@ typedef enum {
 }
 
 #pragma mark - Actions
+
+/**
+ *  只是测试ocr
+ */
 - (void)ocrTest
 {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    UIImage *img = info[UIImagePickerControllerOriginalImage];
+    NSData *data = UIImageJPEGRepresentation(img, 0.1);
+    NSString *base64String = [data base64EncodedStringWithOptions:0];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"dfd35e6ce265322a3129da6005dc1a8c" forHTTPHeaderField:@"apikey"];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"fromdevice"] = @"iPhone";
+    params[@"clientip"] = @"10.10.10.0";
+    params[@"detecttype"] = @"LocateRecognize";
+    params[@"imagetype"] = @"1";
+    params[@"image"] = base64String;
+    
+    [manager POST:@"http://apis.baidu.com/apistore/idlocr/ocr" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"ocr response:%@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"ocr error:%@", error.localizedDescription);
+    }];
     
 }
 

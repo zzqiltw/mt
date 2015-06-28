@@ -12,11 +12,12 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "Background@3x.png"
     },
     {
       "idiom" : "universal",
-      "filename" : "Background@3x.png",
+      "filename" : "Background@(null).png",
       "unassigned" : true
     }
   ],
