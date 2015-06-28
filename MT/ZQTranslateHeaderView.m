@@ -65,6 +65,7 @@ static NSString * const PlaceHolderEN = @"Please input the content to be transla
 
 - (void)setTextForInput:(NSString *)text
 {
+    self.placeHolderLabel.hidden = YES;
     self.textView.text = text;
 }
 

@@ -32,6 +32,9 @@
 #define GetRecognizeSentenceNotification @"GetRecognizeSentenceNotification"
 #define GetRecognizeSentenceNotificationKey @"GetRecognizeSentenceNotificationKey"
 
+#define OCRGetSentenceNotification @"OCRGetSentenceNotification"
+#define OCRGetSentenceNotificationKey @"OCRGetSentenceNotificationKey"
+
 typedef NS_ENUM(NSInteger, TranslateType) {
     TranslateTypeEn2Cn,
     TranslateTypeCn2En

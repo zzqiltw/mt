@@ -172,10 +172,24 @@ typedef enum {
     params[@"imagetype"] = @"1";
     params[@"image"] = base64String;
     
+    [MBProgressHUD showMessage:@"正在识别图片中的文字"];
     [manager POST:@"http://apis.baidu.com/apistore/idlocr/ocr" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [MBProgressHUD hideHUD];
+        if (responseObject[@"retData"]) {
+            [TSMessage showNotificationInViewController:self title:@"图片中的文字已识别完毕" subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
+            NSMutableString *word = [NSMutableString string];
+            for (NSDictionary *dict in responseObject[@"retData"]) {
+                [word appendString:dict[@"word"]];
+            }
+            [((ZQTranslateHeaderView *)self.tableView.tableHeaderView) setTextForInput:word];
+        } else {
+            [TSMessage showNotificationInViewController:self title:@"图片中的文字无法识别" subtitle:nil type:TSMessageNotificationTypeMessage duration:0.8f canBeDismissedByUser:YES];
+        }
+
         NSLog(@"ocr response:%@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"ocr error:%@", error.localizedDescription);
+        [MBProgressHUD hideHUD];
+        [TSMessage showNotificationInViewController:self title:@"图片中的文字无法识别" subtitle:nil type:TSMessageNotificationTypeMessage duration:0.8f canBeDismissedByUser:YES];
     }];
     
 }
@@ -318,7 +332,7 @@ typedef enum {
     NSLog(@"finalSystemCombine = %@", finalSystemCombine);
     
     [self addTranslateFrameToTopWithIcon:@"mt" text:finalSystemCombine srcText:@"猜最优译文是" ofType:TranslateResultSupporterNone score:0];
-    [TSMessage showNotificationInViewController:self title:@"译文质量排序完毕" subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
+    [TSMessage showNotificationInViewController:self title:@"分析完毕" subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.8f canBeDismissedByUser:YES];
     [self.tableView reloadData];
 }
 
