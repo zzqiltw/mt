@@ -418,7 +418,6 @@ typedef enum {
     }];
     
     [ZQTranslateTools baiduTranslate:srcText ofType:self.type success:^(ZQBaiduTranslateResult *result) {
-        
         ZQBaiduTranslateResultItem *item = result.trans_result[0];
         self.baiduResult = item.dst;
         [self refreshDataWithIcon:@"baidu.png" text:self.baiduResult srcText:srcText ofType:TranslateResultSupporterBaidu];
@@ -447,7 +446,9 @@ typedef enum {
     //说明只是单个的没有Get
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TimeOutInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:[NSString stringWithFormat:@"%@翻译无结果", supportor]];
+        if (![self dontGetAnything]) {
+            [MBProgressHUD showError:[NSString stringWithFormat:@"%@翻译无结果", supportor]];
+        }
     });
     
 }
@@ -460,10 +461,10 @@ typedef enum {
 - (void)failed:(MBProgressHUD *)hud
 {
     // 超时判断
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((TimeOutInterval + 2) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((TimeOutInterval + 0.1) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if ([self dontGetAnything]) {
             [hud hide:YES];
-            [MBProgressHUD showError:@"网络不给力..."];
+            [MBProgressHUD showError:@"网络不给力"];
         }
     });
 }
