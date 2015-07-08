@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
+/**
+ *  翻译主界面控制器
+ */
 @interface ZQTranslateViewController : UITableViewController
 @property (nonatomic, assign) TranslateType type;
 @end

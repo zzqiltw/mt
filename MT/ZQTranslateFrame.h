@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ZQTranslateModel.h"
 
+/**
+ *  为了防止算两遍的高度，要先计算好frame
+ */
 @interface ZQTranslateFrame : NSObject
 
 @property (nonatomic, assign, readonly) CGRect iconFrame;

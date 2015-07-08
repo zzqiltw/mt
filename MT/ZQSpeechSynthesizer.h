@@ -6,6 +6,10 @@
 //  Copyright (c) 2015年 zzqiltw. All rights reserved.
 //
 
+
+/**
+ *  语音播放
+ */
 #import <Foundation/Foundation.h>
 #import "Singleton.h"
 @interface ZQSpeechSynthesizer : NSObject

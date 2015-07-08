@@ -6,6 +6,9 @@
 //  Copyright (c) 2015年 zzqiltw. All rights reserved.
 //
 
+/**
+ *  翻译界面底部的评价按钮
+ */
 #import <UIKit/UIKit.h>
 #define ZQFooterViewHeight 30
 @class ZQTranslateFooterView;

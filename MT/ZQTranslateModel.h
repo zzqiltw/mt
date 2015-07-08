@@ -7,6 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+/**
+ *  显示在tableView上的模型
+ *
+ *  @return <#return value description#>
+ */
+
 #define TextFont [UIFont systemFontOfSize:16]
 
 typedef enum{

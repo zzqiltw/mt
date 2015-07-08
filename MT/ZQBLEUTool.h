@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-
+/**
+ *  BLEU工具类
+ */
 @interface ZQBLEUTool : NSObject
+
 - (double)getBLUEScoreofFirst:(NSString *)first andStrings:(NSArray *)strings Ngram:(NSInteger)n ofType:(TranslateType)type;
 @end

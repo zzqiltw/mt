@@ -10,6 +10,9 @@
 #import "ZQBaiduTranslateResultItem.h"
 #import "MJExtension.h"
 
+/**
+ *  百度翻译结果模型
+ */
 @interface ZQBaiduTranslateResult : NSObject
 @property (nonatomic, copy) NSString *from;
 @property (nonatomic, copy) NSString *to;

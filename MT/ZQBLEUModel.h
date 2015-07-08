@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  这个类是用来和Java工程交换数据格式的
+ */
+
 @interface ZQBLEUModel : NSObject
 
 @property (nonatomic, assign) NSInteger ID;

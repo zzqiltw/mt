@@ -12,6 +12,9 @@
 @implementation ZQHTTPTools
 SingletonM(HTTPTools)
 
+/**
+ *  这里以后可以对错误进行统一处理
+ */
 + (void)showError
 {
 //    [MBProgressHUD showError:@"加载失败,请检查网络"];

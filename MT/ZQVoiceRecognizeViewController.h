@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  语音识别控制器
+ */
 @interface ZQVoiceRecognizeViewController : UIViewController
 @property (nonatomic, assign) TranslateType type;
 

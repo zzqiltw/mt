@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  查看pdf的控制器
+ */
 @interface ZQPDFViewController : UIViewController
 @property (nonatomic, copy) NSString *filename;
 

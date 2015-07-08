@@ -13,6 +13,16 @@
 @end
 @implementation ZQBLEUTool
 
+/**
+ *  得到一个翻译译文参照其他翻译译文的BLEU得分
+ *
+ *  @param first   <#first description#>
+ *  @param strings <#strings description#>
+ *  @param n       <#n description#>
+ *  @param type    <#type description#>
+ *
+ *  @return <#return value description#>
+ */
 - (double)getBLUEScoreofFirst:(NSString *)first andStrings:(NSArray *)strings Ngram:(NSInteger)n ofType:(TranslateType)type
 {
     first = [self addSpace2CNStringAndLower:first ofType:type];

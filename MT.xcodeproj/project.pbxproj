@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		6DEBDE8E1B4D07D600A83530 /* AppleDoc */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6DEBDE911B4D07D600A83530 /* Build configuration list for PBXAggregateTarget "AppleDoc" */;
+			buildPhases = (
+				6DEBDE921B4D07EE00A83530 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = AppleDoc;
+			productName = AppleDoc;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		5789A28F7D004880A326ED68 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA60FFFCF37544E68D23B39F /* libPods.a */; };
 		6D11C6C61A4EEB0800527EF7 /* ZQTranslateHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D11C6C51A4EEB0800527EF7 /* ZQTranslateHeaderView.m */; };
@@ -623,6 +637,7 @@
 			targets = (
 				6DBBF6241A4DBADD00B28671 /* MT */,
 				6DBBF6481A4DBADD00B28671 /* MTTests */,
+				6DEBDE8E1B4D07D600A83530 /* AppleDoc */,
 			);
 		};
 /* End PBXProject section */
@@ -653,6 +668,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6DEBDE921B4D07EE00A83530 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#appledoc Xcode script\n# Start constants\ncompany=\"zzqiltw\";\ncompanyID=\"com.zzqiltw\";\ncompanyURL=\"http://zzqiltw.com\";\ntarget=\"iphoneos\";\n#target=\"macosx\";\noutputPath=\"~/help\";\n# End constants\n\n/usr/local/bin/appledoc \\\n--project-name \"${PROJECT_NAME}\" \\\n--project-company \"${company}\" \\\n--company-id \"${companyID}\" \\\n--docset-atom-filename \"${company}.atom\" \\\n--docset-feed-url \"${companyURL}/${company}/%DOCSETATOMFILENAME\" \\\n--docset-package-url \"${companyURL}/${company}/%DOCSETPACKAGEFILENAME\" \\\n--docset-fallback-url \"${companyURL}/${company}\" \\\n--output \"${outputPath}\" \\\n--publish-docset \\\n--docset-platform-family \"${target}\" \\\n--logformat xcode \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--exit-threshold 2 \\\n\"${PROJECT_DIR}\"";
+		};
 		D2001531EECB41DAA1448D72 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -970,6 +998,20 @@
 			};
 			name = Release;
 		};
+		6DEBDE8F1B4D07D600A83530 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6DEBDE901B4D07D600A83530 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -999,6 +1041,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		6DEBDE911B4D07D600A83530 /* Build configuration list for PBXAggregateTarget "AppleDoc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DEBDE8F1B4D07D600A83530 /* Debug */,
+				6DEBDE901B4D07D600A83530 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

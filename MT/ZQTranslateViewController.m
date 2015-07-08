@@ -349,12 +349,14 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"heightForRowAtIndexPath");
     ZQTranslateFrame *currentCellFrame = self.translateModelFrameList[indexPath.row];
     return currentCellFrame.rowHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"cellForRowAtIndexPath");
     ZQTranslateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TranslateCellID forIndexPath:indexPath];
     cell.translateFrame = self.translateModelFrameList[indexPath.row];
     return cell;

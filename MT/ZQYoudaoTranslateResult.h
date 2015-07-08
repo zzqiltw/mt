@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ZQYoudaoTranslateResultWebItem.h"
 
+/**
+ *  有道翻译结果模型（面向模型开发而不是面向字典开发）
+ */
 @interface ZQYoudaoTranslateResult : NSObject
 
 @property (nonatomic, copy) NSString *query;

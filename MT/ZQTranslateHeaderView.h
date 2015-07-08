@@ -10,15 +10,41 @@
 
 @protocol ZQTranslateHeaderViewDelegate;
 
+/**
+ *  翻译页面上面的输入框
+ */
 @interface ZQTranslateHeaderView : UIView
 
 @property (nonatomic, assign) TranslateType modeType;
 @property (nonatomic, weak) id<ZQTranslateHeaderViewDelegate> delegate;
 
+/**
+ *  设置要翻译的文字
+ *
+ *  @param text <#text description#>
+ */
 - (void)setTextForInput:(NSString *)text;
+
+/**
+ *  暂时没有用到这个方法
+ *
+ *  @param inputAccessoryView <#inputAccessoryView description#>
+ */
 - (void)setInputFieldAccessoryView:(UIView *)inputAccessoryView;
+
+/**
+ *  退下键盘
+ */
 - (void)quitKb;
+
+/**
+ *  清空输入
+ */
 - (void)clearInputField;
+
+/**
+ *  让输入框变成第一响应者
+ */
 - (void)letInputTextViewBecomeFirstResponder;
 
 @end

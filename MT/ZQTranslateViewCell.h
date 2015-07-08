@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+/**
+ *  每一个cell
+ */
 #import "ZQTranslateFrame.h"
 #define TranslateCellID @"TranslateCellID"
 
